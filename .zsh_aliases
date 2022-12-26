@@ -1,0 +1,5 @@
+# #!/bin/bash
+# declare -A aliases=( ["d"]="docker" ["g"]="git")
+
+# for a in "${!aliases[@]}"; do echo "$a $aliases[$a]"; done
+alias dots='/usr/bin/git --git-dir=/home/nei/.cfg/ --work-tree=/home/nei'
