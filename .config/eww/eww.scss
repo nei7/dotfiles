@@ -1,0 +1,145 @@
+* {
+    all: unset;
+    font-family: "JetBrains Mono";
+}
+
+$fg: #c6c8d1;
+$bg: #1a1b26;
+$bg2: #24283b;
+$bg-alt: #545454;
+$primary: #ff79c6;
+$secondary: #FFFCFA;
+
+.main {
+    margin: 10px 10px 0 15px;
+
+}
+
+
+.song {
+
+    font-weight: bold;
+    margin: 3px 5px 0px 0px;
+}
+
+.song_btn_play {
+
+    margin: 3px 0px 0px 5px;
+
+}
+
+
+.song_btn_prev,
+.song_btn_next {
+    color: #bfc9db;
+
+    margin: 3px 0px 0px 5px;
+
+}
+
+
+
+.workspace_active {
+
+    color: $secondary;
+}
+
+.workspace_inactive {
+
+    color: $fg;
+}
+
+.workspace_occupied {
+    color: $secondary;
+}
+
+.poweroff__icon {
+    background-size: 16px 16px;
+    background-position: center;
+    background-image: url('/home/nei/.config/eww/images/shutdown.png');
+    background-repeat: no-repeat;
+    min-width: 22px;
+}
+
+.container {
+    background-color: $bg;
+    padding: 3px 20px;
+    border-radius: 12px;
+    margin: 0 5px;
+}
+
+.pause {
+    padding-top: 7px;
+    background-image: url('/home/nei/.config/eww/images/pause.png');
+
+    background-position: center;
+    background-repeat: no-repeat;
+    min-width: 20px;
+    min-height: 20px;
+}
+
+.play {
+    padding-top: 7px;
+    background-image: url('/home/nei/.config/eww/images/play.png');
+
+    background-position: center;
+    background-repeat: no-repeat;
+    min-width: 20px;
+    min-height: 20px;
+}
+
+
+
+.cal {
+    border-radius: 11px;
+    background-color: $bg;
+    font-family: JetBrainsMono Nerd;
+    font-size: 15px;
+    font-weight: normal;
+
+
+
+    .cal-in {
+        border-radius: 11px;
+        padding: 15px;
+        color: $fg;
+
+        border: 1.5px solid #959cbd;
+
+        .cal {
+            &.highlight {
+                padding: 20px;
+            }
+
+            padding: 5px 5px 5px 5px;
+            margin-left: 10px;
+        }
+    }
+}
+
+calender {
+    color: #FFFCFA;
+}
+
+calendar:selected {
+    color: $bg;
+    background-color: #959cbd;
+}
+
+calendar.header {
+    color: #FFFCFA;
+    font-weight: bold;
+}
+
+calendar.button {
+    color: #afbea2;
+}
+
+calendar.highlight {
+    color: #FFFCFA;
+    font-weight: bold;
+}
+
+calendar:indeterminate {
+    color: #bfc9db;
+}

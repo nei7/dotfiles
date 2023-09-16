@@ -1,0 +1,28 @@
+(defpoll song_time :interval "1s"  "~/.config/eww/leftbar/scripts/music_info --time")
+
+(defwidget music []
+  (box :orientation "v" :space-evenly "false" :vexpand "false" :hexpand "false"
+    (box :orientation "v" :spacing 5 :space-evenly "false" :vexpand "false" :hexpand "false" :class "msc_bg"
+      (label :halign "start" :class "song" :wrap "false" :limit-width 12 :text song)
+      (label :halign "start" :class "song_artist" :wrap "true" :limit-width 15 :text song_artist))))
+
+(defwidget music_ctl []
+  (box :orientation "v" :spacing 1 :halign "center" :space-evenly "false" :vexpand "false" :hexpand "false" :class "msc_ctl_bg"
+    (button :class "song_btn_prev" :onclick "~/.config/eww/scripts/music_info --prev" "")
+    (button :class "song_btn_play" :onclick "~/.config/eww/scripts/music_info --toggle" song_status)
+    (button :class "song_btn_next" :onclick "~/.config/eww/scripts/music_info --next" "")
+  ))
+
+
+(defwidget music_prog []
+  (box :orientation "v" :spacing 5 :space-evenly "false" :vexpand "false" :hexpand "false" :class "music_prog_bg"
+    (scale :value song_time :halign "start" :class "song_prog")))
+
+
+(defwindow song :stacking "fg" :focusable "false" :screen 1
+  :geometry (geometry
+    :width "260px"
+    :height "140px"
+    :x "0px"
+  :y "300px")
+  (music))

@@ -1,0 +1,129 @@
+(defvar time_rev false)
+(defvar music_reveal false)
+
+
+(defwindow bar
+  :monitor 0
+  :windowtype "dock"
+  :geometry (
+    geometry
+    :x "0%"
+    :y "0%"
+    :width "90%"
+    :height "10px"
+    :anchor "top center"
+  )
+  :reserve (struts :side "top" :distance "4%")
+  
+  (main)
+)
+
+(defpoll song :interval "1s"  "~/.config/eww/scripts/music_info.sh --song")
+(defpoll song_artist :interval "2s"  "~/.config/eww/scripts/music_info.sh --artist")
+(defpoll current_status :interval "1s"  "~/.config/eww/scripts/music_info.sh --time")
+(defpoll song_status :interval "2s"  "~/.config/eww/scripts/music_info.sh --status")
+
+(defpoll WORKSPACES :interval "0.1s"
+"scripts/workspaces.sh")
+
+(defpoll WINDOW :interval "0.5s"
+"scripts/get_window.sh")
+
+(defpoll time :interval "10s"
+"date '+%H:%M'")
+
+(defwidget left []
+  (box :class "left" :space-evenly false :orientation "horizontal"
+    :halign "start" (workspaces)
+  )
+  
+)
+
+
+(defwidget workspaces []
+  (box :halign "start" :style "font-size: 23px;" :valign "center" :class "container"
+    (literal :content WORKSPACES)
+  )
+)
+
+
+(defwidget center []
+  (box :class "container" :halign "center" (music))
+)
+
+
+(defwidget right []
+  
+  (box :halign "end" :space-evenly false
+    (box :class "container"  (button  :style "font-size: 18px" "🔊"))
+    
+    (
+      eventbox :onhover "eww update time_rev=true"
+      :onhoverlost "eww update time_rev=false"
+      (box :class "container"
+        (button :class "clock_date_class"
+          :onclick "~/.config/eww/scripts/open_window.sh calendar"
+          "🕛 ${time}"
+        ))
+    )
+    
+    (box :class "container"  :halign "end"  (box :halign "center" :hexpand false :class "poweroff__icon"  ))
+  )
+  
+  
+)
+
+(defpoll calendar_day :interval "20h" "date '+%d'")
+(defpoll calendar_year :interval "20h" "date '+%Y'")
+
+(defwidget cal []
+  (box :class "cal" :orientation "v"
+    (box :class "cal-in"
+      (calendar
+        :class "cal"
+        :day calendar_day
+        :year calendar_year
+      )
+    )
+  )
+)
+
+
+
+(defwindow calendar
+  :geometry (
+    geometry
+    :x "-10px"
+    :y "4.3%"
+    :anchor "top right"
+    :width "270px"
+    :height "60px"
+  )
+  (cal)
+)
+
+
+
+(defwidget music []
+  (eventbox :onhover "eww update music_reveal=true"
+    :onhoverlost "eww update music_reveal=false"
+    :class "container"
+    (box :class "module-2" :orientation "h" :space-evenly "false" :hexpand true
+      (button :class "song" :wrap "true" :onclick "~/.config/eww/scripts/open_window.sh song" song)
+      (revealer :transition "slideright"
+        :reveal music_reveal
+        :duration "350ms"
+        (box :vexpand "false" :hexpand "false" :orientation "h"
+          (button :class "song_btn_prev" :onclick "~/.config/eww/scripts/music_info.sh --prev" "")
+          (button :class "song_btn_play" :onclick "~/.config/eww/scripts/music_info.sh --toggle" (literal :content song_status))
+          (button :class "song_btn_next" :onclick "~/.config/eww/scripts/music_info.sh --next" ""))))))
+
+
+(defwidget main []
+  (centerbox :class "main"
+    (left)
+    (center)
+    (right)
+  )
+)
+
