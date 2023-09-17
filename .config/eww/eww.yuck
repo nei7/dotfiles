@@ -1,44 +1,21 @@
 (defvar time_rev false)
 (defvar music_reveal false)
 
-
-(defwindow bar
-  :monitor 0
-  :windowtype "dock"
-  :geometry (
-    geometry
-    :x "0%"
-    :y "0%"
-    :width "90%"
-    :height "10px"
-    :anchor "top center"
-  )
-  :reserve (struts :side "top" :distance "4%")
-  
-  (main)
-)
-
+(defpoll volume :interval "1s"  "/home/nei/.config/eww/scripts/get_vol.sh speaker")
 (defpoll song :interval "1s"  "~/.config/eww/scripts/music_info.sh --song")
 (defpoll song_artist :interval "2s"  "~/.config/eww/scripts/music_info.sh --artist")
 (defpoll current_status :interval "1s"  "~/.config/eww/scripts/music_info.sh --time")
 (defpoll song_status :interval "2s"  "~/.config/eww/scripts/music_info.sh --status")
+(defpoll WORKSPACES :interval "0.1s" "scripts/workspaces.sh")
+(defpoll time :interval "10s" "date '+%H:%M'")
+(defpoll calendar_day :interval "20h" "date '+%d'")
+(defpoll calendar_year :interval "20h" "date '+%Y'")
+(defpoll user :interval "6h" `whoami`)
+(defpoll mic_volume :interval "1s"  "/home/nei/.config/eww/scripts/get_vol.sh mic")
+(defpoll temperature :interval "12h" "/home/nei/.config/eww/scripts/temperature.sh")
+(defpoll updates :interval "12h" "/home/nei/.config/eww/scripts/updates.sh")
 
-(defpoll WORKSPACES :interval "0.1s"
-"scripts/workspaces.sh")
-
-(defpoll WINDOW :interval "0.5s"
-"scripts/get_window.sh")
-
-(defpoll time :interval "10s"
-"date '+%H:%M'")
-
-(defwidget left []
-  (box :class "left" :space-evenly false :orientation "horizontal"
-    :halign "start" (workspaces)
-  )
-  
-)
-
+; (defpoll WINDOW :interval "0.5s" "scripts/get_window.sh")
 
 (defwidget workspaces []
   (box :halign "start" :style "font-size: 23px;" :valign "center" :class "container"
@@ -47,34 +24,49 @@
 )
 
 
-(defwidget center []
+(defwidget bar_center []
   (box :class "container" :halign "center" (music))
 )
 
+(defwidget bar_left []
+  (box :class "left" :space-evenly false :orientation "horizontal"
+    :halign "start" (workspaces) (button  :onclick "~/.config/eww/scripts/open_window.sh dashboard"  :class "menu" "󰍜") (box :class "container" (label :class "updates" :text " ${updates}"))
+  )
+)
 
-(defwidget right []
-  
+
+(defwidget volume []
+  (box :class "volume_box" :space-evenly false (button :class "speaker_btn" "") (metric :icon ""
+      :class "volume"
+      :value volume
+    :onchange "amixer set Master {}%"))
+)
+
+(defwidget mic_volume []
+  (box :class "mic_volume_box" :space-evenly false (button :class "mic_btn" "󰍬") (metric :icon ""
+      :class "mic_volume"
+      :value mic_volume
+    :onchange "amixer set Capture {}%" :tooltip "jd"))
+)
+
+(defwidget bar_right []
   (box :halign "end" :space-evenly false
-    (box :class "container"  (button  :style "font-size: 18px" "🔊"))
     
-    (
-      eventbox :onhover "eww update time_rev=true"
+    (box :class "container" (label :text "${temperature > 18 ? "☀️" : '❄️'} ${temperature} ℃"))
+    (box :class "container" (volume))
+    
+    (eventbox :onhover "eww update time_rev=true"
       :onhoverlost "eww update time_rev=false"
       (box :class "container"
         (button :class "clock_date_class"
           :onclick "~/.config/eww/scripts/open_window.sh calendar"
-          "🕛 ${time}"
+          "󰥔 ${time}"
         ))
     )
     
-    (box :class "container"  :halign "end"  (box :halign "center" :hexpand false :class "poweroff__icon"  ))
+    (box :class "container"  :halign "end"  (label :text "" :class "poweroff_btn" ))
   )
-  
-  
 )
-
-(defpoll calendar_day :interval "20h" "date '+%d'")
-(defpoll calendar_year :interval "20h" "date '+%Y'")
 
 (defwidget cal []
   (box :class "cal" :orientation "v"
@@ -88,7 +80,87 @@
   )
 )
 
+(defwidget music []
+  (eventbox :onhover "eww update music_reveal=true"
+    :onhoverlost "eww update music_reveal=false"
+    :class "container"
+    (box :class "module-2" :orientation "h" :space-evenly false :hexpand true
+      (button :class "song" :wrap "true" :onclick "~/.config/eww/scripts/open_window.sh song" song)
+      (revealer :transition "slideright"
+        :reveal music_reveal
+        :duration "350ms"
+        (box :vexpand "false" :hexpand false :orientation "h"
+          (button :class "song_btn_prev" :onclick "~/.config/eww/scripts/music_info.sh --prev" "")
+          (button :class "song_btn_play" :onclick "~/.config/eww/scripts/music_info.sh --toggle" (literal :content song_status))
+          (button :class "song_btn_next" :onclick "~/.config/eww/scripts/music_info.sh --next" "")
+        )
+      )
+    )
+  )
+)
 
+(defwidget metric [icon value ?onchange ?onclick ?class ?height ?width ?tooltip]
+  (box :orientation "h"
+    :class "metric"
+    :space-evenly false
+    (scale
+      
+      
+      :min 0
+      :max 101
+      :active {onchange != ""}
+      :value value
+      :onchange onchange
+    )
+  )
+)
+
+(defwidget bar []
+  (centerbox :class "bar"
+    (bar_left)
+    (bar_center)
+    (bar_right)
+  )
+)
+
+(defwidget dashboard []
+  (box :halign "center" :orientation "v" :class "dashboard" :space-evenly false
+    (box :class "dashboard_hour" "${time}" )
+    (box :class "dashboard_user" "Logged as: ${user}" )
+    (box :height 10 "")
+    (box :orientation "h" :class "info"
+      (box :class "mem_info" :orientation "v" :space-evenly false (overlay
+          (circular-progress  :thickness 7 :height 60 :value {EWW_RAM.used_mem_perc} :class "mem_bar")
+          (box :halign "center" :valign "center" :class "mem_icon" ""))
+        (label :text "RAM: ${round(EWW_RAM.used_mem_perc, 0)}%" :style "margin-top: 14px;")
+      )
+      (box :class "cpu_info" :orientation "v" :space-evenly false (overlay
+          (circular-progress  :thickness 7 :height 60 :value {EWW_CPU.avg} :class "cpu_bar")
+          (box :halign "center" :valign "center" :class "cpu_icon" "󰍛"))
+        (label :text "CPU: ${round(EWW_CPU.avg, 0)}%" :style "margin-top: 14px;")
+      )
+    )
+    (box :height 10 "")
+    
+    (volume)
+    (mic_volume)
+  )
+)
+
+(defwindow bar
+  :monitor 0
+  :windowtype "dock"
+  :geometry (
+    geometry
+    :x "0%"
+    :y "0%"
+    :width "90%"
+    :height "10px"
+    :anchor "top center"
+  )
+  :reserve (struts :side "top" :distance "4%")
+  (bar)
+)
 
 (defwindow calendar
   :geometry (
@@ -102,28 +174,13 @@
   (cal)
 )
 
-
-
-(defwidget music []
-  (eventbox :onhover "eww update music_reveal=true"
-    :onhoverlost "eww update music_reveal=false"
-    :class "container"
-    (box :class "module-2" :orientation "h" :space-evenly "false" :hexpand true
-      (button :class "song" :wrap "true" :onclick "~/.config/eww/scripts/open_window.sh song" song)
-      (revealer :transition "slideright"
-        :reveal music_reveal
-        :duration "350ms"
-        (box :vexpand "false" :hexpand "false" :orientation "h"
-          (button :class "song_btn_prev" :onclick "~/.config/eww/scripts/music_info.sh --prev" "")
-          (button :class "song_btn_play" :onclick "~/.config/eww/scripts/music_info.sh --toggle" (literal :content song_status))
-          (button :class "song_btn_next" :onclick "~/.config/eww/scripts/music_info.sh --next" ""))))))
-
-
-(defwidget main []
-  (centerbox :class "main"
-    (left)
-    (center)
-    (right)
+(defwindow dashboard
+  :geometry (
+    geometry
+    :x "20px"
+    :y "4.3%"
+    :stacking "bg"
+    :anchor "top left"
   )
+  (dashboard)
 )
-

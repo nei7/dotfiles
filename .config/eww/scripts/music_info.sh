@@ -8,9 +8,9 @@ STATUS="$(playerctl status)"
 get_status() {
 	
 	if [[ $STATUS == "Playing" ]]; then
-		echo "(box :halign 'center' :hexpand false :class 'pause')"
+		echo "(label :halign 'center' :hexpand false :class 'song_btn_pause' :text '󰏤')"
 	else
-		echo "(box :halign 'center' :hexpand false :class 'play')"
+		echo "(label :halign 'center' :hexpand false :class 'song_btn_play' :text '󰐊')"
 	fi
 }
 

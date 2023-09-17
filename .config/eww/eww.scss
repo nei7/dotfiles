@@ -4,61 +4,32 @@
 }
 
 $fg: #c6c8d1;
+$fg2: #FFFCFA;
 $bg: #1a1b26;
 $bg2: #24283b;
 $bg-alt: #545454;
-$primary: #ff79c6;
-$secondary: #FFFCFA;
 
-.main {
+
+$red: #f7768e;
+$orange: #ff9e64;
+$blue: #7aa2f7;
+$purple: #bb9af7;
+$green: #9ece6a;
+
+.bar {
     margin: 10px 10px 0 15px;
-
 }
-
-
-.song {
-
-    font-weight: bold;
-    margin: 3px 5px 0px 0px;
-}
-
-.song_btn_play {
-
-    margin: 3px 0px 0px 5px;
-
-}
-
-
-.song_btn_prev,
-.song_btn_next {
-    color: #bfc9db;
-
-    margin: 3px 0px 0px 5px;
-
-}
-
-
 
 .workspace_active {
-
-    color: $secondary;
+    color: $fg2;
 }
 
 .workspace_inactive {
-
     color: $fg;
 }
 
 .workspace_occupied {
-    color: $secondary;
-}
-
-.poweroff__icon {
-    background-size: 16px 16px;
-    background-position: center;
-    background-image: url('/home/nei/.config/eww/images/shutdown.png');
-    background-repeat: no-repeat;
-    min-width: 22px;
+    color: $fg2;
 }
 
 .container {
@@ -68,27 +39,6 @@ $secondary: #FFFCFA;
     margin: 0 5px;
 }
 
-.pause {
-    padding-top: 7px;
-    background-image: url('/home/nei/.config/eww/images/pause.png');
-
-    background-position: center;
-    background-repeat: no-repeat;
-    min-width: 20px;
-    min-height: 20px;
-}
-
-.play {
-    padding-top: 7px;
-    background-image: url('/home/nei/.config/eww/images/play.png');
-
-    background-position: center;
-    background-repeat: no-repeat;
-    min-width: 20px;
-    min-height: 20px;
-}
-
-
 
 .cal {
     border-radius: 11px;
@@ -97,14 +47,10 @@ $secondary: #FFFCFA;
     font-size: 15px;
     font-weight: normal;
 
-
-
     .cal-in {
         border-radius: 11px;
         padding: 15px;
         color: $fg;
-
-        border: 1.5px solid #959cbd;
 
         .cal {
             &.highlight {
@@ -118,16 +64,17 @@ $secondary: #FFFCFA;
 }
 
 calender {
-    color: #FFFCFA;
+    color: $fg;
+    padding-top: 10px;
 }
 
 calendar:selected {
-    color: $bg;
-    background-color: #959cbd;
+    color: $blue;
+
 }
 
 calendar.header {
-    color: #FFFCFA;
+    color: $fg2;
     font-weight: bold;
 }
 
@@ -140,6 +87,164 @@ calendar.highlight {
     font-weight: bold;
 }
 
-calendar:indeterminate {
-    color: #bfc9db;
+
+.song {
+    font-weight: bold;
+}
+
+.song_btn_play {
+    margin: 3px 0px 0px 5px;
+}
+
+.song_btn_prev,
+.song_btn_next {
+    color: $fg;
+    margin: 3px 0px 0px 5px;
+}
+
+.song_btn_pause {
+    margin-top: 2px;
+    font-size: 20px;
+
+}
+
+.song_btn_play {
+    font-size: 20px;
+    margin-top: 1px;
+}
+
+
+.speaker_btn {
+    font-size: 20px;
+    margin-top: 2px;
+    margin-right: 5px;
+    color: $blue
+}
+
+.mic_btn {
+    font-size: 24px;
+    margin-top: 0px;
+    margin-left: 5px;
+    color: $purple
+}
+
+.poweroff_btn {
+    color: $red;
+    font-size: 17px;
+    margin-right: 4px
+}
+
+.metric scale trough highlight {
+    all: unset;
+    background-color: $blue;
+    color: $bg;
+    border-radius: 10px;
+}
+
+
+.metric scale.volume trough highlight {
+    all: unset;
+    background-color: $orange;
+    color: $red;
+    border-radius: 10px;
+}
+
+.metric scale trough {
+    all: unset;
+    background-color: $bg-alt;
+    border-radius: 50px;
+    min-height: 5px;
+    min-width: 100px;
+    margin-left: 20px;
+    margin-right: 0px;
+}
+
+.dashboard {
+    background-color: $bg;
+    min-width: 320px;
+    padding: 20px 10px;
+    border-radius: 11px;
+
+}
+
+.dashboard_hour {
+    font-size: 30px;
+}
+
+.mem_bar {
+    color: $orange;
+    background-color: $bg-alt;
+    border-radius: 10px;
+    min-height: 100px;
+}
+
+
+.cpu_bar {
+    color: $purple;
+    background-color: $bg-alt;
+    border-radius: 10px;
+    min-height: 100px;
+}
+
+
+.cpu_info {
+    background-color: $bg2;
+    min-height: 100px;
+    padding: 12px;
+    border-radius: 11px;
+    margin: 5px;
+}
+
+
+.mem_info {
+    margin: 5px;
+    background-color: $bg2;
+    min-height: 60px;
+    padding: 12px;
+    border-radius: 11px;
+    min-height: 100px;
+}
+
+.mem_icon {
+    font-size: 20px;
+    margin-right: 3px;
+}
+
+.cpu_icon {
+    font-size: 25px;
+    margin-right: 3px;
+}
+
+.menu {
+    background-color: $bg;
+    padding: 3px 20px;
+    border-radius: 12px;
+    margin: 0 5px;
+    color: $purple;
+    font-size: 20px;
+}
+
+.dashboard .volume_box,
+.mic_volume_box {
+    background-color: $bg2;
+    margin: 8px;
+    border-radius: 11px;
+    padding: 10px;
+    min-width: 50px;
+}
+
+.dashboard .metric scale trough {
+    min-width: 250px;
+}
+
+
+.mic_volume_box>.metric scale trough highlight {
+    all: unset;
+    background-color: $purple;
+    color: $bg;
+    border-radius: 10px;
+}
+
+.updates {
+    color: $green;
 }
