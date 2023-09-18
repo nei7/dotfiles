@@ -17,7 +17,7 @@ Config files for my arch linux desktop setup
 # Installation
 
 ```shell
-$ bash -c "$(curl -#fL )"
+$ bash -c "$(curl -#fL https://raw.githubusercontent.com/nei7/dotfiles/master/install_dotfiles.sh)"
 ```
 
 # Gallery
