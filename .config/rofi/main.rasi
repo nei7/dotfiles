@@ -16,7 +16,7 @@ window {
     text-color:                     @fg;
 	border:							0px;
 	border-color:					@ac;
-    border-radius:                  0px;
+    border-radius:                  11px;
 	width:							25%;
     location:                       center;
     x-offset:                       0;

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-picom &
+picom -b --experimental-backend
 dunst &
 nitrogen --restore
 exec i3
