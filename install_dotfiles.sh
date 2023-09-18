@@ -125,8 +125,15 @@ install_dependencies() {
 
 }
 
+download_dotfiles() {
+  info "Cloning repo..."
+  git clone https://github.com/nei7/dotfiles
+  cd "dotfiles"
+}
 
 main() {
+  download_dotfiles
+
   if [ ! -d $BACKUP_FOLDER_PATH ]
   then
     mkdir $BACKUP_FOLDER_PATH
