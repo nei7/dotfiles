@@ -1,0 +1,45 @@
+.cal {
+  border-radius: $border;
+  background-color: $bg;
+  font-family: JetBrainsMono Nerd;
+  font-size: 15px;
+  font-weight: normal;
+
+  .cal-in {
+    border-radius: $border;
+    padding: 15px;
+    color: $fg;
+
+    .cal {
+      &.highlight {
+        padding: 20px;
+      }
+
+      padding: 5px 5px 5px 5px;
+      margin-left: 10px;
+    }
+  }
+}
+
+calender {
+  color: $fg;
+  padding-top: 10px;
+}
+
+calendar:selected {
+  color: $blue;
+}
+
+calendar.header {
+  color: $fg2;
+  font-weight: bold;
+}
+
+calendar.button {
+  color: #afbea2;
+}
+
+calendar.highlight {
+  color: #fffcfa;
+  font-weight: bold;
+}

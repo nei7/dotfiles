@@ -1,0 +1,75 @@
+.dashboard {
+  background-color: $bg;
+  min-width: 320px;
+  padding: 15px 10px;
+  border-radius: $border;
+  font-family: "Roboto", sans-serif;
+
+  .bar {
+    color: $blue;
+    background-color: $bg-alt;
+    border-radius: 10px;
+    min-height: 100px;
+  }
+
+  .status > * {
+    background-color: $bg2;
+    border-radius: $border;
+    min-height: 100px;
+    padding: 12px;
+    margin: 5px;
+  }
+}
+
+.volume_box,
+.player {
+  background-color: $bg2;
+  margin: 8px;
+  border-radius: $border;
+  padding: 10px;
+  min-width: 50px;
+}
+
+.dashboard .metric scale trough {
+  min-width: 250px;
+}
+
+.btn {
+  background-color: $bg2;
+  padding: 10px 20px;
+  font-size: 20px;
+  border-radius: 50%;
+}
+
+.btn:hover {
+  background-color: $bg3;
+  transition: color 1s;
+}
+
+.player-cover {
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100px;
+  min-width: 100px;
+  margin: 10px 30px 10px 10px;
+  border-radius: 15px;
+}
+
+.player button {
+  font-size: 24px;
+}
+
+.controls > .control {
+  border-radius: $border;
+  background-color: $bg2;
+  min-height: 100px;
+  font-size: 24px;
+}
+
+.controls {
+  margin: 10px 10px;
+}
+
+.controls > .control.active {
+  background-color: $blue;
+}

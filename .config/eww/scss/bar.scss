@@ -1,0 +1,47 @@
+.bar {
+  margin: 12px 12px 0px 12px;
+  font-family: "JetBrains Mono";
+}
+
+.workspace {
+  .active {
+    color: $fg2;
+  }
+
+  .inactive {
+    color: $fg;
+  }
+
+  .occupied {
+    color: $fg2;
+  }
+}
+
+.song {
+  .play {
+    font-size: 20px;
+
+    margin: 1px 0px 0px 5px;
+  }
+
+  .prev,
+  .next {
+    color: $fg;
+    margin: 0px 0px 0px 5px;
+  }
+}
+
+.container {
+  background-color: $bg;
+  padding: 3px 20px;
+  border-radius: $border;
+  margin: 0 5px;
+}
+
+.menu {
+  background-color: $bg;
+  padding: 4px 20px 6px 13px;
+  border-radius: 12px;
+  margin: 0 5px;
+  font-size: 18px;
+}

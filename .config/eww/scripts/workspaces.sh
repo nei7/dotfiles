@@ -19,19 +19,19 @@ get_workspaces_yuck() {
         occupied=$(check_occupied $number)
 
         if [ "$status" == "-" ]; then  
-            status_class="workspace_inactive"
+            status_class="inactive"
             # icon="󰧞"
             icon=""
         fi
 
         if [ "$occupied" == "occupied" ]; then
-            status_class="workspace_occupied"
+            status_class="occupied"
             icon="○"
         fi
 
          
         if [ "$status" == "*" ]; then   # "*" mean active
-            status_class="workspace_active"
+            status_class="active"
             icon="●"
         fi
 
