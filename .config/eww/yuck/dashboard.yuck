@@ -94,8 +94,8 @@
       (button :style "margin-right: 6px" "󱘖")
     )
     
-    (box :class {mic_muted == 0 ? "control active" : "control"}
-      (button :onclick "amixer set Capture toggle" " 󰍭")
+    (box :class "control"
+      (button :onclick "nohup /home/nei/.config/rofi/powermenu/launch.sh & sleep 0.1s && eww close dashboard" " 󰆞")
     )
     
     (box :class "control"

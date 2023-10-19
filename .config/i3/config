@@ -16,7 +16,7 @@ bindsym $mod+Return exec alacritty
 bindsym $mod+Shift+q kill
 
 # Start rofi
-bindsym $mod+d exec $HOME/.config/rofi/launcher.sh
+bindsym $mod+d exec $HOME/.config/rofi/launcher/launch.sh
 
 # Move between windows
 bindsym $mod+j focus left
