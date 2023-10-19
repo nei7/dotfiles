@@ -22,4 +22,4 @@ $ bash -c "$(curl -#fL https://raw.githubusercontent.com/nei7/dotfiles/master/in
 
 # Gallery
 
-![](.github/docs/1.png)
+![](.github/docs/2.png)
