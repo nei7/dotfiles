@@ -1,4 +1,3 @@
-(defvar time_reveal false)
 (defvar music_reveal false)
 
 
@@ -18,7 +17,7 @@
 
 
 ;; TIME
-(defpoll time :interval "10s" "date '+%H:%M'")
+(defpoll time :interval "10s" "date '+%a %b %H:%M'")
 (defpoll calendar_day :interval "20h" "date '+%d'")
 (defpoll calendar_year :interval "20h" "date '+%Y'")
 

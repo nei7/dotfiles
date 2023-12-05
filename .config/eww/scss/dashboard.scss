@@ -1,75 +1,63 @@
 .dashboard {
-  background-color: $bg;
-  min-width: 320px;
   padding: 15px 10px;
-  border-radius: $border;
   font-family: "Roboto", sans-serif;
 
-  .bar {
-    color: $blue;
-    background-color: $bg-alt;
-    border-radius: 10px;
-    min-height: 100px;
+  .powermenu,
+  .player,
+  .volume {
+    box-shadow: 0 0 5px 0 rgba(black, 0.5);
   }
 
-  .status > * {
-    background-color: $bg2;
+  .powermenu {
+    background-color: $bg;
+    margin: 8px;
+
+    padding: 13px 18px;
+    border-radius: 35px;
+
+    button {
+      background-color: $bg2;
+      padding: 5px 30px;
+      font-size: 30px;
+      border-radius: 35px;
+
+      &:hover {
+        background-color: lighten($bg2, 7);
+        transition: all 0.2s ease-in-out;
+      }
+    }
+  }
+
+  .volume {
+    background-color: $bg;
+    margin: 8px;
     border-radius: $border;
-    min-height: 100px;
-    padding: 12px;
-    margin: 5px;
+    padding: 10px;
+    min-width: 50px;
+    border-radius: 35px;
+
+    .metric scale trough {
+      min-width: 250px;
+    }
   }
-}
 
-.volume_box,
-.player {
-  background-color: $bg2;
-  margin: 8px;
-  border-radius: $border;
-  padding: 10px;
-  min-width: 50px;
-}
+  .player {
+    background-color: $bg;
+    margin: 8px;
+    border-radius: 35px;
+    padding: 10px;
 
-.dashboard .metric scale trough {
-  min-width: 250px;
-}
+    button {
+      font-size: 24px;
+    }
 
-.btn {
-  background-color: $bg2;
-  padding: 10px 20px;
-  font-size: 20px;
-  border-radius: 50%;
-}
-
-.btn:hover {
-  background-color: $bg3;
-  transition: color 1s;
-}
-
-.player-cover {
-  background-repeat: no-repeat;
-  background-size: cover;
-  min-height: 100px;
-  min-width: 100px;
-  margin: 10px 30px 10px 10px;
-  border-radius: 15px;
-}
-
-.player button {
-  font-size: 24px;
-}
-
-.controls > .control {
-  border-radius: $border;
-  background-color: $bg2;
-  min-height: 100px;
-  font-size: 24px;
-}
-
-.controls {
-  margin: 10px 10px;
-}
-
-.controls > .control.active {
-  background-color: $blue;
+    .cover {
+      background-repeat: no-repeat;
+      background-size: cover;
+      min-height: 70px;
+      min-width: 70px;
+      margin: 10px 10px 10px 10px;
+      border-radius: 15px;
+    }
+  }
 }

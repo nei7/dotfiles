@@ -9,116 +9,64 @@
 (defpoll album_cover :interval "1s"  "./scripts/music_info.sh --cover")
 
 
-(defwidget dashboard_header []
-  (box :orientation "h" :space-evenly false :spacing 10 :style "padding: 10px 12px 10px 12px;"
-    (box :orientation "v" :space-evenly false :halign "start" :hexpand true
-      (label :text "Logged as ${user}" :halign "start" :style "font-weight: 500; font-size: 16px")
-      (label :text "${uptime}" :halign "start" :style "font-size: 16px")
-    )
-    (button :class "btn" :halign "end" :style "font-size: 23px" :onclick "systemctl poweroff"  "⏻"  )
-    (button :class "btn" :halign "end" :onclick "i3-msg exit"  "󰍃" )
+(defwidget powermenu []
+  (box :orientation "h" :space-evenly false :halign "center" :spacing 10 :class "powermenu"
+    (button :halign "end" :onclick "systemctl poweroff"  "⏻"  )
+    (button :halign "end" :onclick "reboot"  ""  )
+    (button :halign "end" :style "font-size: 24px" :onclick "reboot"  ""  )
+    (button :halign "end" :style "font-size: 21px" :onclick "i3-msg exit"  "󰍃" )
   )
 )
-
-(defwidget status []
-  (box :orientation "h" :style "margin: 10px 0px" :class "status"
-    (box :orientation "v" :space-evenly false
-      (overlay
-        (circular-progress  :thickness 7 :height 60 :value {EWW_RAM.used_mem_perc} :class "bar")
-        (box :halign "center" :valign "center" :style "font-size: 20px; margin-right: 3px;" "")
-      )
-      (label :text "${round(EWW_RAM.used_mem_perc, 0)}%" :style "margin-top: 14px;")
-    )
-    (box :orientation "v" :space-evenly false
-      (overlay
-        (circular-progress  :thickness 7 :height 60 :value {EWW_CPU.avg} :class "bar")
-        (box :halign "center" :valign "center" :style "font-size: 25px;margin-right: 3px;" "󰍛")
-      )
-      (label :text "${round(EWW_CPU.avg, 0)}%" :style "margin-top: 14px;")
-    )
-  )
-)
-
-
 
 (defwidget player []
-  (box :class "player" :space-evenly false :orientation "h"
+  (box :class "player" :halign "fill" :space-evenly false :orientation "h" :spacing 10
     
-    (box :class "player-cover" :style "background-image: url('${album_cover}');")
+    (box :class "cover" :style "background-image: url('${album_cover}');")
     
     
     
-    (box :space-evenly false :orientation "v" :valign "center"  :style "min-width: 200px"
-      (label :halign "start" :style "font-weight: bold" :text {substring("${song_artist}",0, 30)} )
-      (label :halign "start" :text {substring("${song_title}",0, 30)})
-      (box :spacing 10 :style "margin-top: 8px" :halign "start" :space-evenly false
-        (button :onclick "./scripts/music_info.sh --prev" "󰒮")
-        (button :onclick "./scripts/music_info.sh --toggle" (literal :content player_status))
-        (button :onclick "./scripts/music_info.sh --next" "󰒭")
-      )
+    (box :orientation "v" :valign "center"  :hexpand true
+      (label :halign "start" :style "font-weight: bold; font-size: 16px" :text {substring("${song_artist}", 0, 24)} )
+      (label :halign "start" :text {`${substring("${song_title}", 0, 24)}${strlength(song_title) > 24 ? "..." : ""}`})
     )
+    
+    
+    (box :spacing 10 :halign "end" :valign "center" :orientation "h" :style "margin-right: 15px"
+      (button  :onclick "./scripts/music_info.sh --toggle" (literal :content player_status))
+      (button :onclick "./scripts/music_info.sh --next" "󰒬")
+    )
+    
   )
 )
 
 (defwidget volume []
-  (box :class "volume_box" :space-evenly false :orientation "v"
-    (box :orientation "h" :space-evenly false
-      (metric
-        :icon "󰕾"
-        :class "volume"
-        :value speaker_volume
-        :onchange "amixer set Master {}%"
-      )
-      (label :style "font-size: 15px; margin: 0px 15px" :text "${speaker_volume}%")
+  (box :class "volume" :space-evenly false :orientation "v"
+    (metric
+      :icon "󰕾"
+      :value speaker_volume
+      :onchange "amixer set Master {}%"
     )
-    (box :orientation "h" :space-evenly false :style "margin-top: 10px"
-      (metric
-        :icon "󰍬"
-        :class "volume"
-        :value mic_volume
-        :onchange "amixer set Capture {}%"
-      )
-      (label :style "font-size: 15px; margin: 0px 15px" :text "${mic_volume}%")
-      
-    )
-  )
-)
-
-
-(defwidget controls []
-  (box
-    :class "controls"
-    :spacing 10
-    
-    (box :class "control active"
-      (button :style "margin-right: 6px" "󱘖")
+    (metric
+      :icon "󰍬"
+      :value mic_volume
+      :onchange "amixer set Capture {}%"
     )
     
-    (box :class "control"
-      (button :onclick "nohup /home/nei/.config/rofi/powermenu/launch.sh & sleep 0.1s && eww close dashboard" " 󰆞")
-    )
-    
-    (box :class "control"
-      (button :style "margin-right: 6px; font-size: 17px" "")
-    )
   )
 )
 
 (defwindow dashboard
   :geometry (
     geometry
-    :x "-17px"
-    :y "4.3%"
+    :x "0px"
+    :y "4.6%"
     :stacking "bg"
     :anchor "top right"
   )
   (box :halign "center" :orientation "v" :class "dashboard" :space-evenly false
-    (dashboard_header)
-    (volume)
-    
-    (status)
+    (powermenu)
     (player)
-    (controls)
+    (volume)
   )
 )
 

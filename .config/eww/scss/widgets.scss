@@ -1,7 +1,6 @@
 .metric > .icon {
   margin-top: 0px;
   margin: 5px 15px;
-  color: white;
 }
 
 .metric scale trough highlight {
@@ -22,7 +21,7 @@
   all: unset;
   background-color: $bg-alt;
   border-radius: 50px;
-  min-height: 7px;
+  min-height: 15px;
   min-width: 100px;
   margin-left: 20px;
   margin-right: 0px;

@@ -3,7 +3,6 @@
 (include "./yuck/widgets.yuck")
 (include "./yuck/dashboard.yuck")
 (include "./yuck/bar.yuck")
-(include "./yuck/calendar.yuck")
 
 
 

@@ -27,10 +27,9 @@ window {
 
 prompt {
     enabled: 						true;
-	padding: 						0.30% 1% 0% -0.5%;
+	padding: 						0.10% 1% 0% -0.1%;
 	background-color: 				@al;
 	text-color: 					@fg;
-	font:							"FantasqueSansMono Nerd Font 12";
 }
 
 entry {
@@ -39,26 +38,34 @@ entry {
     placeholder-color:              @fg;
     expand:                         true;
     horizontal-align:               0;
-    placeholder:                    "Search";
     padding:                        0.10% 0% 0% 0%;
     blink:                          true;
 }
 
+
 inputbar {
 	children: 						[ prompt, entry ];
-    background-color:               @bg;
+    background-color:               @bg2;
     text-color:                     @fg;
     expand:                         false;
-	border:							0% 0% 0% 0%;
-    border-radius:                  0px;
+	border:							0px 0px 0px 0px;
+    border-radius:                  16px;
 	border-color:					@ac;
     margin:                         0% 0% 0% 0%;
-    padding:                        1.5%;
+    padding:                        0.8%;
+}
+
+
+inputbox {
+    children: [inputbar];
+    background-color: @bg;
+    expand:                         false;
+    padding: 15px;
 }
 
 listview {
     background-color:               @al;
-    padding:                        10px;
+    padding:                        15px 20px 20px 20px;
     columns:                        1;
     lines:                          4;
     spacing:                        1%;
@@ -72,16 +79,17 @@ mainbox {
 	border:							0% 0% 0% 0%;
     border-radius:                  0% 0% 0% 0%;
 	border-color:					@ac;
-    children:                       [ inputbar, listview ];
+    children:                       [ inputbox, listview ];
     spacing:                       	0%;
-    padding:                        0%;
+    padding:                        8px;
 }
 
 element {
+    font:							"Roboto 12";
     background-color:               @al;
     text-color:                     @fg;
     orientation:                    horizontal;
-    border-radius:                  0%;
+    border-radius:                  16px;
     padding:                        0.5% 0.5% 0.5% 0.5%;
 }
 
@@ -107,6 +115,6 @@ element selected {
     background-color:               @ac;
     text-color:                     @bg;
 	border:							0% 0% 0% 0%;
-    border-radius:                  8px;
+    border-radius:                  16px;
     border-color:                  	@bg;
 }

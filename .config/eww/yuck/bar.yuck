@@ -9,7 +9,7 @@
 )
 
 (defwidget bar_center []
-  (box :class "container" :halign "center" (music))
+  (box :halign "center" (music))
 )
 
 (defwidget bar_left []
@@ -20,33 +20,30 @@
     :halign "start"
     
     (workspaces)
-    (box :class "container"
-      (label :class "updates" :text " ${updates}")
-    )
+    
   )
 )
 
 (defwidget bar_right []
   (box :halign "end" :space-evenly false
     
+    
     (box :class "container"
-      (label :text "${temperature} ℃")
+      (label :class "updates" :text " ${updates}")
     )
     
     
-    (eventbox :onhover "eww update time_reveal=true"
-      :onhoverlost "eww update time_reveal=false"
-      (box :class "container"
-        (button
-          :class "clock_date_class"
-          :onclick "eww open --toggle calendar"
-          
-          "󰥔 ${time}"
+    (eventbox
+      :timeout "10ms"
+      :cursor "pointer"
+      :onclick "eww open --toggle dashboard"
+      (box :class "dashboard_button" :space-evenly false
+        (label :text
+          "🕗 ${time}"
         )
+        (label :text "${temperature} ℃")
       )
     )
-    
-    (button  :onclick "eww open --toggle dashboard"  :class "menu" "")
   )
 )
 
@@ -54,7 +51,7 @@
   (eventbox
     :onhover "eww update music_reveal=true"
     :onhoverlost "eww update music_reveal=false"
-    :class "container"
+    :class ""
     
     (box :class "song" :orientation "h" :space-evenly false :hexpand true
       (label :style "font-weight: bold" :text {song})
@@ -81,13 +78,15 @@
     :x "0%"
     :y "0%"
     :width "90%"
-    :height "10px"
+    :height "20px"
     :anchor "top center"
   )
-  :reserve (struts :side "top" :distance "4%")
-  (centerbox :class "bar"
-    (bar_left)
-    (bar_center)
-    (bar_right)
-  )
+  :reserve (struts :side "top" :distance "2%")
+  (box :class "bar"
+    (centerbox :class "widget"
+      (bar_left)
+      (bar_center)
+      (bar_right)
+    ))
+  
 )

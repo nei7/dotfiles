@@ -36,7 +36,7 @@ get_workspaces_yuck() {
         fi
 
         buffered+=$'\n'
-        buffered+="(button :class '$status_class'
+        buffered+="(button :class '$status_class' :style 'font-size: 20px; min-height: 10px '
                            :onclick 'wmctrl -s $number'
                            '$icon')"
 
