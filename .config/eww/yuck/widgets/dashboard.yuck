@@ -1,0 +1,51 @@
+(defwidget dashboard []
+  
+  
+  (revealer
+    :transition "slidedown"
+    :reveal dashboard_rev
+    :duration duration
+    
+  )
+)
+(defwidget powermenu []
+  (box :orientation "h" :space-evenly false :halign "center" :spacing 10 :class "powermenu"
+    (button :halign "end" :onclick "systemctl poweroff"  "󰤆"  )
+    (button :halign "end" :onclick "reboot"  "󰑐"  )
+    (button :halign "end" :onclick "reboot"  "󰌾"  )
+    (button :halign "end" :onclick "i3-msg exit"  "󰍃" )
+  )
+)
+
+
+(defwidget volume []
+  (box :class "volume" :space-evenly false :orientation "v"
+    (metric
+      :icon "󰕾"
+      :value speaker_volume
+      :onchange "amixer set Master {}%"
+    )
+    (metric
+      :icon "󰍬"
+      :value mic_volume
+      :onchange "amixer set Capture {}%"
+    )
+  )
+)
+
+(defwidget metric [icon value ?onchange ?onclick ?class ?height ?width ?tooltip]
+  (box :orientation "h"
+    :class "metric"
+    :space-evenly false
+    (label :class "icon" :style "font-size: 21px" :text "${icon}")
+    
+    (scale
+      :min 0
+      :max 101
+      :active {onchange != ""}
+      :value value
+      :onchange onchange
+    )
+  )
+)
+

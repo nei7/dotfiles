@@ -1,8 +1,16 @@
+(defpoll user :interval "6h" `whoami`)
+(defpoll uptime :interval "1h" "uptime --pretty")
 
-(include "./variables.yuck")
-(include "./yuck/widgets.yuck")
-(include "./yuck/dashboard.yuck")
-(include "./yuck/bar.yuck")
+(defpoll speaker_volume :interval "1s"  "./scripts/get_vol.sh speaker")
+(defpoll mic_volume :interval "1s"  "./scripts/get_vol.sh mic")
+(defpoll mic_muted :interval "0.3s"  "./scripts/music_info.sh --muted")
 
+(defpoll album_cover :interval "1s"  "./scripts/music_info.sh --cover")
+
+
+
+(include "variables.yuck")
+(include "yuck/widgets.yuck")
+(include "yuck/windows.yuck")
 
 

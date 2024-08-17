@@ -1,0 +1,68 @@
+.player {
+  background-color: $bg;
+  margin: 8px;
+  border-radius: 35px;
+  padding: 1rem;
+
+  button {
+    font-size: 24px;
+  }
+
+  .cover {
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 70px;
+    min-width: 70px;
+    margin-right: 10px;
+    border-radius: 1rem
+  }
+
+
+
+  .metadata {
+    .title {
+      font-size: 1rem;
+      font-weight: bold;
+    }
+
+    .artist,
+    .album {
+      font-size: 1rem;
+    }
+  }
+
+
+  .progress {
+    margin: .5rem 0;
+
+    @include slider;
+  }
+
+  .time {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    margin: 0 5px 0 5px
+  }
+
+  .controls {
+
+
+    .loop,
+    .shuffle {
+      font-size: 1rem;
+    }
+
+    .toggle {
+      font-size: 1.4rem;
+    }
+
+    .previous,
+    .next {
+      font-size: 1em;
+    }
+
+    .disabled {
+      color: transparentize($fg, 0.5);
+    }
+  }
+}

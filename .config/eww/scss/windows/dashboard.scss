@@ -3,9 +3,8 @@
   font-family: "Roboto", sans-serif;
 
   .powermenu,
-  .player,
   .volume {
-    box-shadow: 0 0 5px 0 rgba(black, 0.5);
+    box-shadow: $shadow
   }
 
   .powermenu {
@@ -17,8 +16,8 @@
 
     button {
       background-color: $bg2;
-      padding: 5px 30px;
-      font-size: 30px;
+      padding: 8px 30px;
+      font-size: 25px;
       border-radius: 35px;
 
       &:hover {
@@ -31,33 +30,13 @@
   .volume {
     background-color: $bg;
     margin: 8px;
-    border-radius: $border;
+    border-radius: $radius;
     padding: 10px;
     min-width: 50px;
     border-radius: 35px;
 
     .metric scale trough {
       min-width: 250px;
-    }
-  }
-
-  .player {
-    background-color: $bg;
-    margin: 8px;
-    border-radius: 35px;
-    padding: 10px;
-
-    button {
-      font-size: 24px;
-    }
-
-    .cover {
-      background-repeat: no-repeat;
-      background-size: cover;
-      min-height: 70px;
-      min-width: 70px;
-      margin: 10px 10px 10px 10px;
-      border-radius: 15px;
     }
   }
 }

@@ -1,18 +1,14 @@
 (defvar music_reveal false)
+(defvar position "{}")
+(defvar dashboard_rev false)
 
 
-;; MUSIC
-(defpoll song :interval "1s"  "./scripts/music_info.sh --song")
-(defpoll song_title :interval "2s"  "./scripts/music_info.sh --title")
-(defpoll song_artist :interval "2s"  "./scripts/music_info.sh --artist")
-(defpoll song_time :interval "1s"  "./scripts/music_info.sh --time")
-(defpoll player_status :interval "0.2s"  "./scripts/music_info.sh --status")
+(deflisten updates :initial 0 "scripts/updates.sh")
+(deflisten mpris :initial "{}" "scripts/js/mpris.js")
 
+(deflisten window :initial "" "scripts/get_window.sh")
 
-
-;; MISC
-(defpoll temperature :interval "12h" "./scripts/temperature.sh")
-(defpoll updates :interval "12h" "./scripts/updates.sh")
+(defpoll temperature  :interval "12h" "./scripts/temperature.sh")
 (defpoll WORKSPACES :interval "0.1s" "./scripts/workspaces.sh")
 
 

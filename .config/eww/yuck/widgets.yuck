@@ -1,15 +1,3 @@
-(defwidget metric [icon value ?onchange ?onclick ?class ?height ?width ?tooltip]
-  (box :orientation "h"
-    :class "metric"
-    :space-evenly false
-    (label :class "icon" :style "font-size: 21px" :text "${icon}")
-    
-    (scale
-      :min 0
-      :max 101
-      :active {onchange != ""}
-      :value value
-      :onchange onchange
-    )
-  )
-)
+(include "yuck/widgets/bar.yuck")
+(include "yuck/widgets/dashboard.yuck")
+(include "yuck/widgets/player.yuck")

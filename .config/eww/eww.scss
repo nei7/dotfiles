@@ -4,6 +4,11 @@
 
 @import "./scss/colors.scss";
 @import "./scss/variables.scss";
-@import "./scss/dashboard.scss";
-@import "./scss/bar.scss";
-@import "./scss/widgets.scss";
+@import "./scss/mixins.scss";
+
+
+@import "./scss/windows/dashboard.scss";
+@import "./scss/windows/bar.scss";
+
+@import "./scss/widgets/metric.scss";
+@import "./scss/widgets/player.scss";
