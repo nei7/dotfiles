@@ -24,7 +24,7 @@
       (scale
         :visible {player.length  > 0}
         :class "progress"
-        :value {position?.[player.serviceName]?.position ?: 0}
+        :value {positions?.[player.serviceName]?.position ?: 0}
         :min 0
         :max {player.length}
         :onchange "playerctl -p ${player.name} position {}"
@@ -34,7 +34,7 @@
       (centerbox :hexpand true
         (label
           :class "time"
-          :text "${position?.[player.serviceName]?.positionStr}"
+          :text "${positions?.[player.serviceName]?.positionStr}"
           :visible {player.length > 0}
           :halign "start"
           :hexpand true

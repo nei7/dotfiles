@@ -8,7 +8,7 @@
     (box :halign "center" :orientation "v" :class "dashboard" :space-evenly false
       (powermenu)
       (box :orientation "v" :space-evenly false 
-        (for i in {mpris}
+        (for i in {players}
           (player :player i)
         )
       )

@@ -1,13 +1,4 @@
-(defwidget dashboard []
-  
-  
-  (revealer
-    :transition "slidedown"
-    :reveal dashboard_rev
-    :duration duration
-    
-  )
-)
+
 (defwidget powermenu []
   (box :orientation "h" :space-evenly false :halign "center" :spacing 10 :class "powermenu"
     (button :halign "end" :onclick "systemctl poweroff"  "󰤆"  )
@@ -20,16 +11,16 @@
 
 (defwidget volume []
   (box :class "volume" :space-evenly false :orientation "v"
-    (metric
-      :icon "󰕾"
-      :value speaker_volume
-      :onchange "amixer set Master {}%"
-    )
-    (metric
-      :icon "󰍬"
-      :value mic_volume
-      :onchange "amixer set Capture {}%"
-    )
+    ; (metric
+    ;   :icon "󰕾"
+    ;   :value {speaker_volume}
+    ;   :onchange "amixer set Master {}%"
+    ; )
+    ; (metric
+    ;   :icon "󰍬"
+    ;   :value {mic_volume}
+    ;   :onchange "amixer set Capture {}%"
+    ; )
   )
 )
 
