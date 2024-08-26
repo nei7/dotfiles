@@ -4,6 +4,8 @@
 
 (deflisten updates :initial 0 "scripts/updates.sh")
 
+(deflisten volume :initial "{}" "scripts/volume.sh")
+
 (deflisten window :initial "{}" "scripts/get_window.sh")
 
 (defpoll temperature  :interval "12h" "./scripts/temperature.sh")

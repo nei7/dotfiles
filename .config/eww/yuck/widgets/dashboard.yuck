@@ -9,18 +9,60 @@
 )
 
 
+(defwidget slider [class value action icon launch ?muted]
+  (box
+    :class class
+    :space-evenly false
+    :hexpand true
+    (eventbox
+      :cursor "pointer"
+      :valign "center"
+      (button
+        :class "icon ${muted}"
+        :onclick "${action} toggle"
+        icon
+      )
+    )
+    (scale
+      :class "scale"
+      :hexpand true
+      :tooltip {muted ? "Muted" : "${value}%"}
+      :value value
+      :min 0
+      :max 101
+      :onchange "${action}"
+    )
+    (eventbox
+      :cursor "pointer"
+      :valign "center"
+      (button
+        :class "launch"
+        :onclick launch
+        ""
+      )
+    )
+  )
+)
+
 (defwidget volume []
   (box :class "volume" :space-evenly false :orientation "v"
-    ; (metric
-    ;   :icon "󰕾"
-    ;   :value {speaker_volume}
-    ;   :onchange "amixer set Master {}%"
-    ; )
-    ; (metric
-    ;   :icon "󰍬"
-    ;   :value {mic_volume}
-    ;   :onchange "amixer set Capture {}%"
-    ; )
+    (slider
+      :class "volume-slider"
+      :value {volume.output.volume}
+      :icon "󰕾"
+      :action "amixer set Master {}%"
+      :launch "pavucontrol &"
+      :muted {false}
+    )
+
+    (slider
+      :class "volume-slider"
+      :value {volume.input.volume}
+      :icon "󰍬"
+      :action "amixer set Capture {}%"
+      :launch "pavucontrol &"
+      :muted {false}
+    )
   )
 )
 

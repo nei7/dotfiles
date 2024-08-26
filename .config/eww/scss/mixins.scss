@@ -24,8 +24,6 @@
   }
 
   &:hover trough {
-
-
     slider {
       @if $slider {
         background-color: $fg;
@@ -57,4 +55,13 @@
     }
   }
 
+}
+
+
+@mixin widget($radius: $radius, $padding: 1rem) {
+  border-radius: $radius;
+  background-color: $bg;
+  padding: $padding;
+  color: $fg;
+  box-shadow: 0 0 5px 0 rgba(black, 0.5);
 }

@@ -1,5 +1,4 @@
 (defwidget player [player]
-  
   (box :class "player" :orientation "v" :space-evenly false
     (box :halign "fill" :space-evenly false :orientation "h" :spacing 10
       
@@ -12,15 +11,14 @@
       
       
       (box :orientation "v" :valign "center" :class "metadata" :hexpand true
-        (label :halign "start" :limit-width 40 :class "title" :text {player.title} )
-        (label :halign "start" :class "album" :text {player.artist})
-        (label :halign "start" :class "artist" :visible {player.album != ""} :text {player.album})
+        (label :halign "start" :limit-width 50 :class "title" :text {player.title} )
+        (label :halign "start" :limit-width 50 :class "album" :text {player.artist})
+        (label :halign "start" :limit-width 50 :class "artist" :visible {player.album != ""} :text {player.album})
       )
       
       
     )
     (box :space-evenly true :orientation "v" :hexpand true :halign "fill"
-      
       (scale
         :visible {player.length  > 0}
         :class "progress"

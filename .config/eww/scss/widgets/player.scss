@@ -1,8 +1,6 @@
 .player {
-  background-color: $bg;
+  @include widget($dashboard-radius);
   margin: 8px;
-  border-radius: 35px;
-  padding: 1rem;
 
   button {
     font-size: 24px;

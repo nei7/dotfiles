@@ -1,7 +1,3 @@
-(defpoll speaker_volume :interval "1s"  "./scripts/get_vol.sh speaker")
-(defpoll mic_volume :interval "1s"  "./scripts/get_vol.sh mic")
-(defpoll mic_muted :interval "0.3s"  "./scripts/music_info.sh --muted")
-
 (include "variables.yuck")
 (include "yuck/widgets.yuck")
 (include "yuck/windows.yuck")
