@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SINK=$(pactl list short sinks | grep RUNNING | awk '{print $1}')
-SOURCE=57
+SOURCE=$(pactl list short sources | grep RUNNING | awk '{print $1}')
 
 if [ -z "$SINK" ]; then
   echo "No active sink found."

@@ -48,7 +48,7 @@
   (box :class "volume" :space-evenly false :orientation "v"
     (slider
       :class "volume-slider"
-      :value {volume.output.volume}
+      :value {volume?.output?.volume ?: 0}
       :icon "󰕾"
       :action "amixer set Master {}%"
       :launch "pavucontrol &"
@@ -57,7 +57,7 @@
 
     (slider
       :class "volume-slider"
-      :value {volume.input.volume}
+      :value {volume?.input?.volume ?: 0}
       :icon "󰍬"
       :action "amixer set Capture {}%"
       :launch "pavucontrol &"

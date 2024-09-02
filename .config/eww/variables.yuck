@@ -6,7 +6,7 @@
 
 (deflisten volume :initial "{}" "scripts/volume.sh")
 
-(deflisten window :initial "{}" "scripts/get_window.sh")
+(deflisten window :initial "" "scripts/window.sh")
 
 (defpoll temperature  :interval "12h" "./scripts/temperature.sh")
 (defpoll WORKSPACES :interval "0.1s" "./scripts/workspaces.sh")

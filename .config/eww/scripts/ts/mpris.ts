@@ -7,13 +7,9 @@ import crypto from 'crypto'
 import axios from 'axios'
 import path from 'path'
 
-import EventEmitter from 'node:events';
-
-const eventEmitter = new EventEmitter();
-
-
-
 const MPRIS_DIR = '/home/nei/.cache/eww';
+const players = new Map<string, Song>()
+const postitions = new Map<string, Position>()
 
 async function getArtwork(artworkUrl: string) {
     if (!artworkUrl) return ""
@@ -147,7 +143,7 @@ for (const name of services) {
     const owner = await dbusInterface.GetNameOwner(name)
     if (name.startsWith("org.mpris.MediaPlayer2")) {
         activePlayers.set(owner, name)
-        eventEmitter.emit('playerConnected', name);
+        watchPlayer(name)
     }
 }
 
@@ -160,7 +156,7 @@ dbusInterface.on('NameOwnerChanged', async (name: string, oldOwner: string, newO
 
     if (newOwner !== "" && !activePlayers.has(newOwner)) {
         activePlayers.set(newOwner, name)
-        eventEmitter.emit('playerConnected', name);
+        watchPlayer(name)
     }
 
     if (activePlayers.has(oldOwner)) {
@@ -172,11 +168,5 @@ dbusInterface.on('NameOwnerChanged', async (name: string, oldOwner: string, newO
 });
 
 
-
-eventEmitter.on("playerConnected", watchPlayer)
-
-
-const players = new Map<string, Song>()
-const postitions = new Map<string, Position>()
 
 process.stdin.resume();
