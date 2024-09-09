@@ -11,6 +11,9 @@ const MPRIS_DIR = '/home/nei/.cache/eww';
 const players = new Map<string, Song>()
 const postitions = new Map<string, Position>()
 
+process.stdout.write("")
+process.stdout.write("\n")
+
 async function getArtwork(artworkUrl: string) {
     if (!artworkUrl) return ""
     if (artworkUrl.startsWith("file://")) {
@@ -47,7 +50,7 @@ function formatTime(seconds: number) {
 }
 
 async function getProperty<T = any>(propInterface: ClientInterface, property: string): Promise<T> {
-    const { value }: dbus.Variant = await propInterface.Get("org.mpris.MediaPlayer2.Player", property)
+    const { value }: dbus.Variant = await propInterface.Get("org.mpris.MediaPlayer2.Player", property).catch(() => ({ value: null }))
     return value
 }
 
@@ -85,7 +88,9 @@ async function updateSong(name: string, p: ClientInterface) {
             canPause,
         })
 
-        await updateEww("players", JSON.stringify(Array.from(players.values())))
+        const playersRaw = JSON.stringify(Array.from(players.values()))
+
+        await updateEww("players", playersRaw)
     } catch (err) {
         console.error(err)
     }
@@ -169,4 +174,3 @@ dbusInterface.on('NameOwnerChanged', async (name: string, oldOwner: string, newO
 
 
 
-process.stdin.resume();

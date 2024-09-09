@@ -1,3 +1,9 @@
+@mixin bar-widget {
+  @include widget($padding: 3px 20px);
+  background-color: $bg2;
+
+}
+
 .bar {
   .widget {
     font-family: "JetBrains Mono";
@@ -9,58 +15,71 @@
     border-radius: 30px;
   }
 
-  .workspaces {
-    .indicator {
-      &.active {
-        color: $fg2;
-      }
 
-      &.inactive {
-        color: $fg;
+
+  .workspaces {
+    @include bar-widget;
+
+    .workspace {
+      border-radius: 3rem;
+
+
+      &.active {
+        background: $blue;
+        min-width: 24px;
+        min-height: 14px;
+        border-radius: 1rem;
       }
 
       &.occupied {
-        color: $fg2;
+        background: lighten($bg, 50);
+        min-width: 10px;
+        min-height: 10px;
+      }
+
+      &.empty {
+        background: transparentize($fg, 0.8);
+        min-width: 8px;
+        min-height: 8px;
+
       }
     }
   }
 
-  .song {
-    .play {
-      font-size: 20px;
+  .updates {
+    font-weight: bold;
+    margin: 0 1rem;
+    @include bar-widget;
+  }
 
-      margin: 2px 0px 0px 5px;
+  .tray {
+    margin: 0 2rem;
+  }
+
+
+
+  .time {
+    font-weight: bold;
+  }
+
+  .indicator {
+    @include bar-widget;
+    font-weight: bold;
+    font-size: 1.1rem;
+
+    .containter {
+      padding: 3px 20px;
     }
 
-    .prev,
-    .next {
-      margin: 0px 0px 0px 5px;
+    &:hover {
+      background-color: $blue;
+      color: $bg2;
+      transition: all 0.2s ease-in-out;
     }
   }
 
-  .container {
-    background-color: $bg2;
-    padding: 3px 20px;
-    border-radius: $radius;
-    margin: 0 5px;
-  }
 
-  .dashboard_button {
-    background-color: $blue;
-    color: $bg;
-    padding: 3px 20px;
-    border-radius: $radius;
-    margin: 0 5px;
 
-    &>* {
-      margin: 0 5px;
-    }
-  }
 
-  .menu {
-    padding: 4px 20px 6px 13px;
-    border-radius: 12px;
-    margin: 0 5px;
-    font-size: 18px;
-  }
+
 }

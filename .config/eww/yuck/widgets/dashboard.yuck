@@ -1,10 +1,10 @@
 
 (defwidget powermenu []
   (box :orientation "h" :space-evenly false :halign "center" :spacing 10 :class "powermenu"
-    (button :halign "end" :onclick "systemctl poweroff"  "󰤆"  )
-    (button :halign "end" :onclick "reboot"  "󰑐"  )
-    (button :halign "end" :onclick "reboot"  "󰌾"  )
-    (button :halign "end" :onclick "i3-msg exit"  "󰍃" )
+    (button :halign "end" :onclick "systemctl poweroff"  "󰤆")
+    (button :halign "end" :onclick "reboot"  "󰑐")
+    (button :halign "end" :onclick "reboot"  "󰌾")
+    (button :halign "end" :onclick "i3-msg exit"  "󰍃")
   )
 )
 
@@ -45,7 +45,7 @@
 )
 
 (defwidget volume []
-  (box :class "volume" :space-evenly false :orientation "v"
+  (box :class "volume ${mpris}" :space-evenly false :orientation "v"
     (slider
       :class "volume-slider"
       :value {volume?.output?.volume ?: 0}

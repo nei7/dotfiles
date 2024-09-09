@@ -1,32 +1,39 @@
+
+
 (defwidget bar []
   (box :class "bar"
     (centerbox :class "widget"
+      
       (box
         :class "left"
         :space-evenly false
         :orientation "horizontal"
         :halign "start"
         (workspaces)
+        (current-window)
       )
       
-      (box :halign "center" (music))
+      (box :halign "center" (time))
       
       (box :halign "end" :space-evenly false
         (systemtray)
-        (box :class "container"
-          (label :class "updates" :text " ${updates}")
-        )
+        ; (updates)
         (eventbox
           :timeout "10ms"
           :cursor "pointer"
           :onclick "scripts/toggle.sh dashboard_rev"
-          (box :class "dashboard_button" :space-evenly false
-            (label :text
-              "🕗 ${time}"
+          :class "indicator"
+          (box :class "containter" :space-evenly false :spacing 20
+            (box :class "indicators" :space-evenly false
+              (volume-indicator)
+              (microphone-indicator)
             )
-            (label :text "${temperature} ℃")
           )
+          
+          
+          
         )
+        
       )
     )
   )
@@ -37,7 +44,7 @@
 (defwindow bar
   :monitor 0
   :stacking "fg"
-  :exclusive true 
+  :exclusive true
   :geometry (geometry
     :width "3420px"
     :height "50px"

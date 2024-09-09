@@ -5,19 +5,17 @@
 (deflisten updates :initial 0 "scripts/updates.sh")
 
 (deflisten volume :initial "{}" "scripts/volume.sh")
+(deflisten mpris   :keepalive true :initial "" "scripts/ts/mpris.ts")
 
-(deflisten window :initial "" "scripts/window.sh")
+(deflisten window :initial "{}" "scripts/window.sh")
 
 (defpoll temperature  :interval "12h" "./scripts/temperature.sh")
-(defpoll WORKSPACES :interval "0.1s" "./scripts/workspaces.sh")
+
+
 
 (defvar players "[]")
 (defvar positions "{}")
+(defvar workspaces "[]")
+(defvar current_workspace "{}")
 
-
-;; TIME
 (defpoll time :interval "10s" "date '+%a %b %H:%M'")
-(defpoll calendar_day :interval "20h" "date '+%d'")
-(defpoll calendar_year :interval "20h" "date '+%Y'")
-
-

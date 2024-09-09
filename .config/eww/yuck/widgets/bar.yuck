@@ -1,16 +1,30 @@
 (defwidget workspaces []
-  (box
-    :halign "start"
-    :style "font-size: 23px;"
-    :valign "center"
-    :class "container workspaces"
-    (literal :content WORKSPACES)
+  (box :class "workspaces"  :space-evenly false :spacing 7
+    (for workspace in workspaces
+      (eventbox
+        :cursor "pointer"
+        :halign "center"
+        :valign "center"
+        (button
+          :class "workspace ${current_workspace.id == workspace.id ? "active" : workspace.windows > 0 ? "occupied" : "empty"}"
+          :onclick "hyprctl dispatch workspace ${workspace.id}"
+        )
+      )
+    )
+  )
+)
+
+
+(defwidget updates []
+  (box :class "updates"
+    (label :text " ${updates}")
   )
 )
 
 (defwidget systemtray []
-  (box :orientation "v" :halign "center"
-    (systray 
+  (box :orientation "v" :class "system-tray" :halign "center"
+    
+    (systray
       :class "tray"
       :spacing 10
       :icon-size 19
@@ -19,27 +33,44 @@
   )
 )
 
-(defwidget music []
-  (eventbox
-    :onhover "eww update music_reveal=true"
-    :onhoverlost "eww update music_reveal=false"
-    :class ""
-    
-    (box :class "song" :orientation "h" :space-evenly false :hexpand true
-      (label :style "font-weight: bold" :text {window})
-      (revealer
-        :transition "slideright"
-        :reveal music_reveal
-        :duration "350ms"
-        
-        (box :vexpand "false" :hexpand false :orientation "h" :style "margin-left: 7px"
-          (button :class "prev" :onclick "~/.config/eww/scripts/music_info.sh --prev" "")
-          (button :class "play" :onclick "~/.config/eww/scripts/music_info.sh --toggle" (literal :content ""))
-          (button :class "next" :onclick "~/.config/eww/scripts/music_info.sh --next" "")
-        )
-      )
+(defwidget network-indicator []
+  (box :class "network-indicator"
+    (label :class "" :text
+      ""
     )
   )
+)
+
+
+(defwidget volume-indicator []
+  (box :class "volume-indicator"
+    (label :text
+      "󰕾"
+    )
+  )
+)
+
+(defwidget current-window []
+  (box :class "current-window" :space-evenly false
+    (image :class "icon" :path {window.icon_path} :image-width 20 :image-height 20)
+    (label :limit-width 50 :text {window.title})
+  )
+)
+
+
+(defwidget microphone-indicator []
+  (box :class "microphone-indicator"
+    (label :text
+      "󰍬"
+    )
+  )
+)
+
+(defwidget time []
+  (box :class "time" :orientation "h" :space-evenly false :hexpand true
+    (label :text {time})
+  )
+  
 )
 
 
