@@ -61,16 +61,18 @@ function getPlayerName(name: string): string {
 async function updateSong(name: string, p: ClientInterface) {
     try {
         const metadata = await getProperty(p, "Metadata")
+
         const playbackStatus = await getProperty(p, "PlaybackStatus")
         const canGoNext = await getProperty(p, "CanGoNext")
         const canGoPrevious = await getProperty(p, "CanGoPrevious")
         const canPlay = await getProperty(p, "CanPlay")
         const canPause = await getProperty(p, "CanPause")
-        const artwork = await getArtwork(metadata['mpris:artUrl']?.value)
+
+        const artwork = metadata ? await getArtwork(metadata['mpris:artUrl']?.value) : ""
 
         const playerName = getPlayerName(name)
 
-        const length = Number(metadata['mpris:length']?.value) / 1000000 || 0
+        const length = metadata ? Number(metadata['mpris:length']?.value) / 1000000 : 0
 
         players.set(name, {
             serviceName: name,

@@ -16,6 +16,8 @@
       (box :halign "center" (time))
       
       (box :halign "end" :space-evenly false
+        (memory)
+        (network)
         (systemtray)
         ; (updates)
         (eventbox

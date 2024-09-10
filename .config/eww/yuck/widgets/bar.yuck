@@ -15,6 +15,7 @@
 )
 
 
+
 (defwidget updates []
   (box :class "updates"
     (label :text " ${updates}")
@@ -33,14 +34,6 @@
   )
 )
 
-(defwidget network-indicator []
-  (box :class "network-indicator"
-    (label :class "" :text
-      ""
-    )
-  )
-)
-
 
 (defwidget volume-indicator []
   (box :class "volume-indicator"
@@ -52,8 +45,8 @@
 
 (defwidget current-window []
   (box :class "current-window" :space-evenly false
-    (image :class "icon" :path {window.icon_path} :image-width 20 :image-height 20)
-    (label :limit-width 50 :text {window.title})
+    (image :class "icon" :path {window.icon_path == "null" ? "/home/nei/.config/eww/assets/placeholder.png" : window.icon_path} :image-width 20 :image-height 20)
+    (label :limit-width 50 :text {window.title == "null" ? "" : window.title})
   )
 )
 
@@ -70,7 +63,18 @@
   (box :class "time" :orientation "h" :space-evenly false :hexpand true
     (label :text {time})
   )
-  
+)
+
+(defwidget memory []
+  (box :class "memory"
+    (label :text "󰍛 ${memory_usage}%")
+  )
 )
 
 
+
+(defwidget network []
+  (box :class "network"
+    (label :text "󰅢  ${network_rx}")
+  )
+)

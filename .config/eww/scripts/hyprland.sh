@@ -24,14 +24,24 @@ function get_current_workspace {
 }
 
 function get_current_window {
+
     window=$(hyprctl activewindow -j)
-    class=$(echo $window | jq -r '.class')
-    icon=$(grep -i "Icon" /usr/share/applications/$class.desktop | sed 's/Icon=//')
+    class=$(echo $window | jq -r '.class' | awk '{print tolower($0)}')
+    icon=$(grep -i "Icon" /usr/share/applications/$class*.desktop 2>/dev/null | sed 's/Icon=//')
+    if [ -z $icon ]; then
+        echo $window
+        return
+    fi
+
     icon_path=$(find /usr/share/icons/ /usr/share/pixmaps/ -name "$icon.*" -print -quit)
-    
-    echo $(echo $window | jq ". += {\"icon_path\": \"$icon_path\"}" -r  --unbuffered)
- 
-} 
+    if [ -z $icon_path ]; then
+        echo $window
+        return
+    fi
+
+    echo $(echo $window | jq ". += {\"icon_path\": \"$icon_path\"}" -r --unbuffered)
+
+}
 
 get_current_workspace
 get_workspaces
