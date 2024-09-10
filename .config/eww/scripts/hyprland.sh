@@ -15,8 +15,25 @@ function handle {
     esac
 }
 
+generate_json_array() {
+    local x=$1
+    local json="["
+    for ((i = 1; i <= x; i++)); do
+        json+="{\"id\": $i}"
+        if [ $i -lt $x ]; then
+            json+=", "
+        fi
+    done
+    json+="]"
+    echo $json
+}
+
 function get_workspaces {
-    eww update workspaces="$(hyprctl workspaces -j | jq -r 'sort_by(.id)')"
+    workspaces=$(hyprctl workspaces -j | jq -r -c 'sort_by(.id)')
+
+    json_array=$(generate_json_array $(echo $workspaces | jq -r '.[-1].id'))
+
+    eww update workspaces="$(echo -e "$workspaces\n$json_array" | jq -s 'add' | jq 'unique_by(.id) | sort_by(.id)' -r)"
 }
 
 function get_current_workspace {
@@ -40,7 +57,6 @@ function get_current_window {
     fi
 
     echo $(echo $window | jq ". += {\"icon_path\": \"$icon_path\"}" -r --unbuffered)
-
 }
 
 get_current_workspace

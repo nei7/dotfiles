@@ -3,16 +3,6 @@
 SINK=$(pactl list short sinks | grep RUNNING | awk '{print $1}')
 SOURCE=$(pactl list short sources | grep RUNNING | awk '{print $1}')
 
-if [ -z "$SINK" ]; then
-  echo "No active sink found."
-  exit 1
-fi
-
-if [ -z "$SOURCE" ]; then
-  echo "No active source found."
-  exit 1
-fi
-
 display_volume() {
   output_volume=$(pactl list sinks | grep -A 15 "Sink #$SINK" | grep 'Volume:' | head -n 1 | awk '{print $5}' | tr -d '%')
   output_muted=$(pactl list sinks | grep -A 15 "Sink #$SINK" | grep 'Mute:' | awk '{print $2}')

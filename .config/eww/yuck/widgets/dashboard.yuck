@@ -4,7 +4,7 @@
     (button :halign "end" :onclick "systemctl poweroff"  "󰤆")
     (button :halign "end" :onclick "reboot"  "󰑐")
     (button :halign "end" :onclick "reboot"  "󰌾")
-    (button :halign "end" :onclick "i3-msg exit"  "󰍃")
+    (button :halign "end" :onclick "hyprctl dispatch exit"  "󰍃")
   )
 )
 
@@ -30,7 +30,7 @@
       :value value
       :min 0
       :max 101
-      :onchange "${action}"
+      :onchange "${action} {}%"
     )
     (eventbox
       :cursor "pointer"
@@ -49,17 +49,17 @@
     (slider
       :class "volume-slider"
       :value {volume?.output?.volume ?: 0}
-      :icon "󰕾"
-      :action "amixer set Master {}%"
+      :icon {volume?.output?.muted ? "󰝟": "󰕾"}
+      :action "amixer set Master"
       :launch "pavucontrol &"
       :muted {false}
     )
-
+    
     (slider
       :class "volume-slider"
       :value {volume?.input?.volume ?: 0}
-      :icon "󰍬"
-      :action "amixer set Capture {}%"
+      :icon {volume?.input?.muted ? "󰍭" : "󰍬"}
+      :action "amixer set Capture"
       :launch "pavucontrol &"
       :muted {false}
     )

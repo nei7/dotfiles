@@ -6,7 +6,7 @@
         :halign "center"
         :valign "center"
         (button
-          :class "workspace ${current_workspace.id == workspace.id ? "active" : workspace.windows > 0 ? "occupied" : "empty"}"
+          :class "workspace ${current_workspace.id == workspace.id ? "active" : (workspace?.windows ?: 0) > 0 ? "occupied" : "empty"}"
           :onclick "hyprctl dispatch workspace ${workspace.id}"
         )
       )
@@ -14,13 +14,11 @@
   )
 )
 
-
-
-(defwidget updates []
-  (box :class "updates"
-    (label :text " ${updates}")
-  )
-)
+; (defwidget updates []
+  ;   (box :class "updates"
+    ;     (label :text " ${updates}")
+  ;   )
+; )
 
 (defwidget systemtray []
   (box :orientation "v" :class "system-tray" :halign "center"
@@ -38,7 +36,7 @@
 (defwidget volume-indicator []
   (box :class "volume-indicator"
     (label :text
-      "󰕾"
+      {volume?.output?.muted ? "󰝟": "󰕾"}
     )
   )
 )
@@ -54,7 +52,7 @@
 (defwidget microphone-indicator []
   (box :class "microphone-indicator"
     (label :text
-      "󰍬"
+      {volume?.input?.muted ? "󰍭" : "󰍬"}
     )
   )
 )

@@ -72,7 +72,7 @@ async function updateSong(name: string, p: ClientInterface) {
 
         const playerName = getPlayerName(name)
 
-        const length = metadata ? Number(metadata['mpris:length']?.value) / 1000000 : 0
+        const length = metadata ? Number(metadata['mpris:length']?.value) / 1000000 || 0 : 0
 
         players.set(name, {
             serviceName: name,
