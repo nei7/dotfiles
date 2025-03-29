@@ -36,6 +36,7 @@ function get_workspaces {
     eww update workspaces="$(echo -e "$workspaces\n$json_array" | jq -s 'add' | jq 'unique_by(.id) | sort_by(.id)' -r)"
 }
 
+
 function get_current_workspace {
     eww update current_workspace="$(hyprctl activeworkspace -j)"
 }

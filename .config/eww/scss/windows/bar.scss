@@ -1,7 +1,6 @@
 @mixin bar-widget {
   @include widget($padding: 3px 20px);
   background-color: $bg2;
-
 }
 
 .bar {
@@ -11,18 +10,14 @@
     color: $fg;
     box-shadow: 0 0 5px 0 rgba(black, 0.5);
     padding: 5px;
-    margin: 10px 10px 10px 10px;
     border-radius: 30px;
   }
-
-
 
   .workspaces {
     @include bar-widget;
 
     .workspace {
       border-radius: 3rem;
-
 
       &.active {
         background: $blue;
@@ -41,7 +36,6 @@
         background: transparentize($fg, 0.8);
         min-width: 8px;
         min-height: 8px;
-
       }
     }
   }
@@ -55,8 +49,6 @@
   .tray {
     margin: 0 2rem;
   }
-
-
 
   .time {
     font-weight: bold;

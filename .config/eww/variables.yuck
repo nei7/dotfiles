@@ -4,7 +4,7 @@
 
 (deflisten volume :initial "{}" "scripts/volume.sh")
 (deflisten mpris :initial "" "scripts/ts/mpris.ts")
-(deflisten window :initial "{}" "scripts/hyprland.sh")
+(deflisten window :initial "{}" "scripts/workspaces.sh")
 (deflisten network_rx :initial "0 kB/s" "scripts/network.sh")
 
 (defpoll time :interval "10s" "date '+%a %b %H:%M'")
@@ -17,5 +17,5 @@
 
 
 (defpoll memory_usage :interval "1s"
-  `free -m | awk 'NR==2{printf "%.f", $3*100/$2 }'`)
+`free -m | awk 'NR==2{printf "%.f", $3*100/$2 }'`)
 (defpoll cpu_usage :interval "1s" "vmstat 1 2 | awk 'END { print 100 - $15 }'")

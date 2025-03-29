@@ -18,6 +18,7 @@ return {
 							["<C-k>"] = actions.move_selection_previous,
 							["<C-j>"] = actions.move_selection_next,
 							["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+							["<esc>"] = actions.close,
 						},
 					},
 				},
@@ -30,8 +31,10 @@ return {
 			telescope.load_extension("ui-select")
 
 			local builtin = require("telescope.builtin")
-			vim.keymap.set("n", "<leader>ff", builtin.find_files, {desc = "Fuzzy find files in cwd"})
-			vim.keymap.set("n", "<leader>fg", builtin.live_grep, {desc = "Find string in cwd"})
+			vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Fuzzy find files in cwd" })
+			vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Find string in cwd" })
+			vim.keymap.set("n", "<C-p>", builtin.git_files, {})
+			vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
 		end,
 	},
 }
