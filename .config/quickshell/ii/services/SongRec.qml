@@ -54,7 +54,7 @@ Singleton {
             }
             musicReconizedProc.running = true
         } catch(e) {
-            Quickshell.execDetached(["notify-send", Translation.tr("Couldn't recognize music"), Translation.tr("Perhaps what you're listening to is too niche"), "-a", "Shell"])
+            Quickshell.execDetached(["notify-send", "Couldn't recognize music", "Perhaps what you're listening to is too niche", "-a", "Shell"])
         }
     }
 
@@ -73,7 +73,7 @@ Singleton {
         }
         onExited: (exitCode, exitStatus) => {
             if (exitCode === 1) {
-                Quickshell.execDetached(["notify-send", Translation.tr("Couldn't recognize music"), Translation.tr("Make sure you have songrec installed"), "-a", "Shell"])
+                Quickshell.execDetached(["notify-send", "Couldn't recognize music", "Make sure you have songrec installed", "-a", "Shell"])
             }
         }
     }
@@ -83,7 +83,7 @@ Singleton {
         running: false
         command: [
             "notify-send",
-            Translation.tr("Music Recognized"), 
+            "Music Recognized", 
             root.recognizedTrack.title + " - " + root.recognizedTrack.subtitle, 
             "-A", "Shazam",
             "-A", "YouTube",

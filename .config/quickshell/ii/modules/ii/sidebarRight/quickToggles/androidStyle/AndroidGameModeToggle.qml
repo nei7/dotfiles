@@ -8,7 +8,7 @@ import Quickshell.Io
 AndroidQuickToggleButton {
     id: root
 
-    name: Translation.tr("Game mode")
+    name: "Game mode"
     statusText: ""
     toggled: toggled
     buttonIcon: "gamepad"
@@ -30,6 +30,6 @@ AndroidQuickToggleButton {
         }
     }
     StyledToolTip {
-        text: Translation.tr("Game mode")
+        text: "Game mode"
     }
 }

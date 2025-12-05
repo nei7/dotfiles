@@ -9,8 +9,8 @@ AndroidQuickToggleButton {
     
     property bool auto: Config.options.light.night.automatic
 
-    name: Translation.tr("Night Light")
-    statusText: (auto ? Translation.tr("Auto, ") : "") + (toggled ? Translation.tr("Active") : Translation.tr("Inactive"))
+    name: "Night Light"
+    statusText: (auto ? "Auto, " : "") + (toggled ? "Active" : "Inactive")
 
     toggled: Hyprsunset.active
     buttonIcon: auto ? "night_sight_auto" : "bedtime"
@@ -28,7 +28,7 @@ AndroidQuickToggleButton {
     }
     
     StyledToolTip {
-        text: Translation.tr("Night Light | Right-click to configure")
+        text: "Night Light | Right-click to configure"
     }
 }
 

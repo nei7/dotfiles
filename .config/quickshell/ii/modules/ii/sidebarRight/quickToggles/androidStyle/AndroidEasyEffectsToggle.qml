@@ -7,7 +7,7 @@ import Quickshell
 AndroidQuickToggleButton {
     id: root
     
-    name: Translation.tr("EasyEffects")
+    name: "EasyEffects"
 
     available: EasyEffects.available
     toggled: EasyEffects.active
@@ -27,7 +27,7 @@ AndroidQuickToggleButton {
     }
 
     StyledToolTip {
-        text: Translation.tr("EasyEffects | Right-click to configure")
+        text: "EasyEffects | Right-click to configure"
     }
 }
 

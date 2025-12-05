@@ -47,7 +47,7 @@ StyledPopup {
                 id: temp
                 font.pixelSize: Appearance.font.pixelSize.smaller
                 color: Appearance.colors.colOnSurfaceVariant
-                text: Weather.data.temp + " • " + Translation.tr("Feels like %1").arg(Weather.data.tempFeelsLike)
+                text: Weather.data.temp + " • " + "Feels like %1".arg(Weather.data.tempFeelsLike)
             }
         }
 
@@ -60,42 +60,42 @@ StyledPopup {
             uniformCellWidths: true
 
             WeatherCard {
-                title: Translation.tr("UV Index")
+                title: "UV Index"
                 symbol: "wb_sunny"
                 value: Weather.data.uv
             }
             WeatherCard {
-                title: Translation.tr("Wind")
+                title: "Wind"
                 symbol: "air"
                 value: `(${Weather.data.windDir}) ${Weather.data.wind}`
             }
             WeatherCard {
-                title: Translation.tr("Precipitation")
+                title: "Precipitation"
                 symbol: "rainy_light"
                 value: Weather.data.precip
             }
             WeatherCard {
-                title: Translation.tr("Humidity")
+                title: "Humidity"
                 symbol: "humidity_low"
                 value: Weather.data.humidity
             }
             WeatherCard {
-                title: Translation.tr("Visibility")
+                title: "Visibility"
                 symbol: "visibility"
                 value: Weather.data.visib
             }
             WeatherCard {
-                title: Translation.tr("Pressure")
+                title: "Pressure"
                 symbol: "readiness_score"
                 value: Weather.data.press
             }
             WeatherCard {
-                title: Translation.tr("Sunrise")
+                title: "Sunrise"
                 symbol: "wb_twilight"
                 value: Weather.data.sunrise
             }
             WeatherCard {
-                title: Translation.tr("Sunset")
+                title: "Sunset"
                 symbol: "bedtime"
                 value: Weather.data.sunset
             }

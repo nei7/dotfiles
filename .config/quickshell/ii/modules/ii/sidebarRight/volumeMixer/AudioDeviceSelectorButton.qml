@@ -39,14 +39,14 @@ RippleButton {
                 Layout.fillWidth: true
                 elide: Text.ElideRight
                 font.pixelSize: Appearance.font.pixelSize.normal
-                text: input ? Translation.tr("Input") : Translation.tr("Output")
+                text: input ? "Input" : "Output"
                 color: Appearance.colors.colOnLayer2
             }
             StyledText {
                 Layout.fillWidth: true
                 elide: Text.ElideRight
                 font.pixelSize: Appearance.font.pixelSize.smaller
-                text: (input ? Pipewire.defaultAudioSource?.description : Pipewire.defaultAudioSink?.description) ?? Translation.tr("Unknown")
+                text: (input ? Pipewire.defaultAudioSource?.description : Pipewire.defaultAudioSink?.description) ?? "Unknown"
                 color: Appearance.m3colors.m3outline
                 animateChange: true
             }

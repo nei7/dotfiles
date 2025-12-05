@@ -9,7 +9,7 @@ AndroidQuickToggleButton {
     
     property bool auto: Config.options.light.night.automatic
 
-    name: Translation.tr("Anti-flashbang")
+    name: "Anti-flashbang"
 
     toggled: Config.options.light.antiFlashbang.enable
     buttonIcon: "flash_off"
@@ -23,7 +23,7 @@ AndroidQuickToggleButton {
     }
 
     StyledToolTip {
-        text: Translation.tr("Anti-flashbang")
+        text: "Anti-flashbang"
     }
 }
 

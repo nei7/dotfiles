@@ -9,8 +9,8 @@ import Quickshell.Bluetooth
 AndroidQuickToggleButton {
     id: root
     
-    name: Translation.tr("Bluetooth")
-    statusText: BluetoothStatus.firstActiveDevice?.name ?? Translation.tr("No device")
+    name: "Bluetooth"
+    statusText: BluetoothStatus.firstActiveDevice?.name ?? "No device"
 
     available: BluetoothStatus.available
     toggled: BluetoothStatus.enabled
@@ -22,8 +22,8 @@ AndroidQuickToggleButton {
         root.openMenu()
     }
     StyledToolTip {
-        text: Translation.tr("%1 | Right-click to configure").arg(
-            (BluetoothStatus.firstActiveDevice?.name ?? Translation.tr("Bluetooth"))
+        text: "%1 | Right-click to configure".arg(
+            (BluetoothStatus.firstActiveDevice?.name ?? "Bluetooth")
             + (BluetoothStatus.activeDeviceCount > 1 ? ` +${BluetoothStatus.activeDeviceCount - 1}` : "")
         )
     }

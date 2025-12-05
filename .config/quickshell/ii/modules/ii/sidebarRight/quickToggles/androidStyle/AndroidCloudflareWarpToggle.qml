@@ -8,7 +8,7 @@ import Quickshell.Io
 AndroidQuickToggleButton {
     id: root
 
-    name: Translation.tr("Cloudflare WARP")
+    name: "Cloudflare WARP"
 
     toggled: false
     buttonIcon: "cloud_lock"
@@ -29,8 +29,8 @@ AndroidQuickToggleButton {
         onExited: (exitCode, exitStatus) => {
             if (exitCode !== 0) {
                 Quickshell.execDetached(["notify-send", 
-                    Translation.tr("Cloudflare WARP"), 
-                    Translation.tr("Connection failed. Please inspect manually with the <tt>warp-cli</tt> command")
+                    "Cloudflare WARP", 
+                    "Connection failed. Please inspect manually with the <tt>warp-cli</tt> command"
                     , "-a", "Shell"
                 ])
             }
@@ -46,8 +46,8 @@ AndroidQuickToggleButton {
                 connectProc.running = true
             } else {
                 Quickshell.execDetached(["notify-send", 
-                    Translation.tr("Cloudflare WARP"), 
-                    Translation.tr("Registration failed. Please inspect manually with the <tt>warp-cli</tt> command"),
+                    "Cloudflare WARP", 
+                    "Registration failed. Please inspect manually with the <tt>warp-cli</tt> command",
                     "-a", "Shell"
                 ])
             }
@@ -75,6 +75,6 @@ AndroidQuickToggleButton {
         }
     }
     StyledToolTip {
-        text: Translation.tr("Cloudflare WARP (1.1.1.1)")
+        text: "Cloudflare WARP (1.1.1.1)"
     }
 }

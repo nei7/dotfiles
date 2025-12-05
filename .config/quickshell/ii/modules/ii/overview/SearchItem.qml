@@ -15,7 +15,7 @@ RippleButton {
     property var entry
     property string query
     property bool entryShown: entry?.shown ?? true
-    property string itemType: entry?.type ?? Translation.tr("App")
+    property string itemType: entry?.type ?? "App"
     property string itemName: entry?.name ?? ""
     property string itemIcon: entry?.icon ?? ""
     property var itemExecute: entry?.execute
@@ -168,7 +168,7 @@ RippleButton {
             StyledText {
                 font.pixelSize: Appearance.font.pixelSize.smaller
                 color: Appearance.colors.colSubtext
-                visible: root.itemType && root.itemType != Translation.tr("App")
+                visible: root.itemType && root.itemType != "App"
                 text: root.itemType
             }
             RowLayout {

@@ -34,7 +34,7 @@ Item {
     PagePlaceholder {
         shown: Notifications.list.length === 0
         icon: "notifications_active"
-        description: Translation.tr("Nothing")
+        description: "Nothing"
         shape: MaterialShape.Shape.Ghostish
         descriptionHorizontalAlignment: Text.AlignHCenter
     }
@@ -58,7 +58,7 @@ Item {
         NotificationStatusButton {
             enabled: false
             Layout.fillWidth: true
-            buttonText: Translation.tr("%1 notifications").arg(Notifications.list.length)
+            buttonText: "%1 notifications".arg(Notifications.list.length)
         }
         NotificationStatusButton {
             Layout.fillWidth: false

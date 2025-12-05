@@ -188,12 +188,12 @@ Scope {
                             anchors.centerIn: parent
 
                             StyledText {
-                                text: Translation.tr("No active player")
+                                text: "No active player"
                                 font.pixelSize: Appearance.font.pixelSize.large
                             }
                             StyledText {
                                 color: Appearance.colors.colSubtext
-                                text: Translation.tr("Make sure your player has MPRIS support\nor try turning off duplicate player filtering")
+                                text: "Make sure your player has MPRIS support\nor try turning off duplicate player filtering"
                                 font.pixelSize: Appearance.font.pixelSize.small
                             }
                         }

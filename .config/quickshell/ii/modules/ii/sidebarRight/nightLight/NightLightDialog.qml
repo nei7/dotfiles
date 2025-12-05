@@ -18,11 +18,11 @@ WindowDialog {
     backgroundHeight: 600
 
     WindowDialogTitle {
-        text: Translation.tr("Eye protection")
+        text: "Eye protection"
     }
     
     WindowDialogSectionHeader {
-        text: Translation.tr("Night Light")
+        text: "Night Light"
     }
 
     WindowDialogSeparator {
@@ -43,7 +43,7 @@ WindowDialog {
             }
             iconSize: Appearance.font.pixelSize.larger
             buttonIcon: "lightbulb"
-            text: Translation.tr("Enable now")
+            text: "Enable now"
             checked: Hyprsunset.active
             onCheckedChanged: {
                 Hyprsunset.toggle(checked)
@@ -57,7 +57,7 @@ WindowDialog {
             }
             iconSize: Appearance.font.pixelSize.larger
             buttonIcon: "night_sight_auto"
-            text: Translation.tr("Automatic")
+            text: "Automatic"
             checked: Config.options.light.night.automatic
             onCheckedChanged: {
                 Config.options.light.night.automatic = checked;
@@ -71,7 +71,7 @@ WindowDialog {
                 leftMargin: 4
                 rightMargin: 4
             }
-            text: Translation.tr("Intensity")
+            text: "Intensity"
             from: 6500
             to: 1200
             stopIndicatorValues: [5000, to]
@@ -82,7 +82,7 @@ WindowDialog {
     }
 
     WindowDialogSectionHeader {
-        text: Translation.tr("Anti-flashbang (experimental)")
+        text: "Anti-flashbang (experimental)"
     }
 
     WindowDialogSeparator {
@@ -103,19 +103,19 @@ WindowDialog {
             }
             iconSize: Appearance.font.pixelSize.larger
             buttonIcon: "flash_off"
-            text: Translation.tr("Enable")
+            text: "Enable"
             checked: Config.options.light.antiFlashbang.enable
             onCheckedChanged: {
                 Config.options.light.antiFlashbang.enable = checked;
             }
             StyledToolTip {
-                text: Translation.tr("Example use case: eroge on one workspace, dark Discord window on another")
+                text: "Example use case: eroge on one workspace, dark Discord window on another"
             }
         }
     }
 
     WindowDialogSectionHeader {
-        text: Translation.tr("Brightness")
+        text: "Brightness"
     }
 
     WindowDialogSeparator {
@@ -137,7 +137,7 @@ WindowDialog {
                 leftMargin: 4
                 rightMargin: 4
             }
-            // text: Translation.tr("Brightness")
+            // text: "Brightness"
             value: root.brightnessMonitor.brightness
             onMoved: root.brightnessMonitor.setBrightness(value)
         }
@@ -151,7 +151,7 @@ WindowDialog {
         }
 
         DialogButton {
-            buttonText: Translation.tr("Done")
+            buttonText: "Done"
             onClicked: root.dismiss()
         }
     }

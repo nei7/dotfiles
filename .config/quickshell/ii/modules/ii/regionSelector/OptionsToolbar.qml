@@ -68,8 +68,8 @@ Toolbar {
     ToolbarTabBar {
         id: tabBar
         tabButtonList: [
-            {"icon": "activity_zone", "name": Translation.tr("Rect")},
-            {"icon": "gesture", "name": Translation.tr("Circle")}
+            {"icon": "activity_zone", "name": "Rect"},
+            {"icon": "gesture", "name": "Circle"}
         ]
         currentIndex: root.selectionMode === RegionSelection.SelectionMode.RectCorners ? 0 : 1
         onCurrentIndexChanged: {

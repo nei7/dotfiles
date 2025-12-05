@@ -20,14 +20,14 @@ Singleton {
     
     property var properties: {
         "application": "illogical-impulse",
-        "explanation": Translation.tr("For storing API keys and other sensitive information"),
+        "explanation": "For storing API keys and other sensitive information",
     }
     property var propertiesAsArgs: Object.keys(root.properties).reduce(
         function(arr, key) {
             return arr.concat([key, root.properties[key]]);
         }, []
     )
-    property string keyringLabel: Translation.tr("%1 Safe Storage").arg("illogical-impulse")
+    property string keyringLabel: "%1 Safe Storage".arg("illogical-impulse")
 
     function setNestedField(path, value) {
         if (!root.keyringData) root.keyringData = {};

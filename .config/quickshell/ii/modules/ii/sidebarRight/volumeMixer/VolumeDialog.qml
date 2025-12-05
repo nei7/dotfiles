@@ -14,7 +14,7 @@ WindowDialog {
     backgroundHeight: 600
 
     WindowDialogTitle {
-        text: root.isSink ? Translation.tr("Audio output") : Translation.tr("Audio input")
+        text: root.isSink ? "Audio output" : "Audio input"
     }
 
     WindowDialogSeparator {
@@ -29,7 +29,7 @@ WindowDialog {
 
     WindowDialogButtonRow {
         DialogButton {
-            buttonText: Translation.tr("Details")
+            buttonText: "Details"
             onClicked: {
                 Quickshell.execDetached(["bash", "-c", `${Config.options.apps.volumeMixer}`]);
                 GlobalStates.sidebarRightOpen = false;
@@ -41,7 +41,7 @@ WindowDialog {
         }
 
         DialogButton {
-            buttonText: Translation.tr("Done")
+            buttonText: "Done"
             onClicked: root.dismiss()
         }
     }

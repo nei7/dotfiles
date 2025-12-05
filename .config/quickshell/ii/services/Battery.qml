@@ -54,8 +54,8 @@ Singleton {
         if (!root.available || !isLowAndNotCharging) return;
         Quickshell.execDetached([
             "notify-send", 
-            Translation.tr("Low battery"), 
-            Translation.tr("Consider plugging in your device"), 
+            "Low battery", 
+            "Consider plugging in your device", 
             "-u", "critical",
             "-a", "Shell",
             "--hint=int:transient:1",
@@ -68,8 +68,8 @@ Singleton {
         if (!root.available || !isCriticalAndNotCharging) return;
         Quickshell.execDetached([
             "notify-send", 
-            Translation.tr("Critically low battery"), 
-            Translation.tr("Please charge!\nAutomatic suspend triggers at %1%").arg(Config.options.battery.suspend), 
+            "Critically low battery", 
+            "Please charge!\nAutomatic suspend triggers at %1%".arg(Config.options.battery.suspend), 
             "-u", "critical",
             "-a", "Shell",
             "--hint=int:transient:1",
@@ -88,8 +88,8 @@ Singleton {
         if (!root.available || !isFullAndCharging) return;
         Quickshell.execDetached([
             "notify-send",
-            Translation.tr("Battery full"),
-            Translation.tr("Please unplug the charger"),
+            "Battery full",
+            "Please unplug the charger",
             "-a", "Shell",
             "--hint=int:transient:1",
         ]);

@@ -18,7 +18,7 @@ WindowDialog {
     backgroundHeight: 600
 
     WindowDialogTitle {
-        text: Translation.tr("Bluetooth devices")
+        text: "Bluetooth devices"
     }
     WindowDialogSeparator {
         visible: !(Bluetooth.defaultAdapter?.discovering ?? false)
@@ -71,7 +71,7 @@ WindowDialog {
     WindowDialogSeparator {}
     WindowDialogButtonRow {
         DialogButton {
-            buttonText: Translation.tr("Details")
+            buttonText: "Details"
             onClicked: {
                 Quickshell.execDetached(["bash", "-c", `${Config.options.apps.bluetooth}`]);
                 GlobalStates.sidebarRightOpen = false;
@@ -83,7 +83,7 @@ WindowDialog {
         }
 
         DialogButton {
-            buttonText: Translation.tr("Done")
+            buttonText: "Done"
             onClicked: root.dismiss()
         }
     }

@@ -151,18 +151,18 @@ cd .config/quickshell/translations/tools
 
 ```qml
 // 基本格式
-Translation.tr("Hello, world!")
+"Hello, world!"
 Translation.tr('Hello, world!')
 Translation.tr(`Hello, world!`)
 
 // 带换行符
-Translation.tr("Line 1\nLine 2")
+"Line 1\nLine 2"
 
 // 带转义字符
-Translation.tr("Say \"Hello\"")
+"Say \"Hello\""
 
 // 带参数占位符
-Translation.tr("Hello, %1!").arg(name)
+"Hello, %1!".arg(name)
 ```
 
 ## 示例输出

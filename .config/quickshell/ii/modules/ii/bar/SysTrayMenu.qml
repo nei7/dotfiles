@@ -168,7 +168,7 @@ PopupWindow {
                     }
                     StyledText {
                         Layout.fillWidth: true
-                        text: Translation.tr("Back")
+                        text: "Back"
                     }
                 }
             }

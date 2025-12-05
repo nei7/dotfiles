@@ -135,14 +135,14 @@ Scope {
                             pixelSize: Appearance.font.pixelSize.title
                             variableAxes: Appearance.font.variableAxes.title
                         }
-                        text: Translation.tr("Session")
+                        text: "Session"
                     }
 
                     StyledText { // Small instruction
                         Layout.alignment: Qt.AlignHCenter
                         horizontalAlignment: Text.AlignHCenter
                         font.pixelSize: Appearance.font.pixelSize.normal
-                        text: Translation.tr("Arrow keys to navigate, Enter to select\nEsc or click anywhere to cancel")
+                        text: "Arrow keys to navigate, Enter to select\nEsc or click anywhere to cancel"
                     }
                 }
 
@@ -155,7 +155,7 @@ Scope {
                         id: sessionLock
                         focus: sessionRoot.visible
                         buttonIcon: "lock"
-                        buttonText: Translation.tr("Lock")
+                        buttonText: "Lock"
                         onClicked:  { Session.lock(); sessionRoot.hide() }
                         onFocusChanged: { if (focus) sessionRoot.subtitle = buttonText }
                         KeyNavigation.right: sessionSleep
@@ -164,7 +164,7 @@ Scope {
                     SessionActionButton {
                         id: sessionSleep
                         buttonIcon: "dark_mode"
-                        buttonText: Translation.tr("Sleep")
+                        buttonText: "Sleep"
                         onClicked:  { Session.suspend(); sessionRoot.hide() }
                         onFocusChanged: { if (focus) sessionRoot.subtitle = buttonText }
                         KeyNavigation.left: sessionLock
@@ -174,7 +174,7 @@ Scope {
                     SessionActionButton {
                         id: sessionLogout
                         buttonIcon: "logout"
-                        buttonText: Translation.tr("Logout")
+                        buttonText: "Logout"
                         onClicked: { Session.logout(); sessionRoot.hide() }
                         onFocusChanged: { if (focus) sessionRoot.subtitle = buttonText }
                         KeyNavigation.left: sessionSleep
@@ -184,7 +184,7 @@ Scope {
                     SessionActionButton {
                         id: sessionTaskManager
                         buttonIcon: "browse_activity"
-                        buttonText: Translation.tr("Task Manager")
+                        buttonText: "Task Manager"
                         onClicked:  { Session.launchTaskManager(); sessionRoot.hide() }
                         onFocusChanged: { if (focus) sessionRoot.subtitle = buttonText }
                         KeyNavigation.left: sessionLogout
@@ -194,7 +194,7 @@ Scope {
                     SessionActionButton {
                         id: sessionHibernate
                         buttonIcon: "downloading"
-                        buttonText: Translation.tr("Hibernate")
+                        buttonText: "Hibernate"
                         onClicked:  { Session.hibernate(); sessionRoot.hide() }
                         onFocusChanged: { if (focus) sessionRoot.subtitle = buttonText }
                         KeyNavigation.up: sessionLock
@@ -203,7 +203,7 @@ Scope {
                     SessionActionButton {
                         id: sessionShutdown
                         buttonIcon: "power_settings_new"
-                        buttonText: Translation.tr("Shutdown")
+                        buttonText: "Shutdown"
                         onClicked:  { Session.poweroff(); sessionRoot.hide() }
                         onFocusChanged: { if (focus) sessionRoot.subtitle = buttonText }
                         KeyNavigation.left: sessionHibernate
@@ -213,7 +213,7 @@ Scope {
                     SessionActionButton {
                         id: sessionReboot
                         buttonIcon: "restart_alt"
-                        buttonText: Translation.tr("Reboot")
+                        buttonText: "Reboot"
                         onClicked:  { Session.reboot(); sessionRoot.hide() }
                         onFocusChanged: { if (focus) sessionRoot.subtitle = buttonText }
                         KeyNavigation.left: sessionShutdown
@@ -223,7 +223,7 @@ Scope {
                     SessionActionButton {
                         id: sessionFirmwareReboot
                         buttonIcon: "settings_applications"
-                        buttonText: Translation.tr("Reboot to firmware settings")
+                        buttonText: "Reboot to firmware settings"
                         onClicked:  { Session.rebootToFirmware(); sessionRoot.hide() }
                         onFocusChanged: { if (focus) sessionRoot.subtitle = buttonText }
                         KeyNavigation.up: sessionTaskManager
@@ -249,7 +249,7 @@ Scope {
                     active: root.packageManagerRunning
                     visible: active
                     sourceComponent: DescriptionLabel {
-                        text: Translation.tr("Your package manager is running")
+                        text: "Your package manager is running"
                         textColor: Appearance.m3colors.m3onErrorContainer
                         color: Appearance.m3colors.m3errorContainer
                     }
@@ -258,7 +258,7 @@ Scope {
                     active: root.downloadRunning
                     visible: active
                     sourceComponent: DescriptionLabel {
-                        text: Translation.tr("There might be a download in progress")
+                        text: "There might be a download in progress"
                         textColor: Appearance.m3colors.m3onErrorContainer
                         color: Appearance.m3colors.m3errorContainer
                     }

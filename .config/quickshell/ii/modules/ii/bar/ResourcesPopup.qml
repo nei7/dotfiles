@@ -28,17 +28,17 @@ StyledPopup {
                 spacing: 4
                 StyledPopupValueRow {
                     icon: "clock_loader_60"
-                    label: Translation.tr("Used:")
+                    label: "Used:"
                     value: root.formatKB(ResourceUsage.memoryUsed)
                 }
                 StyledPopupValueRow {
                     icon: "check_circle"
-                    label: Translation.tr("Free:")
+                    label: "Free:"
                     value: root.formatKB(ResourceUsage.memoryFree)
                 }
                 StyledPopupValueRow {
                     icon: "empty_dashboard"
-                    label: Translation.tr("Total:")
+                    label: "Total:"
                     value: root.formatKB(ResourceUsage.memoryTotal)
                 }
             }
@@ -57,17 +57,17 @@ StyledPopup {
                 spacing: 4
                 StyledPopupValueRow {
                     icon: "clock_loader_60"
-                    label: Translation.tr("Used:")
+                    label: "Used:"
                     value: root.formatKB(ResourceUsage.swapUsed)
                 }
                 StyledPopupValueRow {
                     icon: "check_circle"
-                    label: Translation.tr("Free:")
+                    label: "Free:"
                     value: root.formatKB(ResourceUsage.swapFree)
                 }
                 StyledPopupValueRow {
                     icon: "empty_dashboard"
-                    label: Translation.tr("Total:")
+                    label: "Total:"
                     value: root.formatKB(ResourceUsage.swapTotal)
                 }
             }
@@ -85,7 +85,7 @@ StyledPopup {
                 spacing: 4
                 StyledPopupValueRow {
                     icon: "bolt"
-                    label: Translation.tr("Load:")
+                    label: "Load:"
                     value: `${Math.round(ResourceUsage.cpuUsage * 100)}%`
                 }
             }

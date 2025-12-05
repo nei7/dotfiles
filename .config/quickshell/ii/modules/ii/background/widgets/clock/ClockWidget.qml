@@ -138,13 +138,13 @@ AbstractBackgroundWidget {
                     id: safetyStatusText
                     shown: root.wallpaperSafetyTriggered
                     statusIcon: "hide_image"
-                    statusText: Translation.tr("Wallpaper safety enforced")
+                    statusText: "Wallpaper safety enforced"
                 }
                 ClockStatusText {
                     id: lockStatusText
                     shown: GlobalStates.screenLocked && Config.options.lock.showLockedText
                     statusIcon: "lock"
-                    statusText: Translation.tr("Locked")
+                    statusText: "Locked"
                 }
                 Item {
                     Layout.fillWidth: root.textHorizontalAlignment !== Text.AlignRight

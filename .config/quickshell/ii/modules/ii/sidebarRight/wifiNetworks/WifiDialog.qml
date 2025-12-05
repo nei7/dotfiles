@@ -12,7 +12,7 @@ WindowDialog {
     backgroundHeight: 600
 
     WindowDialogTitle {
-        text: Translation.tr("Connect to Wi-Fi")
+        text: "Connect to Wi-Fi"
     }
     WindowDialogSeparator {
         visible: !Network.wifiScanning
@@ -57,7 +57,7 @@ WindowDialog {
     WindowDialogSeparator {}
     WindowDialogButtonRow {
         DialogButton {
-            buttonText: Translation.tr("Details")
+            buttonText: "Details"
             onClicked: {
                 Quickshell.execDetached(["bash", "-c", `${Network.ethernet ? Config.options.apps.networkEthernet : Config.options.apps.network}`]);
                 GlobalStates.sidebarRightOpen = false;
@@ -69,7 +69,7 @@ WindowDialog {
         }
 
         DialogButton {
-            buttonText: Translation.tr("Done")
+            buttonText: "Done"
             onClicked: root.dismiss()
         }
     }

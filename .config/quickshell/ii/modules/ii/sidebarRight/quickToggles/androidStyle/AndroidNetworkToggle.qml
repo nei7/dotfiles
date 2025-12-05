@@ -7,7 +7,7 @@ import QtQuick
 AndroidQuickToggleButton {
     id: root
     
-    name: Translation.tr("Internet")
+    name: "Internet"
     statusText: Network.networkName
 
     toggled: Network.wifiStatus !== "disabled"
@@ -17,7 +17,7 @@ AndroidQuickToggleButton {
         root.openMenu()
     }
     StyledToolTip {
-        text: Translation.tr("%1 | Right-click to configure").arg(Network.networkName)
+        text: "%1 | Right-click to configure".arg(Network.networkName)
     }
 }
 

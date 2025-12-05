@@ -16,7 +16,7 @@ StyledPopup {
             return !item.done;
         });
         if (unfinishedTodos.length === 0) {
-            return Translation.tr("No pending tasks");
+            return "No pending tasks";
         }
 
         // Limit to first 5 todos to keep popup manageable
@@ -26,7 +26,7 @@ StyledPopup {
         }).join('\n');
 
         if (unfinishedTodos.length > 5) {
-            todoText += `\n  ${Translation.tr("... and %1 more").arg(unfinishedTodos.length - 5)}`;
+            todoText += `\n  ${"... and %1 more".arg(unfinishedTodos.length - 5)}`;
         }
 
         return todoText;
@@ -44,7 +44,7 @@ StyledPopup {
 
         StyledPopupValueRow {
             icon: "timelapse"
-            label: Translation.tr("System uptime:")
+            label: "System uptime:"
             value: root.formattedUptime
         }
 
@@ -55,7 +55,7 @@ StyledPopup {
 
             StyledPopupValueRow {
                 icon: "checklist"
-                label: Translation.tr("To Do:")
+                label: "To Do:"
                 value: ""
             }
 

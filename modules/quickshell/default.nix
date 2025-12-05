@@ -30,6 +30,8 @@ in
   home.packages = with pkgs; [
     quickshell-wrapper
 
+    cava
+    ddcutil
     inetutils
     libnotify
     brightnessctl

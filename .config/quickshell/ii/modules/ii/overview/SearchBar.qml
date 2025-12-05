@@ -68,7 +68,7 @@ RowLayout {
         implicitHeight: 40
         focus: GlobalStates.overviewOpen
         font.pixelSize: Appearance.font.pixelSize.small
-        placeholderText: Translation.tr("Search, calculate or run")
+        placeholderText: "Search, calculate or run"
         implicitWidth: root.searchingText == "" ? Appearance.sizes.searchWidthCollapsed : Appearance.sizes.searchWidth
 
         Behavior on implicitWidth {
@@ -103,7 +103,7 @@ RowLayout {
         }
         text: "image_search"
         StyledToolTip {
-            text: Translation.tr("Google Lens")
+            text: "Google Lens"
         }
     }
 
@@ -117,7 +117,7 @@ RowLayout {
         text: "music_cast"
 
         StyledToolTip {
-            text: Translation.tr("Recognize music")
+            text: "Recognize music"
         }
 
         colText: toggled ? Appearance.colors.colOnPrimary : Appearance.colors.colOnSurfaceVariant

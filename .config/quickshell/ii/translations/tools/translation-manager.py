@@ -29,7 +29,7 @@ class TranslationManager:
         """Extract translatable texts from source code"""
         translatable_texts = set()
         
-        # Search patterns: Translation.tr("text") or Translation.tr('text')
+        # Search patterns: "text" or Translation.tr('text')
         # Improved regex that handles nested quotes correctly
         patterns = [
             r'Translation\.tr\s*\(\s*(["\'])(((?!\1)[^\\]|\\.)*)(\1)\s*\)',  # Double or single quotes with escape support

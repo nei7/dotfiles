@@ -8,8 +8,8 @@ import Quickshell
 AndroidQuickToggleButton {
     id: root
 
-    name: Translation.tr("Notifications")
-    statusText: toggled ? Translation.tr("Show") : Translation.tr("Silent")
+    name: "Notifications"
+    statusText: toggled ? "Show" : "Silent"
     toggled: !Notifications.silent
     buttonIcon: toggled ? "notifications_active" : "notifications_paused"
 
@@ -18,6 +18,6 @@ AndroidQuickToggleButton {
     }
 
     StyledToolTip {
-        text: Translation.tr("Show notifications")
+        text: "Show notifications"
     }
 }

@@ -16,9 +16,9 @@ Rectangle {
     property int selectedTab: Persistent.states.sidebar.bottomGroup.tab
     property bool collapsed: Persistent.states.sidebar.bottomGroup.collapsed
     property var tabs: [
-        {"type": "calendar", "name": Translation.tr("Calendar"), "icon": "calendar_month", "widget": calendarWidget}, 
-        {"type": "todo", "name": Translation.tr("To Do"), "icon": "done_outline", "widget": todoWidget},
-        {"type": "timer", "name": Translation.tr("Timer"), "icon": "schedule", "widget": pomodoroWidget},
+        {"type": "calendar", "name": "Calendar", "icon": "calendar_month", "widget": calendarWidget}, 
+        {"type": "todo", "name": "To Do", "icon": "done_outline", "widget": todoWidget},
+        {"type": "timer", "name": "Timer", "icon": "schedule", "widget": pomodoroWidget},
     ]
 
     Behavior on implicitHeight {
@@ -98,7 +98,7 @@ Rectangle {
             Layout.margins: 10
             Layout.leftMargin: 0
             // text: `${DateTime.collapsedCalendarFormat}   •   ${remainingTasks} task${remainingTasks > 1 ? "s" : ""}`
-            text: Translation.tr("%1   •   %2 tasks").arg(DateTime.collapsedCalendarFormat).arg(remainingTasks)
+            text: "%1   •   %2 tasks".arg(DateTime.collapsedCalendarFormat).arg(remainingTasks)
             font.pixelSize: Appearance.font.pixelSize.large
             color: Appearance.colors.colOnLayer1
         }

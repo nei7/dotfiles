@@ -9,7 +9,7 @@ import Quickshell.Hyprland
 AndroidQuickToggleButton {
     id: root
 
-    name: Translation.tr("Screen snip")
+    name: "Screen snip"
     statusText: ""
     toggled: false
     buttonIcon: "screenshot_region"
@@ -28,6 +28,6 @@ AndroidQuickToggleButton {
     }
 
     StyledToolTip {
-        text: Translation.tr("Screen snip")
+        text: "Screen snip"
     }
 }

@@ -9,7 +9,7 @@ import Quickshell.Services.UPower
 AndroidQuickToggleButton {
     id: root
 
-    name: Translation.tr("Power Profile")
+    name: "Power Profile"
     toggled: PowerProfiles.profile !== PowerProfile.Balanced
     buttonIcon: switch(PowerProfiles.profile) {
         case PowerProfile.PowerSaver: return "energy_savings_leaf"
@@ -37,6 +37,6 @@ AndroidQuickToggleButton {
         }
     }
     StyledToolTip {
-        text: Translation.tr("Click to cycle through power profiles")
+        text: "Click to cycle through power profiles"
     }
 }

@@ -57,8 +57,8 @@ Item { // Wrapper
                 if (!/^(\d+)/.test(args.trim())) { // Invalid if doesn't start with numbers
                     Quickshell.execDetached([
                         "notify-send", 
-                        Translation.tr("Superpaste"), 
-                        Translation.tr("Usage: <tt>%1superpaste NUM_OF_ENTRIES[i]</tt>\nSupply <tt>i</tt> when you want images\nExamples:\n<tt>%1superpaste 4i</tt> for the last 4 images\n<tt>%1superpaste 7</tt> for the last 7 entries").arg(Config.options.search.prefix.action),
+                        "Superpaste", 
+                        "Usage: <tt>%1superpaste NUM_OF_ENTRIES[i]</tt>\nSupply <tt>i</tt> when you want images\nExamples:\n<tt>%1superpaste 4i</tt> for the last 4 images\n<tt>%1superpaste 7</tt> for the last 7 entries".arg(Config.options.search.prefix.action),
                         "-a", "Shell"
                     ]);
                     return;
@@ -328,7 +328,7 @@ Item { // Wrapper
                                         }
                                     ],
                                     blurImage: shouldBlurImage,
-                                    blurImageText: Translation.tr("Work safety")
+                                    blurImageText: "Work safety"
                                 };
                             }).filter(Boolean);
                         }
@@ -356,8 +356,8 @@ Item { // Wrapper
                         const mathResultObject = {
                             key: `Math result: ${root.mathResult}`,
                             name: root.mathResult,
-                            clickActionName: Translation.tr("Copy"),
-                            type: Translation.tr("Math result"),
+                            clickActionName: "Copy",
+                            type: "Math result",
                             fontType: "monospace",
                             materialSymbol: 'calculate',
                             execute: () => {
@@ -365,16 +365,16 @@ Item { // Wrapper
                             }
                         };
                         const appResultObjects = AppSearch.fuzzyQuery(StringUtils.cleanPrefix(root.searchingText, Config.options.search.prefix.app)).map(entry => {
-                            entry.clickActionName = Translation.tr("Launch");
-                            entry.type = Translation.tr("App");
+                            entry.clickActionName = "Launch";
+                            entry.type = "App";
                             entry.key = entry.execute
                             return entry;
                         })
                         const commandResultObject = {
                             key: `cmd ${root.searchingText}`,
                             name: StringUtils.cleanPrefix(root.searchingText, Config.options.search.prefix.shellCommand).replace("file://", ""),
-                            clickActionName: Translation.tr("Run"),
-                            type: Translation.tr("Run command"),
+                            clickActionName: "Run",
+                            type: "Run command",
                             fontType: "monospace",
                             materialSymbol: 'terminal',
                             execute: () => {
@@ -389,8 +389,8 @@ Item { // Wrapper
                         const webSearchResultObject = {
                             key: `website ${root.searchingText}`,
                             name: StringUtils.cleanPrefix(root.searchingText, Config.options.search.prefix.webSearch),
-                            clickActionName: Translation.tr("Search"),
-                            type: Translation.tr("Search the web"),
+                            clickActionName: "Search",
+                            type: "Search the web",
                             materialSymbol: 'travel_explore',
                             execute: () => {
                                 let query = StringUtils.cleanPrefix(root.searchingText, Config.options.search.prefix.webSearch);
@@ -407,8 +407,8 @@ Item { // Wrapper
                                 return {
                                     key: `Action ${actionString}`,
                                     name: root.searchingText.startsWith(actionString) ? root.searchingText : actionString,
-                                    clickActionName: Translation.tr("Run"),
-                                    type: Translation.tr("Action"),
+                                    clickActionName: "Run",
+                                    type: "Action",
                                     materialSymbol: 'settings_suggest',
                                     execute: () => {
                                         action.execute(root.searchingText.split(" ").slice(1).join(" "));

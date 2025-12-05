@@ -60,7 +60,7 @@ Item {
             id: titleText
             Layout.fillWidth: true
             horizontalAlignment: Text.AlignHCenter
-            text: Translation.tr("Authentication")
+            text: "Authentication"
         }
 
         WindowDialogParagraph {
@@ -82,7 +82,7 @@ Item {
             placeholderText: {
                 const inputPrompt = PolkitService.flow?.inputPrompt.trim() ?? "";
                 const cleanedInputPrompt = inputPrompt.endsWith(":") ? inputPrompt.slice(0, -1) : inputPrompt;
-                return cleanedInputPrompt || (root.usePasswordChars ? Translation.tr("Password") : Translation.tr("Input"))
+                return cleanedInputPrompt || (root.usePasswordChars ? "Password" : "Input")
             }
             echoMode: root.usePasswordChars ? TextInput.Password : TextInput.Normal
             onAccepted: root.submit();
@@ -100,12 +100,12 @@ Item {
                 Layout.fillWidth: true
             }
             DialogButton {
-                buttonText: Translation.tr("Cancel")
+                buttonText: "Cancel"
                 onClicked: PolkitService.cancel();
             }
             DialogButton {
                 enabled: PolkitService.interactionAvailable
-                buttonText: Translation.tr("OK")
+                buttonText: "OK"
                 onClicked: root.submit();
             }
         }

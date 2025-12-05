@@ -7,7 +7,7 @@ import QtQuick
 AndroidQuickToggleButton {
     id: root
     
-    name: Translation.tr("Keep awake")
+    name: "Keep awake"
 
     toggled: Idle.inhibit
     buttonIcon: "coffee"
@@ -15,7 +15,7 @@ AndroidQuickToggleButton {
         Idle.toggleInhibit()
     }
     StyledToolTip {
-        text: Translation.tr("Keep system awake")
+        text: "Keep system awake"
     }
 }
 

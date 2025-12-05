@@ -10,5 +10,6 @@
     discord
     killall
     lxappearance
+    pkgs.qt6.qttools
   ];
 }

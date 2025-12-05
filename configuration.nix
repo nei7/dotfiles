@@ -16,9 +16,24 @@
 
   boot.loader.grub = {
     enable = true;
-    theme = pkgs.distro-grub-themes + "/customize/nixos";
 
     device = "nodev";
+
+    gfxmodeEfi = "1920x1080";
+    gfxmodeBios = "1920x1080";
+    fontSize = 16;
+
+    theme = pkgs.stdenv.mkDerivation {
+      pname = "distro-grub-themes";
+      version = "3.1";
+      src = pkgs.fetchFromGitHub {
+        owner = "AdisonCavani";
+        repo = "distro-grub-themes";
+        rev = "v3.1";
+        sha256 = "ZcoGbbOMDDwjLhsvs77C7G7vINQnprdfI37a9ccrmPs=";
+      };
+      installPhase = "cp -r customize/nixos $out";
+    };
 
     efiSupport = true;
 
@@ -26,21 +41,10 @@
 
     timeout = 5;
 
-    gfxmodeEfi = "3440x1440";
-
     configurationLimit = 5;
   };
 
-  boot.plymouth = {
-    enable = true;
-    theme = "deus_ex";
-
-    themePackages = with pkgs; [
-      (adi1090x-plymouth-themes.override {
-        selected_themes = [ "deus_ex" ];
-      })
-    ];
-  };
+  services.upower.enable = true;
 
   networking.hostName = "nei-nixos";
 
@@ -51,6 +55,8 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   services.xserver.videoDrivers = [ "nvidia" ];
+
+  hardware.bluetooth.enable = true;
 
   hardware.graphics = {
     enable = true;
@@ -83,6 +89,10 @@
     LC_TIME = "pl_PL.UTF-8";
   };
 
+  hardware.enableRedistributableFirmware = true;
+
+  hardware.cpu.amd.updateMicrocode = true;
+
   console.keyMap = "pl2";
 
   programs.zsh.enable = true;
@@ -105,7 +115,6 @@
     git
     kitty
     pkgs.nixfmt-rfc-style
-    distro-grub-themes
   ];
 
   programs.firefox.enable = true;

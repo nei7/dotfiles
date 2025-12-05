@@ -8,7 +8,7 @@ import Quickshell
 AndroidQuickToggleButton {
     id: root
 
-    name: Translation.tr("Color picker")
+    name: "Color picker"
     statusText: ""
     toggled: false
     buttonIcon: "colorize"
@@ -27,6 +27,6 @@ AndroidQuickToggleButton {
     }
 
     StyledToolTip {
-        text: Translation.tr("Color picker")
+        text: "Color picker"
     }
 }

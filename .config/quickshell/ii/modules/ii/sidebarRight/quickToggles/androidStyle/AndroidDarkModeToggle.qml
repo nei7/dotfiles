@@ -7,8 +7,8 @@ import Quickshell
 AndroidQuickToggleButton {
     id: root
 
-    name: Translation.tr("Dark Mode")
-    statusText: Appearance.m3colors.darkmode ? Translation.tr("Dark") : Translation.tr("Light")
+    name: "Dark Mode"
+    statusText: Appearance.m3colors.darkmode ? "Dark" : "Light"
 
     toggled: Appearance.m3colors.darkmode
     buttonIcon: "contrast"
@@ -22,6 +22,6 @@ AndroidQuickToggleButton {
     }
 
     StyledToolTip {
-        text: Translation.tr("Dark Mode")
+        text: "Dark Mode"
     }
 }

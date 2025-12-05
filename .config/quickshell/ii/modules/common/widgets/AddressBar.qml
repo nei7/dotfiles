@@ -113,7 +113,7 @@ Rectangle {
             }
 
             StyledToolTip {
-                text: Translation.tr("Edit directory")
+                text: "Edit directory"
             }
         }
     }

@@ -8,8 +8,8 @@ import Quickshell
 AndroidQuickToggleButton {
     id: root
 
-    name: Translation.tr("Audio input")
-    statusText: toggled ? Translation.tr("Enabled") : Translation.tr("Muted")
+    name: "Audio input"
+    statusText: toggled ? "Enabled" : "Muted"
     toggled: !Audio.source?.audio?.muted
     buttonIcon: Audio.source?.audio?.muted ? "mic_off" : "mic"
     mainAction: () => {
@@ -21,6 +21,6 @@ AndroidQuickToggleButton {
     }
 
     StyledToolTip {
-        text: Translation.tr("Audio input | Right-click for volume mixer & device selector")
+        text: "Audio input | Right-click for volume mixer & device selector"
     }
 }

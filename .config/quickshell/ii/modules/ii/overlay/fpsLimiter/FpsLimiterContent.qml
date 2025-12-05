@@ -70,7 +70,7 @@ OverlayBackground {
             id: fpsField
             Layout.fillWidth: true
             Layout.preferredWidth: 200
-            placeholderText: root.currentState === FpsLimiterContent.State.Error ? Translation.tr("Enter a valid number") : Translation.tr("Set FPS limit")
+            placeholderText: root.currentState === FpsLimiterContent.State.Error ? "Enter a valid number" : "Set FPS limit"
             inputMethodHints: Qt.ImhDigitsOnly
             focus: true
 

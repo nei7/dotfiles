@@ -7,7 +7,7 @@ import QtQuick.Layouts
 
 Item {
     id: root
-    property var tabButtonList: [{"icon": "checklist", "name": Translation.tr("Unfinished")}, {"name": Translation.tr("Done"), "icon": "check_circle"}]
+    property var tabButtonList: [{"icon": "checklist", "name": "Unfinished"}, {"name": "Done", "icon": "check_circle"}]
     property bool showAddDialog: false
     property int dialogMargins: 20
     property int fabSize: 48
@@ -64,7 +64,7 @@ Item {
             TaskList {
                 listBottomPadding: root.fabSize + root.fabMargins * 2
                 emptyPlaceholderIcon: "check_circle"
-                emptyPlaceholderText: Translation.tr("Nothing here!")
+                emptyPlaceholderText: "Nothing here!"
                 taskList: Todo.list
                     .map(function(item, i) { return Object.assign({}, item, {originalIndex: i}); })
                     .filter(function(item) { return !item.done; })
@@ -72,7 +72,7 @@ Item {
             TaskList {
                 listBottomPadding: root.fabSize + root.fabMargins * 2
                 emptyPlaceholderIcon: "checklist"
-                emptyPlaceholderText: Translation.tr("Finished tasks will go here")
+                emptyPlaceholderText: "Finished tasks will go here"
                 taskList: Todo.list
                     .map(function(item, i) { return Object.assign({}, item, {originalIndex: i}); })
                     .filter(function(item) { return item.done; })
@@ -163,7 +163,7 @@ Item {
                     Layout.alignment: Qt.AlignLeft
                     color: Appearance.m3colors.m3onSurface
                     font.pixelSize: Appearance.font.pixelSize.larger
-                    text: Translation.tr("Add task")
+                    text: "Add task"
                 }
 
                 TextField {
@@ -176,7 +176,7 @@ Item {
                     renderType: Text.NativeRendering
                     selectedTextColor: Appearance.m3colors.m3onSecondaryContainer
                     selectionColor: Appearance.colors.colSecondaryContainer
-                    placeholderText: Translation.tr("Task description")
+                    placeholderText: "Task description"
                     placeholderTextColor: Appearance.m3colors.m3outline
                     focus: root.showAddDialog
                     onAccepted: dialog.addTask()
@@ -204,11 +204,11 @@ Item {
                     spacing: 5
 
                     DialogButton {
-                        buttonText: Translation.tr("Cancel")
+                        buttonText: "Cancel"
                         onClicked: root.showAddDialog = false
                     }
                     DialogButton {
-                        buttonText: Translation.tr("Add")
+                        buttonText: "Add"
                         enabled: todoInput.text.length > 0
                         onClicked: dialog.addTask()
                     }

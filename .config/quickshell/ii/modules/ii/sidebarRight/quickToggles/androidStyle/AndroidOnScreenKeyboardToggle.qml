@@ -8,7 +8,7 @@ import Quickshell
 AndroidQuickToggleButton {
     id: root
 
-    name: Translation.tr("Virtual Keyboard")
+    name: "Virtual Keyboard"
     toggled: GlobalStates.oskOpen
     buttonIcon: toggled ? "keyboard_hide" : "keyboard"
     
@@ -17,6 +17,6 @@ AndroidQuickToggleButton {
     }
 
     StyledToolTip {
-        text: Translation.tr("On-screen keyboard")
+        text: "On-screen keyboard"
     }
 }

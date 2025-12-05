@@ -33,14 +33,12 @@
       color4 = "#A67F7C";
       color5 = "#B2416B";
       color6 = "#8D76AD";
-      color7 = "#272022";
       color9 = "#B52755";
       color10 = "#A97363";
       color11 = "#AF535D";
       color12 = "#A67F7C";
       color13 = "#B2416B";
       color14 = "#8D76AD";
-      color15 = "#221A1A";
     };
   };
 }

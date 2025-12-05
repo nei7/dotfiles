@@ -32,7 +32,7 @@ ApplicationWindow {
     onClosing: {
         Qt.quit()
     }
-    title: Translation.tr("Shell conflicts killer")
+    title: "Shell conflicts killer"
 
     Component.onCompleted: {
         Config.readWriteDelay = 0;
@@ -87,7 +87,7 @@ ApplicationWindow {
             RippleButton {
                 colBackground: Appearance.colors.colLayer2
                 contentItem: StyledText {
-                    text: Translation.tr("Always")
+                    text: "Always"
                 }
                 onClicked: {
                     Quickshell.execDetached(["killall", ...conflictGroup.programs])
@@ -98,7 +98,7 @@ ApplicationWindow {
             RippleButton {
                 colBackground: Appearance.colors.colLayer2
                 contentItem: StyledText {
-                    text: Translation.tr("Yes")
+                    text: "Yes"
                 }
                 onClicked: {
                     Quickshell.execDetached(["killall", ...conflictGroup.programs])
@@ -108,7 +108,7 @@ ApplicationWindow {
             RippleButton {
                 colBackground: Appearance.colors.colLayer2
                 contentItem: StyledText {
-                    text: Translation.tr("No")
+                    text: "No"
                 }
                 onClicked: conflictGroup.visible = false
             }
@@ -135,7 +135,7 @@ ApplicationWindow {
                     leftMargin: 12
                 }
                 color: Appearance.colors.colOnLayer0
-                text: Translation.tr("Kill conflicting programs?")
+                text: "Kill conflicting programs?"
                 font {
                     family: Appearance.font.family.title
                     pixelSize: Appearance.font.pixelSize.title
@@ -179,7 +179,7 @@ ApplicationWindow {
                     Layout.alignment: Qt.AlignHCenter
                     Layout.fillHeight: false
                     programs: ["kded6"]
-                    description: Translation.tr("Conflicts with the shell's system tray implementation")
+                    description: "Conflicts with the shell's system tray implementation"
                     onAlwaysSelected: Config.options.conflictKiller.autoKillTrays = true
                 }
 
@@ -188,7 +188,7 @@ ApplicationWindow {
                     Layout.alignment: Qt.AlignHCenter
                     Layout.fillHeight: false
                     programs: ["mako", "dunst"]
-                    description: Translation.tr("Conflicts with the shell's notification implementation")
+                    description: "Conflicts with the shell's notification implementation"
                     onAlwaysSelected: Config.options.conflictKiller.autoKillNotificationDaemons = true
                 }
                 

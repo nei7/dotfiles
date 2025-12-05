@@ -18,19 +18,19 @@ StyledOverlayWidget {
     property list<var> resources: [
         {
             "icon": "planner_review",
-            "name": Translation.tr("CPU"),
+            "name": "CPU",
             "history": ResourceUsage.cpuUsageHistory,
             "maxAvailableString": ResourceUsage.maxAvailableCpuString
         },
         {
             "icon": "memory",
-            "name": Translation.tr("RAM"),
+            "name": "RAM",
             "history": ResourceUsage.memoryUsageHistory,
             "maxAvailableString": ResourceUsage.maxAvailableMemoryString
         },
         {
             "icon": "swap_horiz",
-            "name": Translation.tr("Swap"),
+            "name": "Swap",
             "history": ResourceUsage.swapUsageHistory,
             "maxAvailableString": ResourceUsage.maxAvailableSwapString
         },
@@ -94,7 +94,7 @@ StyledOverlayWidget {
                 }
             }
             StyledText {
-                text: Translation.tr("of %1").arg(resourceSummary.maxAvailableString)
+                text: "of %1".arg(resourceSummary.maxAvailableString)
                 font {
                     // family: Appearance.font.family.numbers
                     // variableAxes: Appearance.font.variableAxes.numbers

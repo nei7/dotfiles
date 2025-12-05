@@ -151,18 +151,18 @@ The tool recognizes the following formats for translatable texts:
 
 ```qml
 // Basic format
-Translation.tr("Hello, world!")
+"Hello, world!"
 Translation.tr('Hello, world!')
 Translation.tr(`Hello, world!`)
 
 // With line breaks
-Translation.tr("Line 1\nLine 2")
+"Line 1\nLine 2"
 
 // With escape characters
-Translation.tr("Say \"Hello\"")
+"Say \"Hello\""
 
 // With parameter placeholders
-Translation.tr("Hello, %1!").arg(name)
+"Hello, %1!".arg(name)
 ```
 
 ## Example Output

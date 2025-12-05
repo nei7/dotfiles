@@ -35,11 +35,11 @@ StyledOverlayWidget {
 
                 SecondaryTabButton {
                     buttonIcon: "media_output"
-                    buttonText: Translation.tr("Output")
+                    buttonText: "Output"
                 }
                 SecondaryTabButton {
                     buttonIcon: "mic"
-                    buttonText: Translation.tr("Input")
+                    buttonText: "Input"
                 }
             }
             SwipeView {

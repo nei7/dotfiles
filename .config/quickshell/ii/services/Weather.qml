@@ -149,7 +149,7 @@ Singleton {
                 positionSource.stop();
                 root.location.valid = false;
                 root.gpsActive = false;
-                Quickshell.execDetached(["notify-send", Translation.tr("Weather Service"), Translation.tr("Cannot find a GPS service. Using the fallback method instead."), "-a", "Shell"]);
+                Quickshell.execDetached(["notify-send", "Weather Service", "Cannot find a GPS service. Using the fallback method instead.", "-a", "Shell"]);
                 console.error("[WeatherService] Could not aquire a valid backend plugin.");
             }
         }

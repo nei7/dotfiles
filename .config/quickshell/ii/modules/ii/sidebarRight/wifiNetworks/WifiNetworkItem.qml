@@ -39,7 +39,7 @@ DialogListItem {
                 Layout.fillWidth: true
                 color: Appearance.colors.colOnSurfaceVariant
                 elide: Text.ElideRight
-                text: root.wifiNetwork?.ssid ?? Translation.tr("Unknown")
+                text: root.wifiNetwork?.ssid ?? "Unknown"
             }
             MaterialSymbol {
                 visible: (root.wifiNetwork?.isSecure || root.wifiNetwork?.active) ?? false
@@ -57,7 +57,7 @@ DialogListItem {
             MaterialTextField {
                 id: passwordField
                 Layout.fillWidth: true
-                placeholderText: Translation.tr("Password")
+                placeholderText: "Password"
 
                 // Password
                 echoMode: TextInput.Password
@@ -76,14 +76,14 @@ DialogListItem {
                 }
 
                 DialogButton {
-                    buttonText: Translation.tr("Cancel")
+                    buttonText: "Cancel"
                     onClicked: {
                         root.wifiNetwork.askingPassword = false;
                     }
                 }
 
                 DialogButton {
-                    buttonText: Translation.tr("Connect")
+                    buttonText: "Connect"
                     onClicked: {
                         Network.changePassword(root.wifiNetwork, passwordField.text);
                     }
@@ -99,7 +99,7 @@ DialogListItem {
             RowLayout {
                 DialogButton {
                     Layout.fillWidth: true
-                    buttonText: Translation.tr("Open network portal")
+                    buttonText: "Open network portal"
                     colBackground: Appearance.colors.colLayer4
                     colBackgroundHover: Appearance.colors.colLayer4Hover
                     colRipple: Appearance.colors.colLayer4Active
