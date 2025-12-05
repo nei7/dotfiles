@@ -1,0 +1,19 @@
+{
+  config,
+  inputs,
+  pkgs,
+  ...
+}:
+{
+  imports = [
+    ./packages
+    ./zsh
+    ./hyprland
+    ./theme
+    ./quickshell
+    ./vscode
+    ./git
+    ./kitty
+    ./walker
+  ];
+}
