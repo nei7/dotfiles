@@ -1,3 +1,0 @@
-(include "yuck/widgets/bar.yuck")
-(include "yuck/widgets/dashboard.yuck")
-(include "yuck/widgets/player.yuck")
