@@ -79,7 +79,7 @@ Singleton {
             id: configOptionsJsonAdapter
 
             property list<string> enabledPanels: [
-                "iiBar", "iiBackground", "iiCheatsheet", "iiDock", "iiLock", "iiMediaControls", "iiNotificationPopup", "iiOnScreenDisplay", "iiOnScreenKeyboard", "iiOverlay", "iiOverview", "iiPolkit", "iiRegionSelector", "iiReloadPopup", "iiScreenCorners", "iiSessionScreen", "iiSidebarRight", "iiVerticalBar", "iiWallpaperSelector"
+                "iiBar", "iiBackground", "iiCheatsheet", "iiDock", "iiLock", "iiMediaControls", "iiNotificationPopup", "iiOnScreenDisplay", "iiOnScreenKeyboard", "iiOverlay", "iiOverview", "iiPolkit", "iiReloadPopup", "iiScreenCorners", "iiSessionScreen", "iiSidebarRight", "iiVerticalBar", "iiWallpaperSelector"
             ]
             property string panelFamily: "ii" // "ii", "w"
 

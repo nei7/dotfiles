@@ -1,11 +1,11 @@
+pragma Singleton
+pragma ComponentBehavior: Bound
 import qs.modules.common
 import qs.services
 import QtQuick
 import Quickshell
 import Quickshell.Hyprland
 import Quickshell.Io
-pragma Singleton
-pragma ComponentBehavior: Bound
 
 Singleton {
     id: root
@@ -48,22 +48,22 @@ Singleton {
         description: "Hold to show workspace numbers, release to show icons"
 
         onPressed: {
-            root.superDown = true
+            root.superDown = true;
         }
         onReleased: {
-            root.superDown = false
+            root.superDown = false;
         }
     }
 
     IpcHandler {
-		target: "zoom"
+        target: "zoom"
 
-		function zoomIn() {
-            screenZoom = Math.min(screenZoom + 0.4, 3.0)
+        function zoomIn() {
+            screenZoom = Math.min(screenZoom + 0.4, 3.0);
         }
 
         function zoomOut() {
-            screenZoom = Math.max(screenZoom - 0.4, 1)
-        } 
-	}
+            screenZoom = Math.max(screenZoom - 0.4, 1);
+        }
+    }
 }

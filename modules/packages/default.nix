@@ -30,16 +30,13 @@
     kdePackages.bluedevil
     kdePackages.plasma-nm
     kdePackages.dolphin
-    kdePackages.systemsettings
     (pkgs.python3.withPackages (python-pkgs: [
       python-pkgs.opencv4
       python-pkgs.numpy
     ]))
     nodejs
     pnpm
-
     bun
-    uv
 
     (texlive.withPackages (
       ps: with ps; [
@@ -50,12 +47,12 @@
 
     hyprpicker
     hyprshot
-    slurp
-    swappy
-    tesseract
-    wf-recorder
 
     ydotool
     wtype
+
+    qt6.qtdeclarative
+
+    btop
   ];
 }

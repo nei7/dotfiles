@@ -29,12 +29,8 @@ RippleButton {
         }
         spacing: 0
 
-    }
-
-    MaterialSymbol {
+        MaterialSymbol {
             id: icon
-            // Zmieniono: Usuwamy anchor do parent.verticalCenter wewnątrz Row, który dopasowuje wysokość
-            // Zamiast tego używamy właściwości Row do wyrównania lub ustalamy wysokość
             anchors.verticalCenter: parent.verticalCenter
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
@@ -42,7 +38,6 @@ RippleButton {
             color: root.colOnBackground
             text: root.iconText
         }
-
         Loader {
             anchors.verticalCenter: parent.verticalCenter
             visible: root.buttonText?.length > 0
@@ -50,22 +45,13 @@ RippleButton {
             sourceComponent: Revealer {
                 visible: root.expanded || implicitWidth > 0
                 reveal: root.expanded
-                
-                // Obliczamy szerokość
                 implicitWidth: reveal ? (buttonText.implicitWidth + root.elementSpacing + contentRowLayout.horizontalMargins) : 0
-                
-                // DODANO: Jawnie ustawiamy wysokość Revealer na wysokość tekstu,
-                // aby uniknąć zgadywania wymiarów przez silnik QML.
-                implicitHeight: buttonText.implicitHeight
-
                 StyledText {
                     id: buttonText
                     anchors {
                         left: parent.left
                         leftMargin: root.elementSpacing
-                        // USUNIĘTO: verticalCenter: parent.verticalCenter
-                        // Nie możemy kotwiczyć do środka rodzica, który sam ustala wysokość na podstawie tego dziecka.
-                        // Loader (dziadek) i tak centruje cały Revealer w wierszu.
+                        verticalCenter: parent.verticalCenter
                     }
                     text: root.buttonText
                     color: Appearance.colors.colOnPrimaryContainer
@@ -74,4 +60,5 @@ RippleButton {
                 }
             }
         }
+    }
 }

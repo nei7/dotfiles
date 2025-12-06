@@ -13,6 +13,10 @@ MaterialShape { // App icon
     property var urgency: NotificationUrgency.Normal
     property bool isUrgent: urgency === NotificationUrgency.Critical
     property var image: ""
+    
+    property bool imageLoadError: false
+    onImageChanged: imageLoadError = false
+
     property real materialIconScale: 0.57
     property real appIconScale: 0.8
     property real smallAppIconScale: 0.49
@@ -28,9 +32,10 @@ MaterialShape { // App icon
     shape: isUrgent ? urgentShapes[Math.floor(Math.random() * urgentShapes.length)] : MaterialShape.Shape.Circle
 
     color: isUrgent ? Appearance.colors.colPrimaryContainer : Appearance.colors.colSecondaryContainer
+
     Loader {
         id: materialSymbolLoader
-        active: root.appIcon == ""
+        active: root.appIcon == "" && (root.image == "" || root.imageLoadError)
         anchors.fill: parent
         sourceComponent: MaterialSymbol {
             text: {
@@ -46,9 +51,10 @@ MaterialShape { // App icon
             verticalAlignment: Text.AlignVCenter
         }
     }
+
     Loader {
         id: appIconLoader
-        active: root.image == "" && root.appIcon != ""
+        active: (root.image == "" || root.imageLoadError) && root.appIcon != ""
         anchors.centerIn: parent
         sourceComponent: IconImage {
             id: appIconImage
@@ -57,9 +63,10 @@ MaterialShape { // App icon
             source: Quickshell.iconPath(root.appIcon, "image-missing")
         }
     }
+
     Loader {
         id: notifImageLoader
-        active: root.image != ""
+        active: root.image != "" && !root.imageLoadError
         anchors.fill: parent
         sourceComponent: Item {
             anchors.fill: parent
@@ -73,6 +80,13 @@ MaterialShape { // App icon
                 cache: false
                 antialiasing: true
                 asynchronous: true
+
+                onStatusChanged: {
+                    if (status === Image.Error) {
+                        console.warn("Notification image failed to load, falling back to icon.")
+                        root.imageLoadError = true
+                    }
+                }
 
                 width: size
                 height: size

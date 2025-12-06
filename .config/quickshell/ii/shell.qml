@@ -11,7 +11,6 @@ import qs.modules.common
 import qs.modules.ii.background
 import qs.modules.ii.bar
 import qs.modules.ii.cheatsheet
-import qs.modules.ii.dock
 import qs.modules.ii.lock
 import qs.modules.ii.mediaControls
 import qs.modules.ii.notificationPopup
@@ -19,13 +18,9 @@ import qs.modules.ii.onScreenDisplay
 import qs.modules.ii.onScreenKeyboard
 import qs.modules.ii.overview
 import qs.modules.ii.polkit
-import qs.modules.ii.regionSelector
 import qs.modules.ii.screenCorners
 import qs.modules.ii.sessionScreen
 import qs.modules.ii.sidebarRight
-import qs.modules.ii.overlay
-import qs.modules.ii.verticalBar
-import qs.modules.ii.wallpaperSelector
 
 import QtQuick
 import QtQuick.Window
@@ -52,22 +47,17 @@ ShellRoot {
     PanelLoader { identifier: "iiBar"; extraCondition: !Config.options.bar.vertical; component: Bar {} }
     PanelLoader { identifier: "iiBackground"; component: Background {} }
     PanelLoader { identifier: "iiCheatsheet"; component: Cheatsheet {} }
-    PanelLoader { identifier: "iiDock"; extraCondition: Config.options.dock.enable; component: Dock {} }
     PanelLoader { identifier: "iiLock"; component: Lock {} }
     PanelLoader { identifier: "iiMediaControls"; component: MediaControls {} }
     PanelLoader { identifier: "iiNotificationPopup"; component: NotificationPopup {} }
     PanelLoader { identifier: "iiOnScreenDisplay"; component: OnScreenDisplay {} }
     PanelLoader { identifier: "iiOnScreenKeyboard"; component: OnScreenKeyboard {} }
-    PanelLoader { identifier: "iiOverlay"; component: Overlay {} }
     PanelLoader { identifier: "iiOverview"; component: Overview {} }
     PanelLoader { identifier: "iiPolkit"; component: Polkit {} }
-    PanelLoader { identifier: "iiRegionSelector"; component: RegionSelector {} }
     PanelLoader { identifier: "iiReloadPopup"; component: ReloadPopup {} }
     PanelLoader { identifier: "iiScreenCorners"; component: ScreenCorners {} }
     PanelLoader { identifier: "iiSessionScreen"; component: SessionScreen {} }
     PanelLoader { identifier: "iiSidebarRight"; component: SidebarRight {} }
-    PanelLoader { identifier: "iiVerticalBar"; extraCondition: Config.options.bar.vertical; component: VerticalBar {} }
-    PanelLoader { identifier: "iiWallpaperSelector"; component: WallpaperSelector {} }
 
     component PanelLoader: LazyLoader {
         required property string identifier

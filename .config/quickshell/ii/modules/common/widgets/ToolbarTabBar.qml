@@ -8,8 +8,18 @@ import QtQuick.Layouts
 
 Item {
     id: root
-    property alias currentIndex: tabBar.currentIndex
+    // FIXED: Changed from property alias to a regular property to break the binding loop.
+    // It's initialized to 0, or you can bind it to tabBar.currentIndex as an initial value.
+    property int currentIndex: tabBar.currentIndex 
+
     required property var tabButtonList
+
+    // Handler 1: Update the internal tabBar when root.currentIndex is changed externally.
+    onCurrentIndexChanged: {
+        if (tabBar.currentIndex !== currentIndex) {
+            tabBar.currentIndex = currentIndex
+        }
+    }
 
     function incrementCurrentIndex() {
         tabBar.incrementCurrentIndex()
@@ -18,7 +28,10 @@ Item {
         tabBar.decrementCurrentIndex()
     }
     function setCurrentIndex(index) {
-        tabBar.setCurrentIndex(index)
+        // FIXED: The function now explicitly sets the internal tabBar.currentIndex.
+        // The onCurrentIndexChanged handler of tabBar (below) will propagate 
+        // this change back to root.currentIndex.
+        tabBar.currentIndex = index
     }
 
     Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
@@ -40,6 +53,7 @@ Item {
                 text: modelData.name
                 materialSymbol: modelData.icon
                 onClicked: {
+                    // This is still the desired entry point for updates.
                     root.setCurrentIndex(index)
                 }
             }
@@ -78,6 +92,7 @@ Item {
         cursorShape: Qt.PointingHandCursor
         onWheel: (event) => {
             if (event.angleDelta.y < 0) {
+                // These functions now call the internal tabBar methods
                 root.incrementCurrentIndex();
             }
             else {
@@ -92,6 +107,15 @@ Item {
         id: tabBar
         z: -1
         background: null
+
+        // Handler 2: Update the exposed root.currentIndex when the internal tabBar changes 
+        // (e.g., from increment/decrement or direct call from setCurrentIndex).
+        onCurrentIndexChanged: {
+            if (root.currentIndex !== currentIndex) {
+                root.currentIndex = currentIndex
+            }
+        }
+        
         Repeater { // This is to fool the TabBar that it has tabs so it does the indices properly
             model: root.tabButtonList.length
             delegate: TabButton {

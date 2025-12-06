@@ -25,7 +25,7 @@ Item {
             visible: Config.options.bar.utilButtons.showScreenSnip
             sourceComponent: CircleUtilButton {
                 Layout.alignment: Qt.AlignVCenter
-                onClicked: Quickshell.execDetached(["qs", "-p", Quickshell.shellPath(""), "ipc", "call", "region", "screenshot"]);
+                onClicked: Quickshell.execDetached(["hyprshot", "-m", "region", "--clipboard-only"]);
                 MaterialSymbol {
                     horizontalAlignment: Qt.AlignHCenter
                     fill: 1
@@ -53,8 +53,8 @@ Item {
         }
 
         Loader {
-            active: Config.options.bar.utilButtons.showColorPicker
-            visible: Config.options.bar.utilButtons.showColorPicker
+            active: true
+            visible: true
             sourceComponent: CircleUtilButton {
                 Layout.alignment: Qt.AlignVCenter
                 onClicked: Quickshell.execDetached(["hyprpicker", "-a"])
@@ -71,8 +71,8 @@ Item {
   
 
         Loader {
-            active: Config.options.bar.utilButtons.showMicToggle
-            visible: Config.options.bar.utilButtons.showMicToggle
+            active: true
+            visible: true
             sourceComponent: CircleUtilButton {
                 Layout.alignment: Qt.AlignVCenter
                 onClicked: Quickshell.execDetached(["wpctl", "set-mute", "@DEFAULT_SOURCE@", "toggle"])
@@ -80,28 +80,6 @@ Item {
                     horizontalAlignment: Qt.AlignHCenter
                     fill: 0
                     text: Pipewire.defaultAudioSource?.audio?.muted ? "mic_off" : "mic"
-                    iconSize: Appearance.font.pixelSize.large
-                    color: Appearance.colors.colOnLayer2
-                }
-            }
-        }
-
-        Loader {
-            active: Config.options.bar.utilButtons.showDarkModeToggle
-            visible: Config.options.bar.utilButtons.showDarkModeToggle
-            sourceComponent: CircleUtilButton {
-                Layout.alignment: Qt.AlignVCenter
-                onClicked: event => {
-                    if (Appearance.m3colors.darkmode) {
-                        Hyprland.dispatch(`exec ${Directories.wallpaperSwitchScriptPath} --mode light --noswitch`);
-                    } else {
-                        Hyprland.dispatch(`exec ${Directories.wallpaperSwitchScriptPath} --mode dark --noswitch`);
-                    }
-                }
-                MaterialSymbol {
-                    horizontalAlignment: Qt.AlignHCenter
-                    fill: 0
-                    text: Appearance.m3colors.darkmode ? "light_mode" : "dark_mode"
                     iconSize: Appearance.font.pixelSize.large
                     color: Appearance.colors.colOnLayer2
                 }

@@ -15,8 +15,6 @@ import Quickshell.Wayland
 import Quickshell.Hyprland
 
 import qs.modules.ii.background.widgets
-import qs.modules.ii.background.widgets.clock
-import qs.modules.ii.background.widgets.weather
 
 Variants {
     id: root
@@ -28,40 +26,67 @@ Variants {
         required property var modelData
 
         // Hide when fullscreen
-        property list<HyprlandWorkspace> workspacesForMonitor: Hyprland.workspaces.values.filter(workspace => workspace.monitor && workspace.monitor.name == monitor.name)
-        property var activeWorkspaceWithFullscreen: workspacesForMonitor.filter(workspace => ((workspace.toplevels.values.filter(window => window.wayland?.fullscreen)[0] != undefined) && workspace.active))[0]
-        visible: GlobalStates.screenLocked || (!(activeWorkspaceWithFullscreen != undefined)) || !Config?.options.background.hideWhenFullscreen
+        property list<HyprlandWorkspace> workspacesForMonitor: Hyprland.workspaces.values.filter(workspace
+                                                                                                 => workspace.monitor
+                                                                                                 && workspace.monitor.name
+                                                                                                 == monitor.name)
+        property var activeWorkspaceWithFullscreen: workspacesForMonitor.filter(workspace => ((
+                                                                                                  workspace.toplevels.values.filter(
+                                                                                                      window => window.wayland
+                                                                                                      ?.fullscreen)[0]
+                                                                                                  != undefined)
+                                                                                              && workspace.active))[0]
+        visible: GlobalStates.screenLocked || (!(activeWorkspaceWithFullscreen != undefined)) || !Config
+                 ?.options.background.hideWhenFullscreen
 
         // Workspaces
         property HyprlandMonitor monitor: Hyprland.monitorFor(modelData)
-        property list<var> relevantWindows: HyprlandData.windowList.filter(win => win.monitor == monitor?.id && win.workspace.id >= 0).sort((a, b) => a.workspace.id - b.workspace.id)
+        property list<var> relevantWindows: HyprlandData.windowList.filter(win => win.monitor == monitor?.id
+                                                                           && win.workspace.id >= 0).sort((a,
+                                                                                                           b) => a.workspace.id
+                                                                                                          - b.workspace.id)
         property int firstWorkspaceId: relevantWindows[0]?.workspace.id || 1
         property int lastWorkspaceId: relevantWindows[relevantWindows.length - 1]?.workspace.id || 10
         // Wallpaper
-        property bool wallpaperIsVideo: Config.options.background.wallpaperPath.endsWith(".mp4") || Config.options.background.wallpaperPath.endsWith(".webm") || Config.options.background.wallpaperPath.endsWith(".mkv") || Config.options.background.wallpaperPath.endsWith(".avi") || Config.options.background.wallpaperPath.endsWith(".mov")
-        property string wallpaperPath: wallpaperIsVideo ? Config.options.background.thumbnailPath : Config.options.background.wallpaperPath
+        property bool wallpaperIsVideo: Config.options.background.wallpaperPath.endsWith(".mp4")
+                                        || Config.options.background.wallpaperPath.endsWith(".webm")
+                                        || Config.options.background.wallpaperPath.endsWith(".mkv")
+                                        || Config.options.background.wallpaperPath.endsWith(".avi")
+                                        || Config.options.background.wallpaperPath.endsWith(".mov")
+        property string wallpaperPath: wallpaperIsVideo ? Config.options.background.thumbnailPath :
+                                                          Config.options.background.wallpaperPath
         property bool wallpaperSafetyTriggered: {
             const enabled = Config.options.workSafety.enable.wallpaper;
-            const sensitiveWallpaper = (CF.StringUtils.stringListContainsSubstring(wallpaperPath.toLowerCase(), Config.options.workSafety.triggerCondition.fileKeywords));
-            const sensitiveNetwork = (CF.StringUtils.stringListContainsSubstring(Network.networkName.toLowerCase(), Config.options.workSafety.triggerCondition.networkNameKeywords));
+            const sensitiveWallpaper = (CF.StringUtils.stringListContainsSubstring(wallpaperPath.toLowerCase(),
+                                                                                   Config.options.workSafety.triggerCondition.fileKeywords));
+            const sensitiveNetwork = (CF.StringUtils.stringListContainsSubstring(
+                                          Network.networkName.toLowerCase(),
+                                          Config.options.workSafety.triggerCondition.networkNameKeywords));
             return enabled && sensitiveWallpaper && sensitiveNetwork;
         }
-        property real wallpaperToScreenRatio: Math.min(wallpaperWidth / screen.width, wallpaperHeight / screen.height)
+        property real wallpaperToScreenRatio: Math.min(wallpaperWidth / screen.width, wallpaperHeight
+                                                       / screen.height)
         property real preferredWallpaperScale: Config.options.background.parallax.workspaceZoom
         property real effectiveWallpaperScale: 1 // Some reasonable init value, to be updated
         property int wallpaperWidth: modelData.width // Some reasonable init value, to be updated
         property int wallpaperHeight: modelData.height // Some reasonable init value, to be updated
-        property real movableXSpace: ((wallpaperWidth / wallpaperToScreenRatio * effectiveWallpaperScale) - screen.width) / 2
-        property real movableYSpace: ((wallpaperHeight / wallpaperToScreenRatio * effectiveWallpaperScale) - screen.height) / 2
-        readonly property bool verticalParallax: (Config.options.background.parallax.autoVertical && wallpaperHeight > wallpaperWidth) || Config.options.background.parallax.vertical
+        property real movableXSpace: ((wallpaperWidth / wallpaperToScreenRatio * effectiveWallpaperScale)
+                                      - screen.width) / 2
+        property real movableYSpace: ((wallpaperHeight / wallpaperToScreenRatio * effectiveWallpaperScale)
+                                      - screen.height) / 2
+        readonly property bool verticalParallax: (Config.options.background.parallax.autoVertical
+                                                  && wallpaperHeight > wallpaperWidth)
+                                                 || Config.options.background.parallax.vertical
         // Colors
         property bool shouldBlur: (GlobalStates.screenLocked && Config.options.lock.blur.enable)
         property color dominantColor: Appearance.colors.colPrimary // Default, to be changed
         property bool dominantColorIsDark: dominantColor.hslLightness < 0.5
         property color colText: {
             if (wallpaperSafetyTriggered)
-                return CF.ColorUtils.mix(Appearance.colors.colOnLayer0, Appearance.colors.colPrimary, 0.75);
-            return (GlobalStates.screenLocked && shouldBlur) ? Appearance.colors.colOnLayer0 : CF.ColorUtils.colorWithLightness(Appearance.colors.colPrimary, (dominantColorIsDark ? 0.8 : 0.12));
+            return CF.ColorUtils.mix(Appearance.colors.colOnLayer0, Appearance.colors.colPrimary, 0.75);
+            return (GlobalStates.screenLocked && shouldBlur) ? Appearance.colors.colOnLayer0 : CF.ColorUtils.colorWithLightness(
+                                                                   Appearance.colors.colPrimary, (
+                                                                       dominantColorIsDark ? 0.8 : 0.12));
         }
         Behavior on colText {
             animation: Appearance.animation.elementMoveFast.colorAnimation.createObject(this)
@@ -70,7 +95,9 @@ Variants {
         // Layer props
         screen: modelData
         exclusionMode: ExclusionMode.Ignore
-        WlrLayershell.layer: (GlobalStates.screenLocked && !scaleAnim.running) ? WlrLayer.Overlay : WlrLayer.Bottom
+        WlrLayershell.layer: (GlobalStates.screenLocked && !scaleAnim.running) ? WlrLayer.Overlay :
+                                                                                 WlrLayer.Bottom
+
         // WlrLayershell.layer: WlrLayer.Bottom
         WlrLayershell.namespace: "quickshell:background"
         anchors {
@@ -81,7 +108,7 @@ Variants {
         }
         color: {
             if (!bgRoot.wallpaperSafetyTriggered || bgRoot.wallpaperIsVideo)
-                return "transparent";
+            return "transparent";
             return CF.ColorUtils.mix(Appearance.colors.colLayer0, Appearance.colors.colPrimary, 0.75);
         }
         Behavior on color {
@@ -116,7 +143,8 @@ Variants {
                         bgRoot.effectiveWallpaperScale = Math.max(screenWidth / width, screenHeight / height);
                     } else {
                         // Oversized = can be zoomed for parallax, yay
-                        bgRoot.effectiveWallpaperScale = Math.min(bgRoot.preferredWallpaperScale, width / screenWidth, height / screenHeight);
+                        bgRoot.effectiveWallpaperScale = Math.min(bgRoot.preferredWallpaperScale, width
+                                                                  / screenWidth, height / screenHeight);
                     }
                 }
             }
@@ -178,7 +206,8 @@ Variants {
                     height: bgRoot.screen.height * bgRoot.effectiveWallpaperScale * bgRoot.monitor.scale
                 }
                 width: bgRoot.wallpaperWidth / bgRoot.wallpaperToScreenRatio * bgRoot.effectiveWallpaperScale
-                height: bgRoot.wallpaperHeight / bgRoot.wallpaperToScreenRatio * bgRoot.effectiveWallpaperScale
+                height: bgRoot.wallpaperHeight / bgRoot.wallpaperToScreenRatio
+                        * bgRoot.effectiveWallpaperScale
             }
 
             Loader {
@@ -203,93 +232,6 @@ Variants {
                         opacity: GlobalStates.screenLocked ? 1 : 0
                         anchors.fill: parent
                         color: CF.ColorUtils.transparentize(Appearance.colors.colLayer0, 0.7)
-                    }
-                }
-            }
-
-            WidgetCanvas {
-                id: widgetCanvas
-                anchors {
-                    left: wallpaper.left
-                    right: wallpaper.right
-                    top: wallpaper.top
-                    bottom: wallpaper.bottom
-                    horizontalCenter: undefined
-                    verticalCenter: undefined
-                    readonly property real parallaxFactor: Config.options.background.parallax.widgetsFactor
-                    leftMargin: {
-                        const xOnWallpaper = bgRoot.movableXSpace;
-                        const extraMove = (wallpaper.effectiveValueX * 2 * bgRoot.movableXSpace) * (parallaxFactor - 1);
-                        return xOnWallpaper - extraMove;
-                    }
-                    topMargin: {
-                        const yOnWallpaper = bgRoot.movableYSpace;
-                        const extraMove = (wallpaper.effectiveValueY * 2 * bgRoot.movableYSpace) * (parallaxFactor - 1);
-                        return yOnWallpaper - extraMove;
-                    }
-                    Behavior on leftMargin {
-                        animation: Appearance.animation.elementMove.numberAnimation.createObject(this)
-                    }
-                    Behavior on topMargin {
-                        animation: Appearance.animation.elementMove.numberAnimation.createObject(this)
-                    }
-                }
-                width: wallpaper.width
-                height: wallpaper.height
-                states: State {
-                    name: "centered"
-                    when: GlobalStates.screenLocked || bgRoot.wallpaperSafetyTriggered
-                    PropertyChanges {
-                        target: widgetCanvas
-                        width: parent.width
-                        height: parent.height
-                    }
-                    AnchorChanges {
-                        target: widgetCanvas
-                        anchors {
-                            left: undefined
-                            right: undefined
-                            top: undefined
-                            bottom: undefined
-                            horizontalCenter: parent.horizontalCenter
-                            verticalCenter: parent.verticalCenter
-                        }
-                    }
-                }
-                transitions: Transition {
-                    PropertyAnimation {
-                        properties: "width,height"
-                        duration: Appearance.animation.elementMove.duration
-                        easing.type: Appearance.animation.elementMove.type
-                        easing.bezierCurve: Appearance.animation.elementMove.bezierCurve
-                    }
-                    AnchorAnimation {
-                        duration: Appearance.animation.elementMove.duration
-                        easing.type: Appearance.animation.elementMove.type
-                        easing.bezierCurve: Appearance.animation.elementMove.bezierCurve
-                    }
-                }
-
-                FadeLoader {
-                    shown: Config.options.background.widgets.weather.enable
-                    sourceComponent: WeatherWidget {
-                        screenWidth: bgRoot.screen.width
-                        screenHeight: bgRoot.screen.height
-                        scaledScreenWidth: bgRoot.screen.width / bgRoot.effectiveWallpaperScale
-                        scaledScreenHeight: bgRoot.screen.height / bgRoot.effectiveWallpaperScale
-                        wallpaperScale: bgRoot.effectiveWallpaperScale
-                    }
-                }
-
-                FadeLoader {
-                    shown: Config.options.background.widgets.clock.enable
-                    sourceComponent: ClockWidget {
-                        screenWidth: bgRoot.screen.width
-                        screenHeight: bgRoot.screen.height
-                        scaledScreenWidth: bgRoot.screen.width / bgRoot.effectiveWallpaperScale
-                        scaledScreenHeight: bgRoot.screen.height / bgRoot.effectiveWallpaperScale
-                        wallpaperScale: bgRoot.effectiveWallpaperScale
-                        wallpaperSafetyTriggered: bgRoot.wallpaperSafetyTriggered
                     }
                 }
             }

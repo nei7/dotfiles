@@ -23,7 +23,7 @@ in
   };
 
   xdg.configFile."quickshell".source =
-    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/config/.config/quickshell";
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.config/quickshell";
 
   fonts.fontconfig.enable = true;
 
