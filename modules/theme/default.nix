@@ -13,6 +13,7 @@
     darkly-qt5
     papirus-icon-theme
     bibata-cursors
+
   ];
 
   gtk = {
@@ -42,4 +43,11 @@
       gtk-application-prefer-dark-theme = 1;
     };
   };
+
+  qt = {
+    enable = true;
+    platformTheme = "qtct";
+    style.name = "kvantum";
+  };
+
 }

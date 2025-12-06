@@ -11,9 +11,7 @@
     ./hyprland
     ./theme
     ./quickshell
-    ./vscode
     ./git
-    ./kitty
     ./walker
   ];
 }

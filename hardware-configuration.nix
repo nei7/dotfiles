@@ -14,6 +14,8 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
+  # Boot
+
   boot.initrd.availableKernelModules = [
     "xhci_pci"
     "ahci"
@@ -22,22 +24,38 @@
     "usbhid"
     "sd_mod"
   ];
-
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
-
   boot.kernelParams = [
+    "nvidia-drm.modeset=1"
+    "nvidia-drm.fbdev=1"
     "quiet"
     "splash"
     "boot.consoleLogLevel=0"
     "systemd.show_status=false"
-    "rd.systemd.show_status=false"
     "udev.log_level=3"
     "vt.global_cursor_default=0"
-  ];
 
-  # 2. Ustawienia konsoli
+    "boot.shell_on_fail"
+    "loglevel=3"
+    "rd.systemd.show_status=false"
+    "rd.udev.log_level=3"
+    "udev.log_priority=3"
+  ];
+  boot.consoleLogLevel = 0;
   boot.initrd.verbose = false;
+  boot.loader.systemd-boot.enable = false;
+  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.grub = {
+    enable = true;
+    device = "nodev";
+    fontSize = 16;
+    efiSupport = true;
+    useOSProber = true;
+    timeout = 5;
+    configurationLimit = 5;
+  };
+  boot.plymouth.enable = true;
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/21337092-22df-4fc5-9e51-0baa6745eb71";
@@ -58,7 +76,34 @@
   ];
 
   networking.useDHCP = lib.mkDefault true;
+  networking.firewall.checkReversePath = false;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+  # Bluetooth
+  hardware.bluetooth.enable = true;
+
+  # GPU
+  boot.initrd.kernelModules = [
+    "nvidia"
+    "nvidia_modeset"
+    "nvidia_uvm"
+    "nvidia_drm"
+  ];
+
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
+
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.nvidia = {
+    open = true;
+    modesetting.enable = true;
+    powerManagement.enable = true;
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+  };
+
 }

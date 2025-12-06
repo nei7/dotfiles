@@ -5,11 +5,20 @@
   ...
 }:
 {
+
+  imports = [
+    ./spotify.nix
+    ./vscode.nix
+    ./kitty.nix
+  ];
+
   home.packages = with pkgs; [
     brave
     discord
     killall
     lxappearance
-    pkgs.qt6.qttools
+    pkgs.qtcreator
+    protonvpn-gui
+
   ];
 }
