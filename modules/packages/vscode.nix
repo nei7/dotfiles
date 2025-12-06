@@ -12,6 +12,18 @@
         jnoortheen.nix-ide
         dotjoshjohnson.xml
         pkief.material-icon-theme
+
+        ms-python.python
+        ms-python.debugpy
+
+        vue.volar
+        bradlc.vscode-tailwindcss
+        esbenp.prettier-vscode
+        dbaeumer.vscode-eslint
+
+        ms-azuretools.vscode-docker
+
+        james-yu.latex-workshop
       ];
       userSettings = {
         "editor.formatOnSave" = true;

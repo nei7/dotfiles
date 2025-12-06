@@ -13,15 +13,14 @@
     darkly-qt5
     papirus-icon-theme
     bibata-cursors
-
   ];
 
   gtk = {
     enable = true;
 
     theme = {
-      name = "Breeze";
-      package = pkgs.kdePackages.breeze;
+      name = "Adwaita";
+      package = pkgs.adw-gtk3;
     };
 
     iconTheme = {
@@ -47,7 +46,9 @@
   qt = {
     enable = true;
     platformTheme = "qtct";
-    style.name = "kvantum";
+    style = {
+      name = "Darkly";
+    };
   };
 
 }
