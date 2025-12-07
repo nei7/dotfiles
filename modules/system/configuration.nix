@@ -7,7 +7,7 @@
 
 {
   imports = [
-    ../modules/sddm
+    ../sddm
   ];
 
   boot.consoleLogLevel = 0;
