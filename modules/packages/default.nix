@@ -17,6 +17,7 @@
     # Cli tools
     killall
     fastfetch
+    inputs.reStream.packages.${pkgs.system}.default
 
     # Apps
     lxappearance

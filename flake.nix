@@ -24,6 +24,8 @@
       url = "github:uiriansan/SilentSDDM";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    reStream.url = "github:rien/reStream";
   };
 
   outputs =
@@ -47,6 +49,8 @@
             ./modules/system/configuration.nix
 
             (./. + "/hosts/${hostname}/hardware-configuration.nix")
+            (./. + "/hosts/${hostname}/system.nix")
+
             home-manager.nixosModules.home-manager
             {
               home-manager = {
