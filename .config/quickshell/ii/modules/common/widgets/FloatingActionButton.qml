@@ -4,8 +4,8 @@ import qs.modules.common
 import qs.modules.common.widgets
 
 /**
- * Material 3 FAB.
- */
+* Material 3 FAB.
+*/
 RippleButton {
     id: root
     property string iconText: "add"
@@ -45,7 +45,9 @@ RippleButton {
             sourceComponent: Revealer {
                 visible: root.expanded || implicitWidth > 0
                 reveal: root.expanded
-                implicitWidth: reveal ? (buttonText.implicitWidth + root.elementSpacing + contentRowLayout.horizontalMargins) : 0
+                implicitHeight: 0
+                implicitWidth: reveal ? (buttonText.implicitWidth + root.elementSpacing
+                                         + contentRowLayout.horizontalMargins) : 0
                 StyledText {
                     id: buttonText
                     anchors {
