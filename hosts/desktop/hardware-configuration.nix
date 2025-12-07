@@ -15,7 +15,6 @@
   ];
 
   # Boot
-
   boot.initrd.availableKernelModules = [
     "xhci_pci"
     "ahci"
@@ -42,20 +41,6 @@
     "rd.udev.log_level=3"
     "udev.log_priority=3"
   ];
-  boot.consoleLogLevel = 0;
-  boot.initrd.verbose = false;
-  boot.loader.systemd-boot.enable = false;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.grub = {
-    enable = true;
-    device = "nodev";
-    fontSize = 16;
-    efiSupport = true;
-    useOSProber = true;
-    timeout = 5;
-    configurationLimit = 5;
-  };
-  boot.plymouth.enable = true;
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/21337092-22df-4fc5-9e51-0baa6745eb71";

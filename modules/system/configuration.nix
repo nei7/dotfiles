@@ -7,14 +7,27 @@
 
 {
   imports = [
-    ./hardware-configuration.nix
-    ./modules/sddm
+    ../modules/sddm
   ];
+
+  boot.consoleLogLevel = 0;
+  boot.initrd.verbose = false;
+  boot.loader.systemd-boot.enable = false;
+  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.grub = {
+    enable = true;
+    device = "nodev";
+    fontSize = 16;
+    efiSupport = true;
+    useOSProber = true;
+    timeout = 5;
+    configurationLimit = 5;
+  };
+  boot.plymouth.enable = true;
 
   services.upower.enable = true;
 
   networking.networkmanager.enable = true;
-  networking.hostName = "nei-nixos";
 
   # Hyprland
   programs.hyprland = {
@@ -60,11 +73,6 @@
     kitty
     pkgs.nixfmt-rfc-style
   ];
-
-  environment.variables = {
-    GBM_BACKEND = "nvidia-drm";
-    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-  };
 
   programs.nix-ld.enable = true;
 
