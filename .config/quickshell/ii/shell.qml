@@ -6,7 +6,6 @@
 // Adjust this to make the shell smaller or larger
 //@ pragma Env QT_SCALE_FACTOR=1
 
-
 import qs.modules.common
 import qs.modules.ii.background
 import qs.modules.ii.bar
@@ -16,7 +15,6 @@ import qs.modules.ii.mediaControls
 import qs.modules.ii.notificationPopup
 import qs.modules.ii.onScreenDisplay
 import qs.modules.ii.onScreenKeyboard
-import qs.modules.ii.overview
 import qs.modules.ii.polkit
 import qs.modules.ii.screenCorners
 import qs.modules.ii.sessionScreen
@@ -34,36 +32,74 @@ ShellRoot {
 
     // Force initialization of some singletons
     Component.onCompleted: {
-        Hyprsunset.load()
-        ConflictKiller.load()
-        Cliphist.refresh()
-        Wallpapers.load()
-        Updates.load()
+        Hyprsunset.load();
+        ConflictKiller.load();
+        Cliphist.refresh();
+        Wallpapers.load();
+        Updates.load();
     }
 
     // Load enabled stuff
     // Well, these loaders only *allow* them to be loaded, to always load or not is defined in each component
     // The media controls for example is not loaded if it's not opened
-    PanelLoader { identifier: "iiBar"; extraCondition: !Config.options.bar.vertical; component: Bar {} }
-    PanelLoader { identifier: "iiBackground"; component: Background {} }
-    PanelLoader { identifier: "iiCheatsheet"; component: Cheatsheet {} }
-    PanelLoader { identifier: "iiLock"; component: Lock {} }
-    PanelLoader { identifier: "iiMediaControls"; component: MediaControls {} }
-    PanelLoader { identifier: "iiNotificationPopup"; component: NotificationPopup {} }
-    PanelLoader { identifier: "iiOnScreenDisplay"; component: OnScreenDisplay {} }
-    PanelLoader { identifier: "iiOnScreenKeyboard"; component: OnScreenKeyboard {} }
-    PanelLoader { identifier: "iiOverview"; component: Overview {} }
-    PanelLoader { identifier: "iiPolkit"; component: Polkit {} }
-    PanelLoader { identifier: "iiReloadPopup"; component: ReloadPopup {} }
-    PanelLoader { identifier: "iiScreenCorners"; component: ScreenCorners {} }
-    PanelLoader { identifier: "iiSessionScreen"; component: SessionScreen {} }
-    PanelLoader { identifier: "iiSidebarRight"; component: SidebarRight {} }
+    PanelLoader {
+        identifier: "iiBar"
+        extraCondition: !Config.options.bar.vertical
+        component: Bar {}
+    }
+    PanelLoader {
+        identifier: "iiBackground"
+        component: Background {}
+    }
+    PanelLoader {
+        identifier: "iiCheatsheet"
+        component: Cheatsheet {}
+    }
+    PanelLoader {
+        identifier: "iiLock"
+        component: Lock {}
+    }
+    PanelLoader {
+        identifier: "iiMediaControls"
+        component: MediaControls {}
+    }
+    PanelLoader {
+        identifier: "iiNotificationPopup"
+        component: NotificationPopup {}
+    }
+    PanelLoader {
+        identifier: "iiOnScreenDisplay"
+        component: OnScreenDisplay {}
+    }
+    PanelLoader {
+        identifier: "iiOnScreenKeyboard"
+        component: OnScreenKeyboard {}
+    }
+
+    PanelLoader {
+        identifier: "iiPolkit"
+        component: Polkit {}
+    }
+    PanelLoader {
+        identifier: "iiReloadPopup"
+        component: ReloadPopup {}
+    }
+    PanelLoader {
+        identifier: "iiScreenCorners"
+        component: ScreenCorners {}
+    }
+    PanelLoader {
+        identifier: "iiSessionScreen"
+        component: SessionScreen {}
+    }
+    PanelLoader {
+        identifier: "iiSidebarRight"
+        component: SidebarRight {}
+    }
 
     component PanelLoader: LazyLoader {
         required property string identifier
         property bool extraCondition: true
         active: Config.ready && Config.options.enabledPanels.includes(identifier) && extraCondition
     }
-
 }
-

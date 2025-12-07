@@ -24,6 +24,8 @@
         ms-azuretools.vscode-docker
 
         james-yu.latex-workshop
+
+        wakatime.vscode-wakatime
       ];
       userSettings = {
         "editor.formatOnSave" = true;

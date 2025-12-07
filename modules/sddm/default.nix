@@ -6,7 +6,7 @@
 }:
 
 let
-  avatarUrl = ../../nei.face.icon;
+  avatarUrl = ./nei.face.icon;
   # myWallpaperPkg = pkgs.runCommand "mojatapeta.png" { } ''
   #   cp ${./wallpaper.png} $out
   # '';

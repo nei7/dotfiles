@@ -14,8 +14,14 @@ Item { // Bar content region
 
     property var screen: root.QsWindow.window?.screen
     property var brightnessMonitor: Brightness.getMonitorForScreen(screen)
-    property real useShortenedForm: (Appearance.sizes.barHellaShortenScreenWidthThreshold >= screen?.width) ? 2 : (Appearance.sizes.barShortenScreenWidthThreshold >= screen?.width) ? 1 : 0
-    readonly property int centerSideModuleWidth: (useShortenedForm == 2) ? Appearance.sizes.barCenterSideModuleWidthHellaShortened : (useShortenedForm == 1) ? Appearance.sizes.barCenterSideModuleWidthShortened : Appearance.sizes.barCenterSideModuleWidth
+    property real useShortenedForm: (Appearance.sizes.barHellaShortenScreenWidthThreshold >= screen?.width)
+                                    ? 2 : (Appearance.sizes.barShortenScreenWidthThreshold >= screen?.width)
+                                      ? 1 : 0
+    readonly property int centerSideModuleWidth: (useShortenedForm == 2)
+                                                 ? Appearance.sizes.barCenterSideModuleWidthHellaShortened : (
+                                                       useShortenedForm == 1)
+                                                   ? Appearance.sizes.barCenterSideModuleWidthShortened :
+                                                     Appearance.sizes.barCenterSideModuleWidth
 
     component VerticalBarSeparator: Rectangle {
         Layout.topMargin: Appearance.sizes.baseBarHeight / 3
@@ -27,7 +33,9 @@ Item { // Bar content region
 
     // Background shadow
     Loader {
-        active: Config.options.bar.showBackground && Config.options.bar.cornerStyle === 1 && Config.options.bar.floatStyleShadow
+        active: Config.options.bar.showBackground && Config.options.bar.cornerStyle === 1
+                && Config.options.bar.floatStyleShadow
+
         anchors.fill: barBackground
         sourceComponent: StyledRectangularShadow {
             anchors.fill: undefined // The loader's anchors act on this, and this should not have any anchor
@@ -39,7 +47,8 @@ Item { // Bar content region
         id: barBackground
         anchors {
             fill: parent
-            margins: Config.options.bar.cornerStyle === 1 ? (Appearance.sizes.hyprlandGapsOut) : 0 // idk why but +1 is needed
+            margins: Config.options.bar.cornerStyle === 1 ? (Appearance.sizes.hyprlandGapsOut) :
+                                                            0 // idk why but +1 is needed
         }
         color: Config.options.bar.showBackground ? Appearance.colors.colLayer0 : "transparent"
         radius: Config.options.bar.cornerStyle === 1 ? Appearance.rounding.windowRounding : 0
@@ -62,7 +71,6 @@ Item { // Bar content region
         onScrollDown: root.brightnessMonitor.setBrightness(root.brightnessMonitor.brightness - 0.05)
         onScrollUp: root.brightnessMonitor.setBrightness(root.brightnessMonitor.brightness + 0.05)
         onMovedAway: GlobalStates.osdBrightnessOpen = false
-
 
         // Visual content
         ScrollHint {
@@ -132,10 +140,10 @@ Item { // Bar content region
                     acceptedButtons: Qt.RightButton
 
                     onPressed: event => {
-                        if (event.button === Qt.RightButton) {
-                            GlobalStates.overviewOpen = !GlobalStates.overviewOpen;
-                        }
-                    }
+                                   if (event.button === Qt.RightButton) {
+                                       GlobalStates.overviewOpen = !GlobalStates.overviewOpen;
+                                   }
+                               }
                 }
             }
         }
@@ -199,12 +207,12 @@ Item { // Bar content region
             const step = currentVolume < 0.1 ? 0.01 : 0.02 || 0.2;
             Audio.sink.audio.volume = Math.min(1, Audio.sink.audio.volume + step);
         }
-        onMovedAway: GlobalStates.osdVolumeOpen = false;
+        onMovedAway: GlobalStates.osdVolumeOpen = false
         onPressed: event => {
-            if (event.button === Qt.LeftButton) {
-                GlobalStates.sidebarRightOpen = !GlobalStates.sidebarRightOpen;
-            }
-        }
+                       if (event.button === Qt.LeftButton) {
+                           GlobalStates.sidebarRightOpen = !GlobalStates.sidebarRightOpen;
+                       }
+                   }
 
         // Visual content
         ScrollHint {
@@ -233,14 +241,17 @@ Item { // Bar content region
                 implicitHeight: indicatorsRowLayout.implicitHeight + 5 * 2
 
                 buttonRadius: Appearance.rounding.full
-                colBackground: barRightSideMouseArea.hovered ? Appearance.colors.colLayer1Hover : ColorUtils.transparentize(Appearance.colors.colLayer1Hover, 1)
+                colBackground: barRightSideMouseArea.hovered ? Appearance.colors.colLayer1Hover :
+                                                               ColorUtils.transparentize(
+                                                                   Appearance.colors.colLayer1Hover, 1)
                 colBackgroundHover: Appearance.colors.colLayer1Hover
                 colRipple: Appearance.colors.colLayer1Active
                 colBackgroundToggled: Appearance.colors.colSecondaryContainer
                 colBackgroundToggledHover: Appearance.colors.colSecondaryContainerHover
                 colRippleToggled: Appearance.colors.colSecondaryContainerActive
                 toggled: GlobalStates.sidebarRightOpen
-                property color colText: toggled ? Appearance.m3colors.m3onSecondaryContainer : Appearance.colors.colOnLayer0
+                property color colText: toggled ? Appearance.m3colors.m3onSecondaryContainer :
+                                                  Appearance.colors.colOnLayer0
 
                 Behavior on colText {
                     animation: Appearance.animation.elementMoveFast.colorAnimation.createObject(this)
@@ -308,7 +319,8 @@ Item { // Bar content region
                     }
                     MaterialSymbol {
                         visible: BluetoothStatus.available
-                        text: BluetoothStatus.connected ? "bluetooth_connected" : BluetoothStatus.enabled ? "bluetooth" : "bluetooth_disabled"
+                        text: BluetoothStatus.connected ? "bluetooth_connected" : BluetoothStatus.enabled
+                                                          ? "bluetooth" : "bluetooth_disabled"
                         iconSize: Appearance.font.pixelSize.larger
                         color: rightSidebarButton.colText
                     }

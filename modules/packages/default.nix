@@ -26,7 +26,6 @@
       withOpenASAR = true;
     })
     vlc
-
     kdePackages.bluedevil
     kdePackages.plasma-nm
     kdePackages.dolphin
@@ -34,6 +33,7 @@
       python-pkgs.opencv4
       python-pkgs.numpy
     ]))
+
     nodejs
     pnpm
     bun
