@@ -43,7 +43,7 @@
         nixpkgs.lib.nixosSystem {
           system = system;
           modules = [
-            { networking.hostName = hostname; }
+            { networking.hostName = "${hostname}"; }
             ./modules/system/configuration.nix
 
             (./. + "/hosts/${hostname}/hardware-configuration.nix")
@@ -64,7 +64,7 @@
     in
     {
       nixosConfigurations = {
-        nei-desktop = mkSystem inputs.nixpkgs "x86_64-linux" "desktop";
+        desktop = mkSystem inputs.nixpkgs "x86_64-linux" "desktop";
       };
     };
 }
