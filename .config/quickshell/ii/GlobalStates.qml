@@ -23,6 +23,8 @@ Singleton {
     property bool superReleaseMightTrigger: true
     property bool workspaceShowNumbers: false
 
+    property bool launcherOpen: false
+
     onSidebarRightOpenChanged: {
         if (GlobalStates.sidebarRightOpen) {
             Notifications.timeoutAll();

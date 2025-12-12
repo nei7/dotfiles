@@ -1,8 +1,8 @@
+pragma Singleton
+pragma ComponentBehavior: Bound
 import QtQuick
 import Quickshell
 import qs.modules.common.functions
-pragma Singleton
-pragma ComponentBehavior: Bound
 
 Singleton {
     id: root
@@ -19,24 +19,36 @@ Singleton {
     ColorQuantizer {
         id: wallColorQuant
         property string wallpaperPath: Config.options.background.wallpaperPath
-        property bool wallpaperIsVideo: wallpaperPath.endsWith(".mp4") || wallpaperPath.endsWith(".webm") || wallpaperPath.endsWith(".mkv") || wallpaperPath.endsWith(".avi") || wallpaperPath.endsWith(".mov")
-        source: Qt.resolvedUrl(wallpaperIsVideo ? Config.options.background.thumbnailPath : Config.options.background.wallpaperPath)
+        property bool wallpaperIsVideo: wallpaperPath.endsWith(".mp4") || wallpaperPath.endsWith(".webm")
+                                        || wallpaperPath.endsWith(".mkv") || wallpaperPath.endsWith(".avi")
+                                        || wallpaperPath.endsWith(".mov")
+        source: Qt.resolvedUrl(wallpaperIsVideo ? Config.options.background.thumbnailPath :
+                                                  Config.options.background.wallpaperPath)
         depth: 0 // 2^0 = 1 color
         rescaleSize: 10
     }
-    property real wallpaperVibrancy: (wallColorQuant.colors[0]?.hslSaturation + wallColorQuant.colors[0]?.hslLightness) / 2
+    property real wallpaperVibrancy: (wallColorQuant.colors[0]?.hslSaturation + wallColorQuant.colors[0]
+                                      ?.hslLightness) / 2
     property real autoBackgroundTransparency: { // y = 0.5768x^2 - 0.759x + 0.2896
-        let x = wallpaperVibrancy
-        let y = 0.5768 * (x * x) - 0.759 * (x) + 0.2896
-        return Math.max(0, Math.min(0.22, y))
+        let x = wallpaperVibrancy;
+        let y = 0.5768 * (x * x) - 0.759 * (x) + 0.2896;
+        return Math.max(0, Math.min(0.22, y));
     }
     property real autoContentTransparency: { // y = -10.1734x^2 + 3.4457x + 0.1872
-        let x = autoBackgroundTransparency
-        let y = -10.1734 * (x * x) + 3.4457 * (x) + 0.1872
-        return Math.max(0, Math.min(0.6, y))
+        let x = autoBackgroundTransparency;
+        let y = -10.1734 * (x * x) + 3.4457 * (x) + 0.1872;
+        return Math.max(0, Math.min(0.6, y));
     }
-    property real backgroundTransparency: Config?.options.appearance.transparency.enable ? Config?.options.appearance.transparency.automatic ? autoBackgroundTransparency : Config?.options.appearance.transparency.backgroundTransparency : 0
-    property real contentTransparency: Config?.options.appearance.transparency.enable ? Config?.options.appearance.transparency.automatic ? autoContentTransparency : Config?.options.appearance.transparency.contentTransparency : 0
+    property real backgroundTransparency: Config?.options.appearance.transparency.enable ? Config
+                                                                                           ?.options.appearance.transparency.automatic
+                                                                                           ? autoBackgroundTransparency :
+                                                                                             Config?.options.appearance.transparency.backgroundTransparency :
+                                                                                             0
+    property real contentTransparency: Config?.options.appearance.transparency.enable ? Config
+                                                                                        ?.options.appearance.transparency.automatic
+                                                                                        ? autoContentTransparency :
+                                                                                          Config?.options.appearance.transparency.contentTransparency :
+                                                                                          0
 
     m3colors: QtObject {
         property bool darkmode: true
@@ -114,61 +126,93 @@ Singleton {
 
     colors: QtObject {
         property color colSubtext: m3colors.m3outline
-        property color colLayer0: ColorUtils.mix(ColorUtils.transparentize(m3colors.m3background, root.backgroundTransparency), m3colors.m3primary, Config.options.appearance.extraBackgroundTint ? 0.99 : 1)
+        property color colLayer0: ColorUtils.mix(ColorUtils.transparentize(m3colors.m3background,
+                                                                           root.backgroundTransparency),
+                                                 m3colors.m3primary,
+                                                 Config.options.appearance.extraBackgroundTint ? 0.99 : 1)
         property color colOnLayer0: m3colors.m3onBackground
-        property color colLayer0Hover: ColorUtils.transparentize(ColorUtils.mix(colLayer0, colOnLayer0, 0.9, root.contentTransparency))
-        property color colLayer0Active: ColorUtils.transparentize(ColorUtils.mix(colLayer0, colOnLayer0, 0.8, root.contentTransparency))
+        property color colLayer0Hover: ColorUtils.transparentize(ColorUtils.mix(colLayer0, colOnLayer0, 0.9,
+                                                                                root.contentTransparency))
+        property color colLayer0Active: ColorUtils.transparentize(ColorUtils.mix(colLayer0, colOnLayer0, 0.8,
+                                                                                 root.contentTransparency))
         property color colLayer0Border: ColorUtils.mix(root.m3colors.m3outlineVariant, colLayer0, 0.4)
-        property color colLayer1: ColorUtils.transparentize(m3colors.m3surfaceContainerLow, root.contentTransparency);
-        property color colOnLayer1: m3colors.m3onSurfaceVariant;
-        property color colOnLayer1Inactive: ColorUtils.mix(colOnLayer1, colLayer1, 0.45);
-        property color colLayer2: ColorUtils.transparentize(m3colors.m3surfaceContainer, root.contentTransparency)
-        property color colOnLayer2: m3colors.m3onSurface;
-        property color colOnLayer2Disabled: ColorUtils.mix(colOnLayer2, m3colors.m3background, 0.4);
-        property color colLayer1Hover: ColorUtils.transparentize(ColorUtils.mix(colLayer1, colOnLayer1, 0.92), root.contentTransparency)
-        property color colLayer1Active: ColorUtils.transparentize(ColorUtils.mix(colLayer1, colOnLayer1, 0.85), root.contentTransparency);
-        property color colLayer2Hover: ColorUtils.transparentize(ColorUtils.mix(colLayer2, colOnLayer2, 0.90), root.contentTransparency)
-        property color colLayer2Active: ColorUtils.transparentize(ColorUtils.mix(colLayer2, colOnLayer2, 0.80), root.contentTransparency);
-        property color colLayer2Disabled: ColorUtils.transparentize(ColorUtils.mix(colLayer2, m3colors.m3background, 0.8), root.contentTransparency);
-        property color colLayer3: ColorUtils.transparentize(m3colors.m3surfaceContainerHigh, root.contentTransparency)
-        property color colOnLayer3: m3colors.m3onSurface;
-        property color colLayer3Hover: ColorUtils.transparentize(ColorUtils.mix(colLayer3, colOnLayer3, 0.90), root.contentTransparency)
-        property color colLayer3Active: ColorUtils.transparentize(ColorUtils.mix(colLayer3, colOnLayer3, 0.80), root.contentTransparency);
-        property color colLayer4: ColorUtils.transparentize(m3colors.m3surfaceContainerHighest, root.contentTransparency)
-        property color colOnLayer4: m3colors.m3onSurface;
-        property color colLayer4Hover: ColorUtils.transparentize(ColorUtils.mix(colLayer4, colOnLayer4, 0.90), root.contentTransparency)
-        property color colLayer4Active: ColorUtils.transparentize(ColorUtils.mix(colLayer4, colOnLayer4, 0.80), root.contentTransparency);
+        property color colLayer1: ColorUtils.transparentize(m3colors.m3surfaceContainerLow,
+                                                            root.contentTransparency)
+        property color colOnLayer1: m3colors.m3onSurfaceVariant
+        property color colOnLayer1Inactive: ColorUtils.mix(colOnLayer1, colLayer1, 0.45)
+        property color colLayer2: ColorUtils.transparentize(m3colors.m3surfaceContainer,
+                                                            root.contentTransparency)
+        property color colOnLayer2: m3colors.m3onSurface
+        property color colOnLayer2Disabled: ColorUtils.mix(colOnLayer2, m3colors.m3background, 0.4)
+        property color colLayer1Hover: ColorUtils.transparentize(ColorUtils.mix(colLayer1, colOnLayer1, 0.92),
+                                                                 root.contentTransparency)
+        property color colLayer1Active: ColorUtils.transparentize(ColorUtils.mix(colLayer1, colOnLayer1, 0.85),
+                                                                  root.contentTransparency)
+        property color colLayer2Hover: ColorUtils.transparentize(ColorUtils.mix(colLayer2, colOnLayer2, 0.90),
+                                                                 root.contentTransparency)
+        property color colLayer2Active: ColorUtils.transparentize(ColorUtils.mix(colLayer2, colOnLayer2, 0.80),
+                                                                  root.contentTransparency)
+        property color colLayer2Disabled: ColorUtils.transparentize(ColorUtils.mix(colLayer2,
+                                                                                   m3colors.m3background, 0.8),
+                                                                    root.contentTransparency)
+        property color colLayer3: ColorUtils.transparentize(m3colors.m3surfaceContainerHigh,
+                                                            root.contentTransparency)
+        property color colOnLayer3: m3colors.m3onSurface
+        property color colLayer3Hover: ColorUtils.transparentize(ColorUtils.mix(colLayer3, colOnLayer3, 0.90),
+                                                                 root.contentTransparency)
+        property color colLayer3Active: ColorUtils.transparentize(ColorUtils.mix(colLayer3, colOnLayer3, 0.80),
+                                                                  root.contentTransparency)
+        property color colLayer4: ColorUtils.transparentize(m3colors.m3surfaceContainerHighest,
+                                                            root.contentTransparency)
+        property color colOnLayer4: m3colors.m3onSurface
+        property color colLayer4Hover: ColorUtils.transparentize(ColorUtils.mix(colLayer4, colOnLayer4, 0.90),
+                                                                 root.contentTransparency)
+        property color colLayer4Active: ColorUtils.transparentize(ColorUtils.mix(colLayer4, colOnLayer4, 0.80),
+                                                                  root.contentTransparency)
         property color colPrimary: m3colors.m3primary
         property color colOnPrimary: m3colors.m3onPrimary
         property color colPrimaryHover: ColorUtils.mix(colors.colPrimary, colLayer1Hover, 0.87)
         property color colPrimaryActive: ColorUtils.mix(colors.colPrimary, colLayer1Active, 0.7)
         property color colPrimaryContainer: m3colors.m3primaryContainer
-        property color colPrimaryContainerHover: ColorUtils.mix(colors.colPrimaryContainer, colors.colOnPrimaryContainer, 0.9)
-        property color colPrimaryContainerActive: ColorUtils.mix(colors.colPrimaryContainer, colors.colOnPrimaryContainer, 0.8)
+        property color colPrimaryContainerHover: ColorUtils.mix(colors.colPrimaryContainer,
+                                                                colors.colOnPrimaryContainer, 0.9)
+        property color colPrimaryContainerActive: m3colors.m3surfaceVariant
         property color colOnPrimaryContainer: m3colors.m3onPrimaryContainer
         property color colSecondary: m3colors.m3secondary
         property color colOnSecondary: m3colors.m3onSecondary
         property color colSecondaryHover: ColorUtils.mix(m3colors.m3secondary, colLayer1Hover, 0.85)
         property color colSecondaryActive: ColorUtils.mix(m3colors.m3secondary, colLayer1Active, 0.4)
         property color colSecondaryContainer: m3colors.m3secondaryContainer
-        property color colSecondaryContainerHover: ColorUtils.mix(m3colors.m3secondaryContainer, m3colors.m3onSecondaryContainer, 0.90)
-        property color colSecondaryContainerActive: ColorUtils.mix(m3colors.m3secondaryContainer, m3colors.m3onSecondaryContainer, 0.54)
+        property color colSecondaryContainerHover: ColorUtils.mix(m3colors.m3secondaryContainer,
+                                                                  m3colors.m3onSecondaryContainer, 0.90)
+        property color colSecondaryContainerActive: ColorUtils.mix(m3colors.m3secondaryContainer,
+                                                                   m3colors.m3onSecondaryContainer, 0.54)
         property color colTertiary: m3colors.m3tertiary
         property color colTertiaryHover: ColorUtils.mix(m3colors.m3tertiary, colLayer1Hover, 0.85)
         property color colTertiaryActive: ColorUtils.mix(m3colors.m3tertiary, colLayer1Active, 0.4)
         property color colTertiaryContainer: m3colors.m3tertiaryContainer
-        property color colTertiaryContainerHover: ColorUtils.mix(m3colors.m3tertiaryContainer, m3colors.m3onTertiaryContainer, 0.90)
-        property color colTertiaryContainerActive: ColorUtils.mix(m3colors.m3tertiaryContainer, colLayer1Active, 0.54)
+        property color colTertiaryContainerHover: ColorUtils.mix(m3colors.m3tertiaryContainer,
+                                                                 m3colors.m3onTertiaryContainer, 0.90)
+        property color colTertiaryContainerActive: ColorUtils.mix(m3colors.m3tertiaryContainer,
+                                                                  colLayer1Active, 0.54)
         property color colOnTertiary: m3colors.m3onTertiary
         property color colOnTertiaryContainer: m3colors.m3onTertiaryContainer
         property color colOnSecondaryContainer: m3colors.m3onSecondaryContainer
-        property color colSurfaceContainerLow: ColorUtils.transparentize(m3colors.m3surfaceContainerLow, root.contentTransparency)
-        property color colSurfaceContainer: ColorUtils.transparentize(m3colors.m3surfaceContainer, root.contentTransparency)
-        property color colBackgroundSurfaceContainer: ColorUtils.transparentize(m3colors.m3surfaceContainer, root.backgroundTransparency)
-        property color colSurfaceContainerHigh: ColorUtils.transparentize(m3colors.m3surfaceContainerHigh, root.contentTransparency)
-        property color colSurfaceContainerHighest: ColorUtils.transparentize(m3colors.m3surfaceContainerHighest, root.contentTransparency)
-        property color colSurfaceContainerHighestHover: ColorUtils.mix(m3colors.m3surfaceContainerHighest, m3colors.m3onSurface, 0.95)
-        property color colSurfaceContainerHighestActive: ColorUtils.mix(m3colors.m3surfaceContainerHighest, m3colors.m3onSurface, 0.85)
+        property color colSurfaceContainerLow: ColorUtils.transparentize(m3colors.m3surfaceContainerLow,
+                                                                         root.contentTransparency)
+        property color colSurfaceContainer: ColorUtils.transparentize(m3colors.m3surfaceContainer,
+                                                                      root.contentTransparency)
+        property color colBackgroundSurfaceContainer: ColorUtils.transparentize(m3colors.m3background,
+                                                                                root.backgroundTransparency)
+        property color colSurfaceContainerHigh: ColorUtils.transparentize(m3colors.m3surfaceContainerHigh,
+                                                                          root.contentTransparency)
+        property color colSurfaceContainerHighest: ColorUtils.transparentize(
+                                                       m3colors.m3surfaceContainerHighest,
+                                                       root.contentTransparency)
+        property color colSurfaceContainerHighestHover: ColorUtils.mix(m3colors.m3surfaceContainerHighest,
+                                                                       m3colors.m3onSurface, 0.95)
+        property color colSurfaceContainerHighestActive: ColorUtils.mix(m3colors.m3surfaceContainerHighest,
+                                                                        m3colors.m3onSurface, 0.85)
         property color colOnSurface: m3colors.m3onSurface
         property color colOnSurfaceVariant: m3colors.m3onSurfaceVariant
         property color colTooltip: m3colors.m3inverseSurface
@@ -182,8 +226,10 @@ Singleton {
         property color colErrorActive: ColorUtils.mix(m3colors.m3error, colLayer1Active, 0.7)
         property color colOnError: m3colors.m3onError
         property color colErrorContainer: m3colors.m3errorContainer
-        property color colErrorContainerHover: ColorUtils.mix(m3colors.m3errorContainer, m3colors.m3onErrorContainer, 0.90)
-        property color colErrorContainerActive: ColorUtils.mix(m3colors.m3errorContainer, m3colors.m3onErrorContainer, 0.70)
+        property color colErrorContainerHover: ColorUtils.mix(m3colors.m3errorContainer,
+                                                              m3colors.m3onErrorContainer, 0.90)
+        property color colErrorContainerActive: ColorUtils.mix(m3colors.m3errorContainer,
+                                                               m3colors.m3onErrorContainer, 0.70)
         property color colOnErrorContainer: m3colors.m3onErrorContainer
     }
 
@@ -214,30 +260,37 @@ Singleton {
         property QtObject variableAxes: QtObject {
             // Roboto Flex is customized to feel geometric, unserious yet not overly kiddy
             property var main: ({
-                "YTUC": 716, // Uppercase height (Raised from 712 to be more distinguishable from lowercase)
-                "YTFI": 716, // Figure (numbers) height (Lowered from 738 to match uppercase)
-                "YTAS": 716, // Ascender height (Lowered from 750 to match uppercase)
-                "YTLC": 490, // Lowercase height (Lowered from 514 to be more distinguishable from uppercase)
-                "XTRA": 488, // Counter width (Raised from 468 to be less condensed, less serious)
-                "wdth": 105, // Width (Space out a tiny bit for readability)
-                "GRAD": 175, // Grade (Increased so the 6 and 9 don't look weak)
-                "wght": 300, // Weight (Lowered to compensate for increased grade)
-            })
+                                    "YTUC": 716 // Uppercase height (Raised from 712 to be more distinguishable from lowercase)
+                                            ,
+                                    "YTFI": 716 // Figure (numbers) height (Lowered from 738 to match uppercase)
+                                            ,
+                                    "YTAS": 716 // Ascender height (Lowered from 750 to match uppercase)
+                                            ,
+                                    "YTLC": 490 // Lowercase height (Lowered from 514 to be more distinguishable from uppercase)
+                                            ,
+                                    "XTRA": 488 // Counter width (Raised from 468 to be less condensed, less serious)
+                                            ,
+                                    "wdth": 105 // Width (Space out a tiny bit for readability)
+                                            ,
+                                    "GRAD": 175 // Grade (Increased so the 6 and 9 don't look weak)
+                                            ,
+                                    "wght": 300 // Weight (Lowered to compensate for increased grade)
+                                })
             // Rubik simply needs regular weight to override that of the main font where necessary
             property var numbers: ({
-                "wght": 400,
-            })
+                                       "wght": 400
+                                   })
             // Slightly bold weight for title
             property var title: ({
-                // "YTUC": 716, // Uppercase height (Raised from 712 to be more distinguishable from lowercase)
-                // "YTFI": 716, // Figure (numbers) height (Lowered from 738 to match uppercase)
-                // "YTAS": 716, // Ascender height (Lowered from 750 to match uppercase)
-                // "YTLC": 490, // Lowercase height (Lowered from 514 to be more distinguishable from uppercase)
-                // "XTRA": 490, // Counter width (Raised from 468 to be less condensed, less serious)
-                // "wdth": 110, // Width (Space out a tiny bit for readability)
-                // "GRAD": 150, // Grade (Increased so the 6 and 9 don't look weak)
-                "wght": 900, // Weight (Lowered to compensate for increased grade)
-            })
+                                     // "YTUC": 716, // Uppercase height (Raised from 712 to be more distinguishable from lowercase)
+                                     // "YTFI": 716, // Figure (numbers) height (Lowered from 738 to match uppercase)
+                                     // "YTAS": 716, // Ascender height (Lowered from 750 to match uppercase)
+                                     // "YTLC": 490, // Lowercase height (Lowered from 514 to be more distinguishable from uppercase)
+                                     // "XTRA": 490, // Counter width (Raised from 468 to be less condensed, less serious)
+                                     // "wdth": 110, // Width (Space out a tiny bit for readability)
+                                     // "GRAD": 150, // Grade (Increased so the 6 and 9 don't look weak)
+                                     "wght": 900 // Weight (Lowered to compensate for increased grade)
+                                 })
         }
         property QtObject pixelSize: QtObject {
             property int smallest: 10
@@ -255,10 +308,12 @@ Singleton {
 
     animationCurves: QtObject {
         readonly property list<real> expressiveFastSpatial: [0.42, 1.67, 0.21, 0.90, 1, 1] // Default, 350ms
-        readonly property list<real> expressiveDefaultSpatial: [0.38, 1.21, 0.22, 1.00, 1, 1] // Default, 500ms
+        readonly property list<real> expressiveDefaultSpatial: [0.38, 1.21, 0.22, 1.00, 1,
+            1] // Default, 500ms
         readonly property list<real> expressiveSlowSpatial: [0.39, 1.29, 0.35, 0.98, 1, 1] // Default, 650ms
         readonly property list<real> expressiveEffects: [0.34, 0.80, 0.34, 1.00, 1, 1] // Default, 200ms
-        readonly property list<real> emphasized: [0.05, 0, 2 / 15, 0.06, 1 / 6, 0.4, 5 / 24, 0.82, 0.25, 1, 1, 1]
+        readonly property list<real> emphasized: [0.05, 0, 2 / 15, 0.06, 1 / 6, 0.4, 5 / 24, 0.82, 0.25, 1, 1,
+            1]
         readonly property list<real> emphasizedFirstHalf: [0.05, 0, 2 / 15, 0.06, 1 / 6, 0.4, 5 / 24, 0.82]
         readonly property list<real> emphasizedLastHalf: [5 / 24, 0.82, 0.25, 1, 1, 1]
         readonly property list<real> emphasizedAccel: [0.3, 0, 0.8, 0.15, 1, 1]
@@ -320,16 +375,20 @@ Singleton {
             property int type: Easing.BezierSpline
             property list<real> bezierCurve: animationCurves.expressiveEffects
             property int velocity: 850
-            property Component colorAnimation: Component { ColorAnimation {
-                duration: root.animation.elementMoveFast.duration
-                easing.type: root.animation.elementMoveFast.type
-                easing.bezierCurve: root.animation.elementMoveFast.bezierCurve
-            }}
-            property Component numberAnimation: Component { NumberAnimation {
+            property Component colorAnimation: Component {
+                ColorAnimation {
                     duration: root.animation.elementMoveFast.duration
                     easing.type: root.animation.elementMoveFast.type
                     easing.bezierCurve: root.animation.elementMoveFast.bezierCurve
-            }}
+                }
+            }
+            property Component numberAnimation: Component {
+                NumberAnimation {
+                    duration: root.animation.elementMoveFast.duration
+                    easing.type: root.animation.elementMoveFast.type
+                    easing.bezierCurve: root.animation.elementMoveFast.bezierCurve
+                }
+            }
         }
 
         property QtObject elementResize: QtObject {
@@ -351,13 +410,15 @@ Singleton {
             property int type: Easing.BezierSpline
             property list<real> bezierCurve: animationCurves.expressiveDefaultSpatial
             property int velocity: 850
-            property Component numberAnimation: Component { NumberAnimation {
+            property Component numberAnimation: Component {
+                NumberAnimation {
                     duration: root.animation.clickBounce.duration
                     easing.type: root.animation.clickBounce.type
                     easing.bezierCurve: root.animation.clickBounce.bezierCurve
-            }}
+                }
+            }
         }
-        
+
         property QtObject scroll: QtObject {
             property int duration: 200
             property int type: Easing.BezierSpline
@@ -372,8 +433,9 @@ Singleton {
 
     sizes: QtObject {
         property real baseBarHeight: 40
-        property real barHeight: Config.options.bar.cornerStyle === 1 ? 
-            (baseBarHeight + root.sizes.hyprlandGapsOut * 2) : baseBarHeight
+        property real barHeight: Config.options.bar.cornerStyle === 1 ? (baseBarHeight
+                                                                         + root.sizes.hyprlandGapsOut * 2) :
+                                                                        baseBarHeight
         property real barCenterSideModuleWidth: Config.options?.bar.verbose ? 360 : 140
         property real barCenterSideModuleWidthShortened: 280
         property real barCenterSideModuleWidthHellaShortened: 190
@@ -387,13 +449,14 @@ Singleton {
         property real mediaControlsHeight: 160
         property real notificationPopupWidth: 410
         property real osdWidth: 180
-        property real searchWidthCollapsed: 210
-        property real searchWidth: 360
+        property real searchWidthCollapsed: 360
+        property real searchWidth: 500
         property real sidebarWidth: 460
         property real sidebarWidthExtended: 750
         property real baseVerticalBarWidth: 46
-        property real verticalBarWidth: Config.options.bar.cornerStyle === 1 ? 
-            (baseVerticalBarWidth + root.sizes.hyprlandGapsOut * 2) : baseVerticalBarWidth
+        property real verticalBarWidth: Config.options.bar.cornerStyle === 1 ? (baseVerticalBarWidth
+                                                                                + root.sizes.hyprlandGapsOut
+                                                                                * 2) : baseVerticalBarWidth
         property real wallpaperSelectorWidth: 1200
         property real wallpaperSelectorHeight: 690
         property real wallpaperSelectorItemMargins: 8

@@ -28,6 +28,6 @@ TextField {
     background: Rectangle {
         id: background
         color: Appearance.colors.colLayer1
-        radius: Appearance.rounding.full
+        radius: Appearance.rounding.verylarge
     }
 }

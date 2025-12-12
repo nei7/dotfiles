@@ -32,7 +32,10 @@ DialogListItem {
             MaterialSymbol {
                 iconSize: Appearance.font.pixelSize.larger
                 property int strength: root.wifiNetwork?.strength ?? 0
-                text: strength > 80 ? "signal_wifi_4_bar" : strength > 60 ? "network_wifi_3_bar" : strength > 40 ? "network_wifi_2_bar" : strength > 20 ? "network_wifi_1_bar" : "signal_wifi_0_bar"
+                text: strength > 80 ? "signal_wifi_4_bar" : strength > 60 ? "network_wifi_3_bar" : strength > 40
+                                                                            ? "network_wifi_2_bar" : strength
+                                                                              > 20 ? "network_wifi_1_bar" :
+                                                                                     "signal_wifi_0_bar"
                 color: Appearance.colors.colOnSurfaceVariant
             }
             StyledText {
@@ -43,7 +46,8 @@ DialogListItem {
             }
             MaterialSymbol {
                 visible: (root.wifiNetwork?.isSecure || root.wifiNetwork?.active) ?? false
-                text: root.wifiNetwork?.active ? "check" : Network.wifiConnectTarget === root.wifiNetwork ? "settings_ethernet" : "lock"
+                text: root.wifiNetwork?.active ? "check" : Network.wifiConnectTarget === root.wifiNetwork
+                                                 ? "settings_ethernet" : "lock"
                 iconSize: Appearance.font.pixelSize.larger
                 color: Appearance.colors.colOnSurfaceVariant
             }
@@ -56,6 +60,7 @@ DialogListItem {
 
             MaterialTextField {
                 id: passwordField
+                focus: passwordPrompt.visible
                 Layout.fillWidth: true
                 placeholderText: "Password"
 
@@ -94,7 +99,8 @@ DialogListItem {
         ColumnLayout { // Public wifi login page
             id: publicWifiPortal
             Layout.topMargin: 8
-            visible: (root.wifiNetwork?.active && (root.wifiNetwork?.security ?? "").trim().length === 0) ?? false
+            visible: (root.wifiNetwork?.active && (root.wifiNetwork?.security ?? "").trim().length === 0)
+                     ?? false
 
             RowLayout {
                 DialogButton {
@@ -104,8 +110,8 @@ DialogListItem {
                     colBackgroundHover: Appearance.colors.colLayer4Hover
                     colRipple: Appearance.colors.colLayer4Active
                     onClicked: {
-                        Network.openPublicWifiPortal()
-                        GlobalStates.sidebarRightOpen = false
+                        Network.openPublicWifiPortal();
+                        GlobalStates.sidebarRightOpen = false;
                     }
                 }
             }

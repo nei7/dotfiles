@@ -38,12 +38,12 @@ WindowDialog {
 
         model: ScriptModel {
             values: [...Network.wifiNetworks].sort((a, b) => {
-                if (a.active && !b.active)
-                    return -1;
-                if (!a.active && b.active)
-                    return 1;
-                return b.strength - a.strength;
-            })
+                                                       if (a.active && !b.active)
+                                                       return -1;
+                                                       if (!a.active && b.active)
+                                                       return 1;
+                                                       return b.strength - a.strength;
+                                                   })
         }
         delegate: WifiNetworkItem {
             required property WifiAccessPoint modelData
@@ -59,7 +59,9 @@ WindowDialog {
         DialogButton {
             buttonText: "Details"
             onClicked: {
-                Quickshell.execDetached(["bash", "-c", `${Network.ethernet ? Config.options.apps.networkEthernet : Config.options.apps.network}`]);
+                Quickshell.execDetached(["zsh", "-c", `${Network.ethernet
+                                         ? Config.options.apps.networkEthernet : Config.options.apps.network
+                                           }`]);
                 GlobalStates.sidebarRightOpen = false;
             }
         }

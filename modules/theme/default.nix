@@ -43,12 +43,26 @@
     };
   };
 
+  home.pointerCursor = {
+    gtk.enable = true;
+    name = "Bibata-Modern-Ice";
+    package = pkgs.bibata-cursors;
+    size = 24;
+  };
+
   qt = {
     enable = true;
     platformTheme = "qtct";
     style = {
       name = "Darkly";
+      package = pkgs.darkly-qt5;
+
     };
   };
+
+  xdg.configFile."kdeglobals".text = ''
+    [Icons]
+    Theme=Papirus-Dark
+  '';
 
 }

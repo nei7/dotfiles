@@ -58,9 +58,9 @@ Scope { // Scope
                 windows: [cheatsheetRoot]
                 active: cheatsheetRoot.visible
                 onCleared: () => {
-                    if (!active)
-                        cheatsheetRoot.hide();
-                }
+                               if (!active)
+                               cheatsheetRoot.hide();
+                           }
             }
 
             // Background
@@ -79,25 +79,28 @@ Scope { // Scope
                 implicitHeight: cheatsheetColumnLayout.implicitHeight + padding * 2
 
                 Keys.onPressed: event => { // Esc to close
-                    if (event.key === Qt.Key_Escape) {
-                        cheatsheetRoot.hide();
-                    }
-                    if (event.modifiers === Qt.ControlModifier) {
-                        if (event.key === Qt.Key_PageDown) {
-                            tabBar.incrementCurrentIndex();
-                            event.accepted = true;
-                        } else if (event.key === Qt.Key_PageUp) {
-                            tabBar.decrementCurrentIndex();
-                            event.accepted = true;
-                        } else if (event.key === Qt.Key_Tab) {
-                            tabBar.setCurrentIndex((tabBar.currentIndex + 1) % root.tabButtonList.length);
-                            event.accepted = true;
-                        } else if (event.key === Qt.Key_Backtab) {
-                            tabBar.setCurrentIndex((tabBar.currentIndex - 1 + root.tabButtonList.length) % root.tabButtonList.length);
-                            event.accepted = true;
-                        }
-                    }
-                }
+                                    if (event.key === Qt.Key_Escape) {
+                                        cheatsheetRoot.hide();
+                                    }
+                                    if (event.modifiers === Qt.ControlModifier) {
+                                        if (event.key === Qt.Key_PageDown) {
+                                            tabBar.incrementCurrentIndex();
+                                            event.accepted = true;
+                                        } else if (event.key === Qt.Key_PageUp) {
+                                            tabBar.decrementCurrentIndex();
+                                            event.accepted = true;
+                                        } else if (event.key === Qt.Key_Tab) {
+                                            tabBar.setCurrentIndex((tabBar.currentIndex + 1)
+                                                                   % root.tabButtonList.length);
+                                            event.accepted = true;
+                                        } else if (event.key === Qt.Key_Backtab) {
+                                            tabBar.setCurrentIndex((tabBar.currentIndex - 1
+                                                                    + root.tabButtonList.length)
+                                                                   % root.tabButtonList.length);
+                                            event.accepted = true;
+                                        }
+                                    }
+                                }
 
                 RippleButton { // Close button
                     id: closeButton
@@ -147,8 +150,11 @@ Scope { // Scope
                         currentIndex: tabBar.currentIndex
                         spacing: 10
 
-                        implicitWidth: Math.max.apply(null, contentChildren.map(child => child.implicitWidth || 0))
-                        implicitHeight: Math.max.apply(null, contentChildren.map(child => child.implicitHeight || 0))
+                        implicitWidth: Math.max.apply(null, contentChildren.map(child => child.implicitWidth
+                                                                                || 0))
+                        implicitHeight: Math.max.apply(null, contentChildren.map(child
+                                                                                 => child.implicitHeight
+                                                                                 || 0))
 
                         clip: true
                         layer.enabled: true
@@ -172,42 +178,42 @@ Scope { // Scope
         target: "cheatsheet"
 
         function toggle(): void {
-            cheatsheetLoader.active = !cheatsheetLoader.active;
-        }
+        cheatsheetLoader.active = !cheatsheetLoader.active;
+    }
 
         function close(): void {
-            cheatsheetLoader.active = false;
-        }
+                              cheatsheetLoader.active = false;
+                          }
 
         function open(): void {
-            cheatsheetLoader.active = true;
-        }
+        cheatsheetLoader.active = true;
+    }
     }
 
-    GlobalShortcut {
-        name: "cheatsheetToggle"
-        description: "Toggles cheatsheet on press"
+        GlobalShortcut {
+            name: "cheatsheetToggle"
+            description: "Toggles cheatsheet on press"
 
-        onPressed: {
-            cheatsheetLoader.active = !cheatsheetLoader.active;
+            onPressed: {
+                cheatsheetLoader.active = !cheatsheetLoader.active;
+            }
+        }
+
+        GlobalShortcut {
+            name: "cheatsheetOpen"
+            description: "Opens cheatsheet on press"
+
+            onPressed: {
+                cheatsheetLoader.active = true;
+            }
+        }
+
+        GlobalShortcut {
+            name: "cheatsheetClose"
+            description: "Closes cheatsheet on press"
+
+            onPressed: {
+                cheatsheetLoader.active = false;
+            }
         }
     }
-
-    GlobalShortcut {
-        name: "cheatsheetOpen"
-        description: "Opens cheatsheet on press"
-
-        onPressed: {
-            cheatsheetLoader.active = true;
-        }
-    }
-
-    GlobalShortcut {
-        name: "cheatsheetClose"
-        description: "Closes cheatsheet on press"
-
-        onPressed: {
-            cheatsheetLoader.active = false;
-        }
-    }
-}

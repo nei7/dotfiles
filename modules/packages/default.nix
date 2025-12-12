@@ -18,6 +18,8 @@
     killall
     fastfetch
     inputs.reStream.packages.${pkgs.system}.default
+    unzip
+    rar
 
     # Apps
     lxappearance
@@ -30,10 +32,9 @@
     kdePackages.bluedevil
     kdePackages.plasma-nm
     kdePackages.dolphin
-    (pkgs.python3.withPackages (python-pkgs: [
-      python-pkgs.opencv4
-      python-pkgs.numpy
-    ]))
+
+    python3
+    uv
 
     nodejs
     pnpm

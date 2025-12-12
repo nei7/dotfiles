@@ -19,6 +19,7 @@ import qs.modules.ii.polkit
 import qs.modules.ii.screenCorners
 import qs.modules.ii.sessionScreen
 import qs.modules.ii.sidebarRight
+import qs.modules.ii.launcher
 
 import QtQuick
 import QtQuick.Window
@@ -97,9 +98,14 @@ ShellRoot {
         component: SidebarRight {}
     }
 
+    PanelLoader {
+        identifier: "iiLauncher"
+        component: Launcher {}
+    }
+
     component PanelLoader: LazyLoader {
         required property string identifier
         property bool extraCondition: true
-        active: Config.ready && Config.options.enabledPanels.includes(identifier) && extraCondition
+        active: Config.ready && extraCondition
     }
 }
