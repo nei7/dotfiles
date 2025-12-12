@@ -69,6 +69,8 @@
     {
       nixosConfigurations = {
         desktop = mkSystem inputs.nixpkgs "x86_64-linux" "desktop";
+        laptop = mkSystem inputs.nixpkgs "x86-64-linux" "laptop";
       };
+
     };
 }

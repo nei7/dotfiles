@@ -140,9 +140,6 @@ in
     theme = "silent";
 
     wayland.enable = true;
-    wayland = {
-      compositorCommand = "${pkgs.weston}/bin/weston --shell=kiosk --config=${sddmWestonConfig}";
-    };
     extraPackages = [
       pkgs.kdePackages.qtsvg
       pkgs.kdePackages.qtmultimedia
