@@ -45,8 +45,14 @@ MouseArea {
                 }
                 StyledText {
                     Layout.alignment: Qt.AlignVCenter
-                    font: batteryProgress.font
                     text: batteryProgress.text
+
+                    font {
+                        hintingPreference: Font.PreferDefaultHinting
+                        family: defaultFont
+                        pixelSize: 12
+                        variableAxes: Appearance.font.variableAxes.main
+                    }
                 }
             }
         }

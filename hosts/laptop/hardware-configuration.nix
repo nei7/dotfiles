@@ -10,6 +10,8 @@
 }:
 
 {
+  hardware.enableRedistributableFirmware = true;
+
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
@@ -20,21 +22,42 @@
     "usb_storage"
     "sd_mod"
   ];
+  boot.kernelParams = [
+    "quiet"
+    "splash"
+    "boot.consoleLogLevel=0"
+    "systemd.show_status=false"
+    "udev.log_level=3"
+    "vt.global_cursor_default=0"
+
+    "amdgpu.dcdebugmask=0x10"
+
+  ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [
     "kvm-amd"
     "amdgpu"
   ];
+
   boot.extraModulePackages = [ ];
 
-  hardware.bluetooth.enable = true;
+  services.tlp = {
+    enable = true;
+  };
+
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  };
 
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
 
     extraPackages = with pkgs; [
-      vaapiVdpau
+      rocmPackages.clr
+
+      libva-vdpau-driver
       libvdpau-va-gl
     ];
   };

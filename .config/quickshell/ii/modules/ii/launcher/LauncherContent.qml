@@ -23,7 +23,7 @@ Item {
         radius: Appearance.rounding.windowRounding
 
         implicitHeight: launcherColumnLayout.implicitHeight + padding * 2
-        implicitWidth: parent.width / 7
+        implicitWidth: 500
 
         property real padding: 20
 
@@ -48,9 +48,10 @@ Item {
                 Keys.onEscapePressed: GlobalStates.launcherOpen = false
             }
 
-            RippleButton {
-                buttonText: "jd"
-                implicitWidth: launcherColumnLayout.implicitWidth
+            ListView {
+                id: appResults
+
+                Layout.fillWidth: true
             }
         }
     }
