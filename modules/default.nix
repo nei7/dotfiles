@@ -16,6 +16,6 @@
     ./theme
     ./quickshell
     ./git
-    ./walker
+
   ];
 }

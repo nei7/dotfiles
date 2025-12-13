@@ -20,6 +20,11 @@
     inputs.reStream.packages.${pkgs.system}.default
     unzip
     rar
+    hyprpicker
+    hyprshot
+    ydotool
+    wtype
+    qt6.qtdeclarative
 
     # Apps
     lxappearance
@@ -33,28 +38,7 @@
     kdePackages.plasma-nm
     kdePackages.dolphin
 
-    python3
-    uv
-
-    nodejs
-    pnpm
-    bun
-
-    (texlive.withPackages (
-      ps: with ps; [
-        scheme-medium
-        latexmk
-      ]
-    ))
-
-    hyprpicker
-    hyprshot
-
-    ydotool
-    wtype
-
-    qt6.qtdeclarative
-
     btop
+
   ];
 }
