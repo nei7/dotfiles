@@ -55,8 +55,8 @@ RippleButton {
     }
 
     onClicked: {
-        console.log('clicked');
-        root;
+        root.itemExecute();
+        GlobalStates.launcherOpen = false;
     }
 
     RowLayout {
