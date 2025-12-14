@@ -34,13 +34,8 @@ RippleButton {
     }
 
     Keys.onPressed: event => {
-        if (event.key === Qt.Key_Delete && event.modifiers === Qt.ShiftModifier) {
-            const deleteAction = root.entry.actions.find(action => action.name == "Delete");
-
-            if (deleteAction) {
-                deleteAction.execute();
-            }
-        } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
+        console.log(event);
+        if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
             root.keyboardDown = true;
             root.clicked();
             event.accepted = true;
@@ -96,14 +91,16 @@ RippleButton {
                 color: Appearance.m3colors.m3onSurface
                 horizontalAlignment: Text.AlignLeft
                 elide: Text.ElideRight
-                text: `${entry.genericName}`
+                text: `${entry.name}`
             }
 
             RowLayout {
+                visible: entry.genericName
+
                 StyledText {
                     font.pixelSize: Appearance.font.pixelSize.smaller
                     color: Appearance.colors.colSubtext
-                    text: entry.name
+                    text: entry.genericName
                 }
             }
         }

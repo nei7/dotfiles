@@ -29,5 +29,15 @@ RowLayout {
         }
 
         onTextChanged: LauncherSearch.query = text
+
+        onAccepted: {
+            if (appResults.count > 0) {
+                // Get the first visible delegate and trigger its click
+                let firstItem = appResults.itemAtIndex(0);
+                if (firstItem && firstItem.clicked) {
+                    firstItem.clicked();
+                }
+            }
+        }
     }
 }

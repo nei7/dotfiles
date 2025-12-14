@@ -107,6 +107,7 @@ Item {
                     KeyNavigation.up: searchBar
 
                     onFocusChanged: {
+                        console.log(focus);
                         if (focus)
                             appResults.currentIndex = 1;
                     }
@@ -128,18 +129,6 @@ Item {
                         entry: modelData
                         anchors.left: parent?.left
                         anchors.right: parent?.right
-
-                        MouseArea {
-                            anchors.fill: parent
-                            hoverEnabled: true
-                            onEntered: {
-                                appResults.currentIndex = index;
-                            }
-                            onClicked: {
-                                parent.itemExecute();
-                                GlobalStates.launcherOpen = false;
-                            }
-                        }
                     }
                 }
             }
