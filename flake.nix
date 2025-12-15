@@ -38,6 +38,12 @@
         nixpkgs.lib.nixosSystem {
           system = system;
           modules = [
+            (
+              { pkgs, ... }:
+              {
+                nixpkgs.overlays = [ (import ./overlays) ];
+              }
+            )
             { networking.hostName = "${hostname}"; }
             ./modules/system/configuration.nix
 

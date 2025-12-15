@@ -7,7 +7,6 @@
 {
 
   imports = [
-    ./spotify.nix
     ./vscode.nix
     ./kitty.nix
   ];
@@ -34,9 +33,8 @@
       withOpenASAR = true;
     })
     vlc
-    kdePackages.bluedevil
-    kdePackages.plasma-nm
     kdePackages.dolphin
+    pkgs.spotify
 
     btop
 

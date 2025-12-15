@@ -48,14 +48,12 @@ in
     rsync
     yq-go
 
-    eza
     fontconfig
     kitty
-    matugen
-    starship
+
     nerd-fonts.jetbrains-mono
     material-symbols
-    rubik
+
     twemoji-color-font
 
     libsForQt5.qt5.qtwayland

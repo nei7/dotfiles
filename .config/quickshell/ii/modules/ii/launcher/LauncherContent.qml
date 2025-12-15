@@ -97,7 +97,6 @@ Item {
                     id: appResults
                     Layout.fillWidth: true
                     anchors.fill: parent
-
                     clip: true
                     topMargin: 5
                     bottomMargin: searchBar.verticalPadding
@@ -107,7 +106,6 @@ Item {
                     KeyNavigation.up: searchBar
 
                     onFocusChanged: {
-                        console.log(focus);
                         if (focus)
                             appResults.currentIndex = 1;
                     }

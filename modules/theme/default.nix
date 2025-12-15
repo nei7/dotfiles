@@ -13,10 +13,18 @@
     darkly-qt5
     papirus-icon-theme
     bibata-cursors
+
+    rubik
   ];
 
   gtk = {
     enable = true;
+
+    font = {
+      name = "Rubik";
+      package = pkgs.rubik;
+      size = 12;
+    };
 
     theme = {
       name = "Adwaita";
@@ -60,9 +68,13 @@
     };
   };
 
+  xdg.configFile."btop".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.config/btop";
+
   xdg.configFile."kdeglobals".text = ''
     [Icons]
     Theme=Papirus-Dark
+
   '';
 
 }

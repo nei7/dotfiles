@@ -34,7 +34,6 @@ RippleButton {
     }
 
     Keys.onPressed: event => {
-        console.log(event);
         if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
             root.keyboardDown = true;
             root.clicked();
@@ -50,6 +49,8 @@ RippleButton {
     }
 
     onClicked: {
+        LauncherSearch.query = "";
+
         root.itemExecute();
         GlobalStates.launcherOpen = false;
     }
