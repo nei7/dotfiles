@@ -16,6 +16,5 @@
     ./theme
     ./quickshell
     ./git
-
   ];
 }

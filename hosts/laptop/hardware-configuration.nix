@@ -23,15 +23,7 @@
     "sd_mod"
   ];
   boot.kernelParams = [
-    "quiet"
-    "splash"
-    "boot.consoleLogLevel=0"
-    "systemd.show_status=false"
-    "udev.log_level=3"
-    "vt.global_cursor_default=0"
-
     "amdgpu.dcdebugmask=0x10"
-
   ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [

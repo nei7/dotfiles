@@ -115,22 +115,6 @@ let
     };
   };
 
-  sddmWestonConfig = pkgs.writeText "weston.ini" ''
-    [output]
-    name=WL1
-    mode=3440x1440@144
-
-
-    [keyboard]
-    keymap_layout=us
-    keymap_model=pc104
-    keymap_options=terminate:ctrl_alt_bksp
-    keymap_variant=
-
-    [libinput]
-    enable-tap=true
-    left-handed=false
-  '';
 in
 {
 

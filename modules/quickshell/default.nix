@@ -4,12 +4,6 @@
   pkgs,
   ...
 }:
-let
-
-  quickshell-wrapper = pkgs.callPackage ./quickshell.nix {
-    quickshell = inputs.quickshell;
-  };
-in
 {
 
   xdg.portal = {
@@ -41,7 +35,7 @@ in
     cliphist
     cmake
     curlFull
-    wget
+
     ripgrep
     jq
     xdg-user-dirs
@@ -49,12 +43,6 @@ in
     yq-go
 
     fontconfig
-    kitty
-
-    nerd-fonts.jetbrains-mono
-    material-symbols
-
-    twemoji-color-font
 
     libsForQt5.qt5.qtwayland
     kdePackages.qtwayland

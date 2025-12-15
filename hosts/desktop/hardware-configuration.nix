@@ -28,18 +28,6 @@
   boot.kernelParams = [
     "nvidia-drm.modeset=1"
     "nvidia-drm.fbdev=1"
-    "quiet"
-    "splash"
-    "boot.consoleLogLevel=0"
-    "systemd.show_status=false"
-    "udev.log_level=3"
-    "vt.global_cursor_default=0"
-
-    "boot.shell_on_fail"
-    "loglevel=3"
-    "rd.systemd.show_status=false"
-    "rd.udev.log_level=3"
-    "udev.log_priority=3"
   ];
 
   fileSystems."/" = {

@@ -24,17 +24,14 @@ Item {
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
         anchors.right: parent.right
-        spacing: -4
+        spacing: 0
 
         StyledText {
             Layout.fillWidth: true
             font.pixelSize: Appearance.font.pixelSize.smaller
             color: Appearance.colors.colSubtext
             elide: Text.ElideRight
-            text: root.focusingThisMonitor && root.activeWindow?.activated && root.biggestWindow ? 
-                root.activeWindow?.appId :
-                (root.biggestWindow?.class) ?? "Desktop"
-
+            text: root.focusingThisMonitor && root.activeWindow?.activated && root.biggestWindow ? root.activeWindow?.appId : (root.biggestWindow?.class) ?? "Desktop"
         }
 
         StyledText {
@@ -42,11 +39,7 @@ Item {
             font.pixelSize: Appearance.font.pixelSize.small
             color: Appearance.colors.colOnLayer0
             elide: Text.ElideRight
-            text: root.focusingThisMonitor && root.activeWindow?.activated && root.biggestWindow ? 
-                root.activeWindow?.title :
-                (root.biggestWindow?.title) ?? `${"Workspace"} ${monitor?.activeWorkspace?.id ?? 1}`
+            text: root.focusingThisMonitor && root.activeWindow?.activated && root.biggestWindow ? root.activeWindow?.title : (root.biggestWindow?.title) ?? `${"Workspace"} ${monitor?.activeWorkspace?.id ?? 1}`
         }
-
     }
-
 }

@@ -11,13 +11,13 @@ ColumnLayout {
     id: root
     required property bool isSink
     function correctType(node) {
-        return (node.isSink === root.isSink) && node.audio
+        return (node.isSink === root.isSink) && node.audio;
     }
-    readonly property list<var> appPwNodes: Pipewire.nodes.values.filter((node) => { // Should be list<PwNode> but it breaks ScriptModel
-        return root.correctType(node) && node.isStream
+    readonly property list<var> appPwNodes: Pipewire.nodes.values.filter(node => { // Should be list<PwNode> but it breaks ScriptModel
+        return root.correctType(node) && node.isStream;
     })
     readonly property list<var> devices: Pipewire.nodes.values.filter(node => {
-        return root.correctType(node) && !node.isStream
+        return root.correctType(node) && !node.isStream;
     })
     readonly property bool hasApps: appPwNodes.length > 0
     spacing: 16
@@ -47,18 +47,18 @@ ColumnLayout {
         model: root.devices.map(node => (node.nickname || node.description || "Unknown"))
         currentIndex: root.devices.findIndex(item => {
             if (root.isSink) {
-                return item.id === Pipewire.preferredDefaultAudioSink?.id
+                return item.id === Pipewire.preferredDefaultAudioSink?.id;
             } else {
-                return item.id === Pipewire.preferredDefaultAudioSource?.id
+                return item.id === Pipewire.preferredDefaultAudioSource?.id;
             }
         })
-        onActivated: (index) => {
-            print(index)
-            const item = root.devices[index]
+        onActivated: index => {
+            print(index);
+            const item = root.devices[index];
             if (root.isSink) {
-                Pipewire.preferredDefaultAudioSink = item
+                Pipewire.preferredDefaultAudioSink = item;
             } else {
-                Pipewire.preferredDefaultAudioSource = item
+                Pipewire.preferredDefaultAudioSource = item;
             }
         }
     }

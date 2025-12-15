@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -41,11 +41,14 @@
             (
               { pkgs, ... }:
               {
-                nixpkgs.overlays = [ (import ./overlays) ];
+                nixpkgs.overlays = [
+                  (import ./overlays)
+                  (import ./overlays/quickshell.nix { inherit inputs; })
+                ];
               }
             )
             { networking.hostName = "${hostname}"; }
-            ./modules/system/configuration.nix
+            ./modules/system
 
             (./. + "/hosts/${hostname}/hardware-configuration.nix")
             (./. + "/hosts/${hostname}/system.nix")
