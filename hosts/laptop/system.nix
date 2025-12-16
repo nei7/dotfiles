@@ -5,5 +5,5 @@
   ...
 }:
 {
-
+  zramSwap.enable = true;
 }
