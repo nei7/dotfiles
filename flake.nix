@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -38,6 +38,7 @@
         nixpkgs.lib.nixosSystem {
           system = system;
           modules = [
+
             (
               { pkgs, ... }:
               {
@@ -48,6 +49,7 @@
               }
             )
             { networking.hostName = "${hostname}"; }
+
             ./modules/system
 
             (./. + "/hosts/${hostname}/hardware-configuration.nix")
@@ -61,7 +63,6 @@
                 extraSpecialArgs = { inherit inputs; };
                 users.nei = (./. + "/hosts/${hostname}/user.nix");
                 backupFileExtension = "backup";
-
               };
             }
           ];

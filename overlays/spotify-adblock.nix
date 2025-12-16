@@ -1,4 +1,3 @@
-# overlays/spotify-adblock.nix
 final: prev: {
   spotify-adblock = prev.rustPlatform.buildRustPackage {
     pname = "spotify-adblock";

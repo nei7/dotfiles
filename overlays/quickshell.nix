@@ -53,7 +53,6 @@ in
     installPhase = ''
       mkdir -p $out/bin
 
-      # Używamy makeWrapper do stworzenia wrappera
       makeWrapper ${qs}/bin/qs $out/bin/qs \
         --prefix XDG_DATA_DIRS : ${prev.gsettings-desktop-schemas}/share/gsettings-schemas/${prev.gsettings-desktop-schemas.name}
     '';

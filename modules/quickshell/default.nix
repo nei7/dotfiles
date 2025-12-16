@@ -16,8 +16,7 @@
     ];
   };
 
-  xdg.configFile."quickshell".source =
-    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.config/quickshell";
+  xdg.configFile."quickshell".source = config.lib.custom.mkLinkDotfiles "quickshell";
 
   fonts.fontconfig.enable = true;
 

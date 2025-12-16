@@ -5,8 +5,7 @@
   ...
 }:
 {
-  xdg.configFile."hypr".source =
-    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.config/hypr";
+  xdg.configFile."hypr".source = config.lib.custom.mkLinkDotfiles "hypr";
 
   home.packages = with pkgs; [
     wl-clipboard

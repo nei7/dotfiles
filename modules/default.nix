@@ -10,6 +10,8 @@
   home.stateVersion = "25.05";
 
   imports = [
+    ./lib.nix
+
     ./packages
     ./zsh
     ./hyprland

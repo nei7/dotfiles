@@ -75,10 +75,8 @@
     Theme=Papirus-Dark
   '';
 
-  xdg.configFile."qt5ct".source =
-    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.config/qt5ct";
+  xdg.configFile."qt5ct".source = config.lib.custom.mkLinkDotfiles "qt5ct";
 
-  xdg.configFile."btop".source =
-    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.config/btop";
+  xdg.configFile."btop".source = config.lib.custom.mkLinkDotfiles "btop";
 
 }
