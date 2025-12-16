@@ -10,7 +10,7 @@ My personal system configuration and dotfiles for **NixOS**. Managed using **Nix
 
 | Component                                      | Description                                                                                            |
 | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| [`quickshell`](https://quickshell.org/)        | Based on [end-4's dots-hyprland](https://github.com/end-4/dots-hyprland) config, with my modifications |
+| [`quickshell`](https://quickshell.org/)        | Config based on [end-4's dots-hyprland](https://github.com/end-4/dots-hyprland), with my modifications |
 | [`zsh`]()                                      | With [ohmyzsh](https://ohmyz.sh/) framework                                                            |
 | [`sddm`](https://github.com/sddm/sddm)         | Configured using [SilentSDDM](https://github.com/uiriansan/SilentSDDM) theme                           |
 | [`hyprland`](https://hypr.land/)               | Tiling manager and compositor                                                                          |
