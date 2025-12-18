@@ -36,7 +36,9 @@
       mkSystem =
         pkgs: system: hostname:
         nixpkgs.lib.nixosSystem {
+
           system = system;
+          specialArgs = { inherit inputs; };
           modules = [
 
             (
@@ -66,7 +68,6 @@
               };
             }
           ];
-          specialArgs = { inherit inputs; };
         };
     in
     {

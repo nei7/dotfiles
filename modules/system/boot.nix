@@ -19,10 +19,12 @@
       fontSize = 16;
       efiSupport = true;
       useOSProber = true;
-      timeout = 5;
+
       configurationLimit = 5;
     };
   };
+
+  boot.loader.timeout = 5;
 
   boot.plymouth.enable = true;
 

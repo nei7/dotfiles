@@ -14,6 +14,12 @@
       xdg-desktop-portal-wlr
       kdePackages.xdg-desktop-portal-kde
     ];
+
+    config = {
+      common = {
+        default = [ "hyprland" ];
+      };
+    };
   };
 
   xdg.configFile."quickshell".source = config.lib.custom.mkLinkDotfiles "quickshell";

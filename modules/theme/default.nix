@@ -63,7 +63,9 @@
 
   qt = {
     enable = true;
-    platformTheme = "qtct";
+    platformTheme = {
+      name = "qtct";
+    };
     style = {
       name = "Darkly";
       package = pkgs.darkly-qt5;
