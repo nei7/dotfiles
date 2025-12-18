@@ -11,6 +11,7 @@
     ./programs.nix
     ./sddm.nix
     ./user.nix
+    ./android.nix
   ];
 
   services.upower.enable = true;

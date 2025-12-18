@@ -11,6 +11,9 @@
     wget
     git
     kitty
-    pkgs.nixfmt-rfc-style
+    nixfmt-rfc-style
+    usbutils
+    lsof
+    zip
   ];
 }

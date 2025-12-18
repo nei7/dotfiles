@@ -14,8 +14,12 @@
 
     oh-my-zsh = {
       enable = true;
-      theme = "robbyrussell";
       plugins = [ "git" ];
     };
+  };
+
+  programs.starship = {
+    enable = true;
+    enableZshIntegration = true;
   };
 }

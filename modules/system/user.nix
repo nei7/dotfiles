@@ -12,6 +12,7 @@
     extraGroups = [
       "networkmanager"
       "wheel"
+      "adbusers"
     ];
     packages = with pkgs; [ ];
     shell = pkgs.zsh;
