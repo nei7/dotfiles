@@ -26,6 +26,8 @@
         james-yu.latex-workshop
 
         wakatime.vscode-wakatime
+        mkhl.direnv
+
       ];
       userSettings = {
         "editor.formatOnSave" = true;

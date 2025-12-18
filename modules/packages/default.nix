@@ -9,6 +9,7 @@
   imports = [
     ./vscode.nix
     ./kitty.nix
+    ./direnv.nix
   ];
 
   home.packages = with pkgs; [
