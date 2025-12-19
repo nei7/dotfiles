@@ -31,8 +31,22 @@
       ];
       userSettings = {
         "editor.formatOnSave" = true;
-        "workbench.colorTheme" = "Dark modern";
+        "workbench.colorTheme" = "Dark Modern";
         "workbench.iconTheme" = "material-icon-theme";
+        "[vue]" = {
+          "editor.defaultFormatter" = "esbenp.prettier-vscode";
+        };
+        "[javascript]" = {
+          "editor.defaultFormatter" = "esbenp.prettier-vscode";
+        };
+        "[typescript]" = {
+          "editor.defaultFormatter" = "esbenp.prettier-vscode";
+        };
+        "prettier.requireConfig" = true;
+
+        "editor.codeActionsOnSave" = {
+          "source.fixAll.eslint" = true;
+        };
       };
     };
   };

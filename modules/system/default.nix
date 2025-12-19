@@ -14,6 +14,10 @@
     ./android.nix
   ];
 
+  environment.variables = {
+    EDITOR = "vim";
+  };
+
   services.upower.enable = true;
   networking.networkmanager.enable = true;
 
