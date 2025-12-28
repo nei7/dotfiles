@@ -31,7 +31,6 @@
       ];
       userSettings = {
         "editor.formatOnSave" = true;
-        "workbench.colorTheme" = "Dark Modern";
         "workbench.iconTheme" = "material-icon-theme";
         "[vue]" = {
           "editor.defaultFormatter" = "esbenp.prettier-vscode";

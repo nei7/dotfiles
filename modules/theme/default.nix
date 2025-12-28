@@ -17,7 +17,8 @@
     rubik
     nerd-fonts.jetbrains-mono
     material-symbols
-    twemoji-color-font
+    twitter-color-emoji
+    fontconfig
   ];
 
   gtk = {
@@ -81,4 +82,14 @@
 
   xdg.configFile."btop".source = config.lib.custom.mkLinkDotfiles "btop";
 
+  fonts.fontconfig = {
+    enable = true;
+    defaultFonts = {
+      sansSerif = [ "Rubik" ];
+
+      monospace = [ "JetBrainsMono Nerd Font" ];
+
+      emoji = [ "Twitter Color Emoji" ];
+    };
+  };
 }

@@ -24,8 +24,6 @@
 
   xdg.configFile."quickshell".source = config.lib.custom.mkLinkDotfiles "quickshell";
 
-  fonts.fontconfig.enable = true;
-
   home.packages = with pkgs; [
     quickshell-wrapper
 
@@ -46,8 +44,6 @@
     xdg-user-dirs
     rsync
     yq-go
-
-    fontconfig
 
     libsForQt5.qt5.qtwayland
     kdePackages.qtwayland
