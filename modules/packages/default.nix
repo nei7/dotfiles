@@ -39,8 +39,13 @@
     (discord.override {
       withOpenASAR = true;
     })
+    bitwarden-desktop
 
     btop
+  ];
+
+  programs.chromium.extensions = [
+    "nngceckbapebfimnlniiiahkandclblb"
   ];
 
   xdg.configFile."menus/applications.menu".source =

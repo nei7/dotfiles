@@ -16,4 +16,12 @@
       withUWSM = true;
     };
   };
+
+  programs.ssh.extraConfig = ''
+    Host remarkable
+      HostName 192.168.0.150
+      User root
+      PubkeyAcceptedKeyTypes +ssh-rsa
+      HostKeyAlgorithms +ssh-rsa
+  '';
 }

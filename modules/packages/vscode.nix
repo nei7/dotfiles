@@ -32,6 +32,10 @@
       userSettings = {
         "editor.formatOnSave" = true;
         "workbench.iconTheme" = "material-icon-theme";
+
+        "[json]" = {
+          "editor.defaultFormatter" = "esbenp.prettier-vscode";
+        };
         "[vue]" = {
           "editor.defaultFormatter" = "esbenp.prettier-vscode";
         };
@@ -41,11 +45,12 @@
         "[typescript]" = {
           "editor.defaultFormatter" = "esbenp.prettier-vscode";
         };
-        "prettier.requireConfig" = true;
 
         "editor.codeActionsOnSave" = {
-          "source.fixAll.eslint" = true;
+          "source.fixAll.eslint" = "explicit";
         };
+
+        "eslint.useFlatConfig" = true;
       };
     };
   };

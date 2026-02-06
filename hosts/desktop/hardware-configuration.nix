@@ -79,4 +79,6 @@
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
+  powerManagement.enable = true;
+
 }
