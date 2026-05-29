@@ -42,6 +42,11 @@
     bitwarden-desktop
 
     btop
+    pavucontrol
+
+    postman
+    docker-compose
+    code-cursor
   ];
 
   programs.chromium.extensions = [
