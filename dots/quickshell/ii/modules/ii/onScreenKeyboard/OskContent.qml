@@ -11,8 +11,8 @@ Item {
         : Layouts.defaultLayout
     property var currentLayout: layouts[activeLayoutName]
 
-    implicitWidth: keyRows.implicitWidth
-    implicitHeight: keyRows.implicitHeight
+    width: keyRows.implicitWidth
+    height: keyRows.implicitHeight
 
     ColumnLayout {
         id: keyRows

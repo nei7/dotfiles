@@ -1,4 +1,3 @@
-import qs.modules.ii.bar.weather
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
@@ -337,16 +336,6 @@ Item { // Bar content region
             Item {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-            }
-
-            // Weather
-            Loader {
-                Layout.leftMargin: 4
-                active: Config.options.bar.weather.enable
-
-                sourceComponent: BarGroup {
-                    WeatherBar {}
-                }
             }
         }
     }

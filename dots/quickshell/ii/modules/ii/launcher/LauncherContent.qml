@@ -11,8 +11,8 @@ import Qt.labs.synchronizer
 
 Item {
     id: root
-    implicitWidth: searchWidgetContent.implicitWidth + Appearance.sizes.elevationMargin * 2
-    implicitHeight: searchBar.implicitHeight + searchBar.verticalPadding * 2 + Appearance.sizes.elevationMargin * 2
+    width: searchWidgetContent.implicitWidth + Appearance.sizes.elevationMargin * 2
+    height: searchBar.implicitHeight + searchBar.verticalPadding * 2 + Appearance.sizes.elevationMargin * 2
     // Background
     property string searchingText: LauncherSearch.query
 
@@ -89,9 +89,8 @@ Item {
             }
             Item {
                 Layout.bottomMargin: 22
-
-                implicitHeight: 500
-                implicitWidth: 600
+                Layout.preferredWidth: 600
+                Layout.preferredHeight: 500
 
                 ListView {
                     id: appResults

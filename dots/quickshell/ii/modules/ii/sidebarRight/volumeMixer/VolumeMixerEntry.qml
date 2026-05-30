@@ -13,7 +13,7 @@ Item {
         objects: [node]
     }
 
-    implicitHeight: rowLayout.implicitHeight
+    height: rowLayout.implicitHeight
 
     RowLayout {
         id: rowLayout

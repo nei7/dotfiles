@@ -15,8 +15,8 @@ Rectangle {
     property var screen: root.QsWindow.window?.screen
     property var brightnessMonitor: Brightness.getMonitorForScreen(screen)
 
-    implicitWidth: contentItem.implicitWidth + root.horizontalPadding * 2
-    implicitHeight: contentItem.implicitHeight + root.verticalPadding * 2
+    Layout.preferredWidth: contentItem.implicitWidth + root.horizontalPadding * 2
+    Layout.preferredHeight: contentItem.implicitHeight + root.verticalPadding * 2
     radius: Appearance.rounding.normal
     color: Appearance.colors.colLayer1
     property real verticalPadding: 4

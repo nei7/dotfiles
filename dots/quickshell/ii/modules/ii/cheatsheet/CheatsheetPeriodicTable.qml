@@ -6,8 +6,8 @@ Item {
     readonly property var elements: PTable.elements
     readonly property var series: PTable.series
     property real spacing: 6
-    implicitWidth: mainLayout.implicitWidth
-    implicitHeight: mainLayout.implicitHeight
+    width: mainLayout.implicitWidth
+    height: mainLayout.implicitHeight
 
     Column {
         id: mainLayout

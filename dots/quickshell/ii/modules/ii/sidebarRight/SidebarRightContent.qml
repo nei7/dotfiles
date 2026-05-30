@@ -40,8 +40,7 @@ Item {
         }
     }
 
-    implicitHeight: sidebarRightBackground.implicitHeight
-    implicitWidth: sidebarRightBackground.implicitWidth
+    anchors.fill: parent
 
     StyledRectangularShadow {
         target: sidebarRightBackground
@@ -50,8 +49,6 @@ Item {
         id: sidebarRightBackground
 
         anchors.fill: parent
-        implicitHeight: parent.height - Appearance.sizes.hyprlandGapsOut * 2
-        implicitWidth: sidebarWidth - Appearance.sizes.hyprlandGapsOut * 2
         color: Appearance.colors.colLayer0
         border.width: 1
         border.color: Appearance.colors.colLayer0Border
@@ -99,13 +96,6 @@ Item {
                 Layout.alignment: Qt.AlignHCenter
                 Layout.fillHeight: true
                 Layout.fillWidth: true
-            }
-
-            BottomWidgetGroup {
-                Layout.alignment: Qt.AlignHCenter
-                Layout.fillHeight: false
-                Layout.fillWidth: true
-                Layout.preferredHeight: implicitHeight
             }
         }
     }
@@ -207,7 +197,7 @@ Item {
     }
 
     component SystemButtonRow: Item {
-        implicitHeight: Math.max(uptimeContainer.implicitHeight, systemButtonsRow.implicitHeight)
+        height: Math.max(uptimeContainer.height, systemButtonsRow.height)
 
         Rectangle {
             id: uptimeContainer
@@ -218,8 +208,8 @@ Item {
             }
             color: Appearance.colors.colLayer1
             radius: height / 2
-            implicitWidth: uptimeRow.implicitWidth + 24
-            implicitHeight: uptimeRow.implicitHeight + 8
+            width: uptimeRow.implicitWidth + 24
+            height: uptimeRow.implicitHeight + 8
             
             Row {
                 id: uptimeRow

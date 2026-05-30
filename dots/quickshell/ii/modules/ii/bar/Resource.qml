@@ -11,8 +11,8 @@ Item {
     property bool shown: true
     clip: true
     visible: width > 0 && height > 0
-    implicitWidth: resourceRowLayout.x < 0 ? 0 : resourceRowLayout.implicitWidth
-    implicitHeight: Appearance.sizes.barHeight
+    width: resourceRowLayout.x < 0 ? 0 : resourceRowLayout.implicitWidth
+    height: Appearance.sizes.barHeight
     property bool warning: percentage * 100 >= warningThreshold
 
     RowLayout {

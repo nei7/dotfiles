@@ -14,9 +14,9 @@ Item {
     property real padding: 8
     property alias colBackground: background.color
     property alias spacing: toolbarLayout.spacing
-    default property alias data: toolbarLayout.data
-    implicitWidth: background.implicitWidth
-    implicitHeight: background.implicitHeight
+    default property alias content: toolbarLayout.data
+    width: background.implicitWidth
+    height: background.implicitHeight
     property alias radius: background.radius
 
     Loader {

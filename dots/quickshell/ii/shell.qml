@@ -35,7 +35,6 @@ ShellRoot {
     Component.onCompleted: {
         Hyprsunset.load();
         ConflictKiller.load();
-        Updates.load();
     }
 
     // Load enabled stuff

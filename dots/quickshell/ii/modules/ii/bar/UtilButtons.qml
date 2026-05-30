@@ -11,8 +11,8 @@ import Quickshell.Services.UPower
 Item {
     id: root
     property bool borderless: Config.options.bar.borderless
-    implicitWidth: rowLayout.implicitWidth + rowLayout.spacing * 2
-    implicitHeight: rowLayout.implicitHeight
+    Layout.preferredWidth: rowLayout.implicitWidth + rowLayout.spacing * 2
+    Layout.preferredHeight: rowLayout.implicitHeight
 
     RowLayout {
         id: rowLayout

@@ -10,8 +10,8 @@ import qs.modules.ii.sidebarRight.quickToggles.classicStyle
 AbstractQuickPanel {
     id: root
     Layout.alignment: Qt.AlignHCenter
-    implicitWidth: buttonGroup.implicitWidth
-    implicitHeight: buttonGroup.implicitHeight
+    Layout.preferredWidth: buttonGroup.implicitWidth
+    Layout.preferredHeight: buttonGroup.implicitHeight
     color: "transparent"
 
     ButtonGroup {

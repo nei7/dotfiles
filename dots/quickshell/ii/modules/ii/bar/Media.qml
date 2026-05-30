@@ -16,8 +16,8 @@ Item {
     readonly property string cleanedTitle: StringUtils.cleanMusicTitle(activePlayer?.trackTitle) || "No media"
 
     Layout.fillHeight: true
-    implicitWidth: rowLayout.implicitWidth + rowLayout.spacing * 2
-    implicitHeight: Appearance.sizes.barHeight
+    Layout.preferredWidth: rowLayout.implicitWidth + rowLayout.spacing * 2
+    Layout.preferredHeight: Appearance.sizes.barHeight
 
     Timer {
         running: activePlayer?.playbackState == MprisPlaybackState.Playing

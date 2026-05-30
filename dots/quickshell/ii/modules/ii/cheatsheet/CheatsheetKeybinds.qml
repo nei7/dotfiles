@@ -12,8 +12,8 @@ Item {
     property real spacing: 20
     property real titleSpacing: 7
     property real padding: 4
-    implicitWidth: row.implicitWidth + padding * 2
-    implicitHeight: row.implicitHeight + padding * 2
+    width: row.implicitWidth + padding * 2
+    height: row.implicitHeight + padding * 2
     // Excellent symbol explaination and source :
     // http://xahlee.info/comp/unicode_computing_symbols.html
     // https://www.nerdfonts.com/cheat-sheet

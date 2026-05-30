@@ -31,9 +31,8 @@ Rectangle {
     bottomRightRadius: bottomLeftRadius
 
     color: "transparent"
+    width: columnLayout.implicitWidth + padding * 2
     height: root.contentHeight + padding * 2
-    implicitWidth: columnLayout.implicitWidth + padding * 2
-    implicitHeight: root.contentHeight + padding * 2
     
     children: [ColumnLayout {
         id: columnLayout

@@ -43,13 +43,14 @@ Singleton {
     }
 
     function notifToJSON(notif) {
+        const image = (notif.image?.startsWith?.("image://qsimage/")) ? "" : notif.image;
         return {
             "notificationId": notif.notificationId,
             "actions": notif.actions,
             "appIcon": notif.appIcon,
             "appName": notif.appName,
             "body": notif.body,
-            "image": notif.image,
+            "image": image,
             "summary": notif.summary,
             "time": notif.time,
             "urgency": notif.urgency
@@ -271,6 +272,8 @@ Singleton {
         onLoaded: {
             const fileContents = notifFileView.text();
             root.list = JSON.parse(fileContents).map(notif => {
+                // qsimage handles are only valid for the current process
+                const image = (notif.image?.startsWith?.("image://qsimage/")) ? "" : (notif.image ?? "");
                 return notifComponent.createObject(root, {
                     "notificationId": notif.notificationId,
                     "actions": [] // Notification actions are meaningless if they're not tracked by the server or the sender is dead
@@ -278,7 +281,7 @@ Singleton {
                     "appIcon": notif.appIcon,
                     "appName": notif.appName,
                     "body": notif.body,
-                    "image": notif.image,
+                    "image": image,
                     "summary": notif.summary,
                     "time": notif.time,
                     "urgency": notif.urgency

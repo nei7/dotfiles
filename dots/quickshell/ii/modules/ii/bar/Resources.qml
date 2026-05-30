@@ -7,8 +7,8 @@ MouseArea {
     id: root
     property bool borderless: Config.options.bar.borderless
     property bool alwaysShowAllResources: false
-    implicitWidth: rowLayout.implicitWidth + rowLayout.anchors.leftMargin + rowLayout.anchors.rightMargin
-    implicitHeight: Appearance.sizes.barHeight
+    width: rowLayout.implicitWidth + rowLayout.anchors.leftMargin + rowLayout.anchors.rightMargin
+    height: Appearance.sizes.barHeight
     hoverEnabled: !Config.options.bar.tooltips.clickToShow
 
     RowLayout {

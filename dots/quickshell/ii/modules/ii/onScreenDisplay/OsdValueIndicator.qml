@@ -16,8 +16,8 @@ Item {
     property real valueIndicatorLeftPadding: 10
     property real valueIndicatorRightPadding: 20 // An icon is circle ish, a column isn't, hence the extra padding
 
-    implicitWidth: Appearance.sizes.osdWidth + 2 * Appearance.sizes.elevationMargin
-    implicitHeight: valueIndicator.implicitHeight + 2 * Appearance.sizes.elevationMargin
+    width: Appearance.sizes.osdWidth + 2 * Appearance.sizes.elevationMargin
+    height: valueIndicator.implicitHeight + 2 * Appearance.sizes.elevationMargin
 
     StyledRectangularShadow {
         target: valueIndicator

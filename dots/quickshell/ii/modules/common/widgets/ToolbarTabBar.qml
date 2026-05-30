@@ -35,8 +35,8 @@ Item {
     }
 
     Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-    implicitWidth: contentItem.implicitWidth
-    implicitHeight: 40
+    Layout.preferredWidth: contentItem.implicitWidth
+    Layout.preferredHeight: 40
 
     Row {
         id: contentItem
