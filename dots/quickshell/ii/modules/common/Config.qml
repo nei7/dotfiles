@@ -78,10 +78,9 @@ Singleton {
         JsonAdapter {
             id: configOptionsJsonAdapter
 
-            property list<string> enabledPanels: ["iiBar", "iiBackground", "iiCheatsheet", "iiDock", "iiLock",
+            property list<string> enabledPanels: ["iiBar", "iiBackground", "iiCheatsheet", "iiLauncher", "iiLock",
                 "iiMediaControls", "iiNotificationPopup", "iiOnScreenDisplay", "iiOnScreenKeyboard",
-                "iiPolkit", "iiReloadPopup", "iiScreenCorners", "iiSessionScreen", "iiSidebarRight",
-                "iiVerticalBar", "iiWallpaperSelector"]
+                "iiPolkit", "iiReloadPopup", "iiScreenCorners", "iiSessionScreen", "iiSidebarRight"]
             property string panelFamily: "ii"
 
             property JsonObject appearance: JsonObject {
@@ -132,39 +131,6 @@ Singleton {
             }
 
             property JsonObject background: JsonObject {
-                property JsonObject widgets: JsonObject {
-                    property JsonObject clock: JsonObject {
-                        property bool enable: false
-                        property bool showOnlyWhenLocked: false
-                        property string placementStrategy: "leastBusy" // "free", "leastBusy", "mostBusy"
-                        property real x: 100
-                        property real y: 100
-                        property string style: "cookie"        // Options: "cookie", "digital"
-                        property string styleLocked: "cookie"  // Options: "cookie", "digital"
-                        property JsonObject cookie: JsonObject {
-                            property bool aiStyling: false
-                            property int sides: 14
-                            property string dialNumberStyle:
-                            "full"   // Options: "dots" , "numbers", "full" , "none"
-                            property string hourHandStyle:
-                            "fill"     // Options: "classic", "fill", "hollow", "hide"
-                            property string minuteHandStyle:
-                            "medium" // Options "classic", "thin", "medium", "bold", "hide"
-                            property string secondHandStyle:
-                            "dot"    // Options: "dot", "line", "classic", "hide"
-                            property string dateStyle:
-                            "bubble"       // Options: "border", "rect", "bubble" , "hide"
-                            property bool timeIndicators: true
-                            property bool hourMarks: false
-                            property bool dateInClock: true
-                            property bool constantlyRotate: false
-                            property bool useSineCookie: false
-                        }
-                        property JsonObject digital: JsonObject {
-                            property bool animateChange: true
-                        }
-                    }
-                }
                 property string wallpaperPath: "/home/nei/.config/quickshell/wallpaper.png"
                 property string thumbnailPath: ""
                 property bool hideWhenFullscreen: true
@@ -174,7 +140,6 @@ Singleton {
                     property bool enableWorkspace: true
                     property real workspaceZoom: 1.0 // Relative to your screen, not wallpaper size
                     property bool enableSidebar: true
-                    property real widgetsFactor: 1.0
                 }
             }
 
@@ -356,35 +321,12 @@ Singleton {
             }
 
             property JsonObject search: JsonObject {
-                property int nonAppResultDelay: 30 // This prevents lagging when typing
-                property string engineBaseUrl: "https://www.google.com/search?q="
-                property list<string> excludedSites: ["quora.com", "facebook.com"]
                 property bool sloppy:
                 false // Uses levenshtein distance based scoring instead of fuzzy sort. Very weird.
-                property JsonObject prefix: JsonObject {
-                    property bool showDefaultActionsWithoutPrefix: true
-                    property string action: "/"
-                    property string app: ">"
-                    property string clipboard: ";"
-                    property string emojis: ":"
-                    property string math: "="
-                    property string shellCommand: "$"
-                    property string webSearch: "?"
-                }
-                property JsonObject imageSearch: JsonObject {
-                    property string imageSearchEngineBaseUrl: "https://lens.google.com/uploadbyurl?url="
-                    property bool useCircleSelection: false
-                }
             }
 
             property JsonObject sidebar: JsonObject {
                 property bool keepRightSidebarLoaded: true
-                property JsonObject translator: JsonObject {
-                    property bool enable: false
-                    property int delay:
-                    300 // Delay before sending request. Reduces (potential) rate limits and lag.
-                }
-
                 property JsonObject cornerOpen: JsonObject {
                     property bool enable: true
                     property bool bottom: false
@@ -438,10 +380,6 @@ Singleton {
                 }
             }
 
-            property JsonObject screenSnip: JsonObject {
-                property string savePath: "" // only copy to clipboard when empty
-            }
-
             property JsonObject sounds: JsonObject {
                 property bool battery: false
                 property bool pomodoro: false
@@ -469,10 +407,6 @@ Singleton {
                 property int stronglyAdviseUpdateThreshold: 200 // packages
             }
 
-            property JsonObject wallpaperSelector: JsonObject {
-                property bool useSystemFileDialog: false
-            }
-
             property JsonObject windows: JsonObject {
                 property bool showTitlebar: true // Client-side decoration for shell apps
                 property bool centerTitle: true
@@ -482,16 +416,6 @@ Singleton {
                 property int arbitraryRaceConditionDelay: 20 // milliseconds
             }
 
-            property JsonObject waffles: JsonObject {
-                // Animations on Windoes are kinda janky. Set the following to
-                // false will make (some) stuff also be like that for accuracy.
-                // Example: the right-click menu of the Start button
-                property bool smootherAnimations: true
-                property JsonObject bar: JsonObject {
-                    property bool bottom: true
-                    property bool leftAlignApps: false
-                }
-            }
         }
     }
 }

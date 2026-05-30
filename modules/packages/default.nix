@@ -2,6 +2,7 @@
   config,
   inputs,
   pkgs,
+  lib,
   ...
 }:
 {
@@ -17,7 +18,7 @@
     # Cli tools
     killall
     fastfetch
-    inputs.reStream.packages.${pkgs.system}.default
+    inputs.code-cursor-nix.packages.x86_64-linux.cursor
     unzip
     rar
     hyprpicker
@@ -39,6 +40,7 @@
     (discord.override {
       withOpenASAR = true;
     })
+
     bitwarden-desktop
 
     btop
@@ -46,7 +48,7 @@
 
     postman
     docker-compose
-    code-cursor
+
   ];
 
   programs.chromium.extensions = [

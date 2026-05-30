@@ -234,58 +234,6 @@ Singleton {
         return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
     }
 
-    /**
-     * Cleans a cliphist entry by removing leading digits and tab.
-     * @param { string } str
-     * @returns { string }
-     */
-    function cleanCliphistEntry(str: string): string {
-        return str.replace(/^\d+\t/, "");
-    }
-
-    /**
-     * Checks if any substring in the list is contained in the string.
-     * @param { string } str
-     * @param { string[] } substrings
-     * @returns { boolean }
-     */
-    function stringListContainsSubstring(str, substrings) {
-        for (let i = 0; i < substrings.length; ++i) {
-            if (str.includes(substrings[i])) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Removes the given prefix from the string if present.
-     * @param { string } str
-     * @param { string } prefix
-     * @returns { string }
-     */
-    function cleanPrefix(str, prefix) {
-        if (str.startsWith(prefix)) {
-            return str.slice(prefix.length);
-        }
-        return str;
-    }
-
-    /**
-     * Removes the first matching prefix from the string if present.
-     * @param { string } str
-     * @param { string[] } prefixes
-     * @returns { string }
-     */
-    function cleanOnePrefix(str, prefixes) {
-        for (let i = 0; i < prefixes.length; ++i) {
-            if (str.startsWith(prefixes[i])) {
-                return str.slice(prefixes[i].length);
-            }
-        }
-        return str;
-    }
-
     function toTitleCase(str) {
         // Replace "-" and "_" with space, then capitalize each word
         return str.replace(/[-_]/g, " ").replace(

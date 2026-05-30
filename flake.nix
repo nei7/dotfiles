@@ -18,7 +18,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    reStream.url = "github:rien/reStream";
+    code-cursor-nix.url = "github:jacopone/code-cursor-nix";
   };
 
   outputs =

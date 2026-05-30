@@ -46,39 +46,10 @@
             "enableSidebar": true,
             "enableWorkspace": true,
             "vertical": false,
-            "widgetsFactor": 1,
             "workspaceZoom": 1
         },
         "thumbnailPath": "",
-        "wallpaperPath": "/home/nei/.config/quickshell/wallpaper.png",
-        "widgets": {
-            "clock": {
-                "cookie": {
-                    "aiStyling": false,
-                    "constantlyRotate": false,
-                    "dateInClock": true,
-                    "dateStyle": "bubble",
-                    "dialNumberStyle": "full",
-                    "hourHandStyle": "fill",
-                    "hourMarks": false,
-                    "minuteHandStyle": "medium",
-                    "secondHandStyle": "dot",
-                    "sides": 14,
-                    "timeIndicators": true,
-                    "useSineCookie": false
-                },
-                "digital": {
-                    "animateChange": true
-                },
-                "enable": false,
-                "placementStrategy": "leastBusy",
-                "showOnlyWhenLocked": false,
-                "style": "cookie",
-                "styleLocked": "cookie",
-                "x": 100,
-                "y": 100
-            }
-        }
+        "wallpaperPath": "/home/nei/.config/quickshell/wallpaper.png"
     },
     "bar": {
         "autoHide": {
@@ -179,7 +150,7 @@
         "iiScreenCorners",
         "iiSessionScreen",
         "iiSidebarRight",
-        "iiOverview"
+        "iiLauncher"
     ],
     "hacks": {
         "arbitraryRaceConditionDelay": 20
@@ -247,30 +218,7 @@
         "historyLength": 60,
         "updateInterval": 3000
     },
-    "screenSnip": {
-        "savePath": ""
-    },
     "search": {
-        "engineBaseUrl": "https://www.google.com/search?q=",
-        "excludedSites": [
-            "quora.com",
-            "facebook.com"
-        ],
-        "imageSearch": {
-            "imageSearchEngineBaseUrl": "https://lens.google.com/uploadbyurl?url=",
-            "useCircleSelection": false
-        },
-        "nonAppResultDelay": 30,
-        "prefix": {
-            "action": "/",
-            "app": ">",
-            "clipboard": ";",
-            "emojis": ":",
-            "math": "=",
-            "shellCommand": "$",
-            "showDefaultActionsWithoutPrefix": true,
-            "webSearch": "?"
-        },
         "sloppy": false
     },
     "sidebar": {
@@ -323,10 +271,6 @@
                 ]
             },
             "style": "android"
-        },
-        "translator": {
-            "delay": 300,
-            "enable": false
         }
     },
     "sounds": {
@@ -360,16 +304,6 @@
         "adviseUpdateThreshold": 75,
         "checkInterval": 120,
         "stronglyAdviseUpdateThreshold": 200
-    },
-    "waffles": {
-        "bar": {
-            "bottom": true,
-            "leftAlignApps": false
-        },
-        "smootherAnimations": true
-    },
-    "wallpaperSelector": {
-        "useSystemFileDialog": false
     },
     "windows": {
         "centerTitle": true,

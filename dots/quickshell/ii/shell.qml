@@ -35,8 +35,6 @@ ShellRoot {
     Component.onCompleted: {
         Hyprsunset.load();
         ConflictKiller.load();
-        Cliphist.refresh();
-        Wallpapers.load();
         Updates.load();
     }
 

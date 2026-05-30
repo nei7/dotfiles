@@ -10,7 +10,6 @@
     kdePackages.breeze
     kdePackages.breeze-icons
     darkly
-    darkly-qt5
     papirus-icon-theme
     bibata-cursors
 
@@ -67,10 +66,7 @@
     platformTheme = {
       name = "qtct";
     };
-    style = {
-      name = "Darkly";
-      package = pkgs.darkly-qt5;
-    };
+
   };
 
   xdg.configFile."kdeglobals".text = ''
