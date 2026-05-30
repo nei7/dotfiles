@@ -7,17 +7,16 @@ MouseArea {
     id: root
     property bool borderless: Config.options.bar.borderless
     property bool alwaysShowAllResources: false
-    width: rowLayout.implicitWidth + rowLayout.anchors.leftMargin + rowLayout.anchors.rightMargin
+    implicitWidth: rowLayout.implicitWidth
+    width: implicitWidth
     height: Appearance.sizes.barHeight
     hoverEnabled: !Config.options.bar.tooltips.clickToShow
 
     RowLayout {
         id: rowLayout
-
-        spacing: 0
-        anchors.fill: parent
-        anchors.leftMargin: 4
-        anchors.rightMargin: 4
+        spacing: 2
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.left: parent.left
 
         Resource {
             iconName: "memory"
@@ -26,23 +25,21 @@ MouseArea {
         }
 
         Resource {
-            iconName: "swap_horiz"
-            percentage: ResourceUsage.swapUsedPercentage
-            shown: (Config.options.bar.resources.alwaysShowSwap && percentage > 0) || 
-                (MprisController.activePlayer?.trackTitle == null) ||
+            iconName: "planner_review"
+            percentage: ResourceUsage.cpuUsage
+            shown: Config.options.bar.resources.alwaysShowCpu ||
+                !(MprisController.activePlayer?.trackTitle?.length > 0) ||
                 root.alwaysShowAllResources
-            Layout.leftMargin: shown ? 6 : 0
-            warningThreshold: Config.options.bar.resources.swapWarningThreshold
+            warningThreshold: Config.options.bar.resources.cpuWarningThreshold
         }
 
         Resource {
-            iconName: "planner_review"
-            percentage: ResourceUsage.cpuUsage
-            shown: Config.options.bar.resources.alwaysShowCpu || 
-                !(MprisController.activePlayer?.trackTitle?.length > 0) ||
+            iconName: "swap_horiz"
+            percentage: ResourceUsage.swapUsedPercentage
+            shown: (Config.options.bar.resources.alwaysShowSwap && percentage > 0) ||
+                (MprisController.activePlayer?.trackTitle == null) ||
                 root.alwaysShowAllResources
-            Layout.leftMargin: shown ? 6 : 0
-            warningThreshold: Config.options.bar.resources.cpuWarningThreshold
+            warningThreshold: Config.options.bar.resources.swapWarningThreshold
         }
 
     }

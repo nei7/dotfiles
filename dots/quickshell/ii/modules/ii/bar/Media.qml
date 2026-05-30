@@ -13,10 +13,11 @@ Item {
     id: root
     property bool borderless: Config.options.bar.borderless
     readonly property MprisPlayer activePlayer: MprisController.activePlayer
-    readonly property string cleanedTitle: StringUtils.cleanMusicTitle(activePlayer?.trackTitle) || "No media"
+    readonly property string cleanedTitle: StringUtils.cleanMusicTitle(activePlayer?.trackTitle ?? "")
+    readonly property bool hasActiveTrack: root.cleanedTitle.length > 0
 
     Layout.fillHeight: true
-    Layout.preferredWidth: rowLayout.implicitWidth + rowLayout.spacing * 2
+    Layout.fillWidth: true
     Layout.preferredHeight: Appearance.sizes.barHeight
 
     Timer {
@@ -29,27 +30,27 @@ Item {
     MouseArea {
         anchors.fill: parent
         acceptedButtons: Qt.MiddleButton | Qt.BackButton | Qt.ForwardButton | Qt.RightButton | Qt.LeftButton
-        onPressed: (event) => {
+        onPressed: event => {
             if (event.button === Qt.MiddleButton) {
-                activePlayer.togglePlaying();
+                activePlayer?.togglePlaying();
             } else if (event.button === Qt.BackButton) {
-                activePlayer.previous();
+                activePlayer?.previous();
             } else if (event.button === Qt.ForwardButton || event.button === Qt.RightButton) {
-                activePlayer.next();
+                activePlayer?.next();
             } else if (event.button === Qt.LeftButton) {
-                GlobalStates.mediaControlsOpen = !GlobalStates.mediaControlsOpen
+                GlobalStates.mediaControlsOpen = !GlobalStates.mediaControlsOpen;
             }
         }
     }
 
-    RowLayout { // Real content
+    RowLayout {
         id: rowLayout
-
-        spacing: 4
+        spacing: 2
         anchors.fill: parent
 
         ClippedFilledCircularProgress {
             id: mediaCircProg
+            visible: root.hasActiveTrack
             Layout.alignment: Qt.AlignVCenter
             lineWidth: Appearance.rounding.unsharpen
             value: activePlayer?.position / activePlayer?.length
@@ -61,7 +62,7 @@ Item {
                 anchors.centerIn: parent
                 width: mediaCircProg.implicitSize
                 height: mediaCircProg.implicitSize
-                
+
                 MaterialSymbol {
                     anchors.centerIn: parent
                     fill: 1
@@ -74,16 +75,15 @@ Item {
 
         StyledText {
             visible: Config.options.bar.verbose
-            width: rowLayout.width - (CircularProgress.size + rowLayout.spacing * 2)
+            Layout.fillWidth: true
             Layout.alignment: Qt.AlignVCenter
-            Layout.fillWidth: true // Ensures the text takes up available space
-            Layout.rightMargin: rowLayout.spacing
-            horizontalAlignment: Text.AlignHCenter
-            elide: Text.ElideRight // Truncates the text on the right
+            Layout.maximumWidth: root.hasActiveTrack ? 200 : undefined
+            horizontalAlignment: root.hasActiveTrack ? Text.AlignLeft : Text.AlignHCenter
+            elide: Text.ElideRight
             color: Appearance.colors.colOnLayer1
-            text: `${cleanedTitle}${activePlayer?.trackArtist ? ' • ' + activePlayer.trackArtist : ''}`
+            text: root.hasActiveTrack
+                  ? `${cleanedTitle}${activePlayer?.trackArtist ? ' • ' + activePlayer.trackArtist : ''}`
+                  : "No media"
         }
-
     }
-
 }
