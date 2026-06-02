@@ -8,15 +8,41 @@ import QtQuick.Layouts
 
 Item {
     id: root
-    readonly property var keybinds: HyprlandKeybinds.keybinds
+
+    property var sections: HyprlandKeybinds.keybinds.children ?? []
     property real spacing: 20
     property real titleSpacing: 7
     property real padding: 4
-    width: row.implicitWidth + padding * 2
-    height: row.implicitHeight + padding * 2
-    // Excellent symbol explaination and source :
-    // http://xahlee.info/comp/unicode_computing_symbols.html
-    // https://www.nerdfonts.com/cheat-sheet
+
+    implicitWidth: row.implicitWidth + padding * 2
+    implicitHeight: row.implicitHeight + padding * 2
+
+    Connections {
+        target: HyprlandKeybinds
+        function onKeybindsChanged() {
+            root.sections = HyprlandKeybinds.keybinds.children ?? [];
+        }
+    }
+
+    function formatKeyLabel(key) {
+        if (keyBlacklist.includes(key))
+            return "";
+        return keySubstitutions[key] || key;
+    }
+
+    function formatKeybindLine(kb) {
+        var parts = [];
+        for (var i = 0; i < kb.mods.length; i++) {
+            var mod = formatKeyLabel(kb.mods[i]) || kb.mods[i];
+            if (mod)
+                parts.push(mod);
+        }
+        var keyLabel = formatKeyLabel(kb.key);
+        if (keyLabel)
+            parts.push(keyLabel);
+        return parts.join(" ");
+    }
+
     property var macSymbolMap: ({
         "Ctrl": "󰘴",
         "Alt": "󰘵",
@@ -30,18 +56,19 @@ Item {
         "Delete": "⌦",
         "Return": "󰌑",
         "Period": ".",
-        "Escape": "⎋"
-      })
+        "Escape": "⎋",
+    })
+
     property var functionSymbolMap: ({
-        "F1":  "󱊫",
-        "F2":  "󱊬",
-        "F3":  "󱊭",
-        "F4":  "󱊮",
-        "F5":  "󱊯",
-        "F6":  "󱊰",
-        "F7":  "󱊱",
-        "F8":  "󱊲",
-        "F9":  "󱊳",
+        "F1": "󱊫",
+        "F2": "󱊬",
+        "F3": "󱊭",
+        "F4": "󱊮",
+        "F5": "󱊯",
+        "F6": "󱊰",
+        "F7": "󱊱",
+        "F8": "󱊲",
+        "F9": "󱊳",
         "F10": "󱊴",
         "F11": "󱊵",
         "F12": "󱊶",
@@ -57,159 +84,150 @@ Item {
     })
 
     property var keyBlacklist: ["Super_L"]
+
     property var keySubstitutions: Object.assign({
         "Super": "",
-        "mouse_up": "Scroll ↓",    // ikr, weird
-        "mouse_down": "Scroll ↑",  // trust me bro
+        "mouse_up": "Scroll ↓",
+        "mouse_down": "Scroll ↑",
         "mouse:272": "LMB",
         "mouse:273": "RMB",
         "mouse:275": "MouseBack",
         "Slash": "/",
         "Hash": "#",
         "Return": "Enter",
-        // "Shift": "",
-      },
-      !!Config.options.cheatsheet.superKey ? {
-          "Super": Config.options.cheatsheet.superKey,
-      }: {},
-      Config.options.cheatsheet.useMacSymbol ? macSymbolMap : {},
-      Config.options.cheatsheet.useFnSymbol ? functionSymbolMap : {},
-      Config.options.cheatsheet.useMouseSymbol ? mouseSymbolMap : {},
-    )
+    },
+    !!Config.options.cheatsheet.superKey ? {
+        "Super": Config.options.cheatsheet.superKey,
+    } : {},
+    Config.options.cheatsheet.useMacSymbol ? macSymbolMap : {},
+    Config.options.cheatsheet.useFnSymbol ? functionSymbolMap : {},
+    Config.options.cheatsheet.useMouseSymbol ? mouseSymbolMap : {})
 
-    Row { // Keybind columns
+    Row {
         id: row
+        anchors.centerIn: parent
         spacing: root.spacing
-        
+
         Repeater {
-            model: keybinds.children
-            
-            delegate: Column { // Keybind sections
+            model: root.sections
+
+            delegate: Column {
+                id: column
                 spacing: root.spacing
                 required property var modelData
                 anchors.top: row.top
 
                 Repeater {
-                    model: modelData.children
+                    model: {
+                        if (column.modelData.children && column.modelData.children.length > 0)
+                            return column.modelData.children;
+                        if (column.modelData.keybinds && column.modelData.keybinds.length > 0)
+                            return [column.modelData];
+                        return [];
+                    }
 
-                    delegate: Item { // Section with real keybinds
-                        id: keybindSection
+                    delegate: Column {
+                        id: section
+                        spacing: root.titleSpacing
                         required property var modelData
-                        implicitWidth: sectionColumn.implicitWidth
-                        implicitHeight: sectionColumn.implicitHeight
+                        width: Math.max(title.implicitWidth, bindsColumn.implicitWidth)
+
+                        StyledText {
+                            id: title
+                            width: parent.width
+                            font {
+                                family: Appearance.font.family.title
+                                pixelSize: Appearance.font.pixelSize.title
+                                variableAxes: Appearance.font.variableAxes.title
+                            }
+                            color: Appearance.colors.colOnLayer0
+                            text: section.modelData.name ?? ""
+                        }
 
                         Column {
-                            id: sectionColumn
-                            anchors.centerIn: parent
-                            spacing: root.titleSpacing
-                            
-                            StyledText {
-                                id: sectionTitle
-                                font {
-                                    family: Appearance.font.family.title
-                                    pixelSize: Appearance.font.pixelSize.title
-                                    variableAxes: Appearance.font.variableAxes.title
-                                }
-                                color: Appearance.colors.colOnLayer0
-                                text: keybindSection.modelData.name
-                            }
+                            id: bindsColumn
+                            width: parent.width
+                            spacing: 4
 
-                            GridLayout {
-                                id: keybindGrid
-                                columns: 2
-                                columnSpacing: 4
-                                rowSpacing: 4
+                            Repeater {
+                                model: section.modelData.keybinds ?? []
 
-                                Repeater {
-                                    model: {
-                                        var result = [];
-                                        for (var i = 0; i < keybindSection.modelData.keybinds.length; i++) {
-                                            const keybind = keybindSection.modelData.keybinds[i];
+                                delegate: Row {
+                                    id: bindRow
+                                    spacing: 12
+                                    required property var modelData
 
-                                            if (!Config.options.cheatsheet.splitButtons) {
-                                                for (var j = 0; j < keybind.mods.length; j++) {
-                                                    keybind.mods[j] = keySubstitutions[keybind.mods[j]] || keybind.mods[j];
-                                                }
-                                                keybind.mods = [keybind.mods.join(' ') ]
-                                                keybind.mods[0] += !keyBlacklist.includes(keybind.key) && keybind.mods[0].length ? ' ' : ''
-                                                keybind.mods[0] += !keyBlacklist.includes(keybind.key) ? (keySubstitutions[keybind.key] || keybind.key) : ''
-                                            } 
+                                    Item {
+                                        id: keysPart
+                                        implicitWidth: keysRow.implicitWidth
+                                        implicitHeight: keysRow.implicitHeight
 
-                                            result.push({
-                                                "type": "keys",
-                                                "mods": keybind.mods,
-                                                "key": keybind.key,
-                                            });
-                                            result.push({
-                                                "type": "comment",
-                                                "comment": keybind.comment,
-                                            });
-                                        }
-                                        return result;
-                                    }
-                                    delegate: Item {
-                                        required property var modelData
-                                        implicitWidth: keybindLoader.implicitWidth
-                                        implicitHeight: keybindLoader.implicitHeight
+                                        Row {
+                                            id: keysRow
+                                            spacing: 4
+                                            visible: Config.options.cheatsheet.splitButtons
 
-                                        Loader {
-                                            id: keybindLoader
-                                            sourceComponent: (modelData.type === "keys") ? keysComponent : commentComponent
-                                        }
+                                            Repeater {
+                                                model: bindRow.modelData.mods ?? []
 
-                                        Component {
-                                            id: keysComponent
-                                            Row {
-                                                spacing: 4
-                                                Repeater {
-                                                    model: modelData.mods
-                                                    delegate: KeyboardKey {
-                                                        required property var modelData
-                                                        key: keySubstitutions[modelData] || modelData
+                                                delegate: Row {
+                                                    spacing: 4
+                                                    required property int index
+                                                    required property var modelData
+
+                                                    KeyboardKey {
+                                                        key: root.formatKeyLabel(modelData) || modelData
                                                         pixelSize: Config.options.cheatsheet.fontSize.key
                                                     }
+
+                                                    StyledText {
+                                                        property int modCount: bindRow.modelData.mods ? bindRow.modelData.mods.length : 0
+                                                        visible: index < modCount - 1
+                                                        text: "+"
+                                                        color: Appearance.colors.colOnLayer0
+                                                    }
                                                 }
-                                                StyledText {
-                                                    id: keybindPlus
-                                                    visible: Config.options.cheatsheet.splitButtons && !keyBlacklist.includes(modelData.key) && modelData.mods.length > 0
-                                                    text: "+"
-                                                }
-                                                KeyboardKey {
-                                                    id: keybindKey
-                                                    visible: Config.options.cheatsheet.splitButtons && !keyBlacklist.includes(modelData.key)
-                                                    key: keySubstitutions[modelData.key] || modelData.key
-                                                    pixelSize: Config.options.cheatsheet.fontSize.key
-                                                    color: Appearance.colors.colOnLayer0
-                                                }
+                                            }
+
+                                            StyledText {
+                                                property int modCount: bindRow.modelData.mods ? bindRow.modelData.mods.length : 0
+                                                visible: modCount > 0 && !root.keyBlacklist.includes(bindRow.modelData.key)
+                                                text: "+"
+                                                color: Appearance.colors.colOnLayer0
+                                            }
+
+                                            KeyboardKey {
+                                                visible: !root.keyBlacklist.includes(bindRow.modelData.key)
+                                                key: root.formatKeyLabel(bindRow.modelData.key)
+                                                pixelSize: Config.options.cheatsheet.fontSize.key
                                             }
                                         }
 
-                                        Component {
-                                            id: commentComponent
-                                            Item {
-                                                id: commentItem
-                                                implicitWidth: commentText.implicitWidth + 8 * 2
-                                                implicitHeight: commentText.implicitHeight
-
-                                                StyledText {
-                                                    id: commentText
-                                                    anchors.centerIn: parent
-                                                    font.pixelSize: Config.options.cheatsheet.fontSize.comment || Appearance.font.pixelSize.smaller
-                                                    text: modelData.comment
-                                                }
-                                            }
+                                        KeyboardKey {
+                                            visible: !Config.options.cheatsheet.splitButtons
+                                            anchors.left: parent.left
+                                            anchors.verticalCenter: parent.verticalCenter
+                                            key: root.formatKeybindLine(bindRow.modelData)
+                                            pixelSize: Config.options.cheatsheet.fontSize.key
                                         }
                                     }
 
+                                    StyledText {
+                                        id: commentText
+                                        anchors.verticalCenter: parent.verticalCenter
+                                        width: 220
+                                        wrapMode: Text.WordWrap
+                                        font.pixelSize: Config.options.cheatsheet.fontSize.comment
+                                            || Appearance.font.pixelSize.smaller
+                                        color: Appearance.colors.colOnLayer0
+                                        text: bindRow.modelData.comment ?? ""
+                                    }
                                 }
                             }
                         }
                     }
-
                 }
             }
-            
         }
     }
-    
 }

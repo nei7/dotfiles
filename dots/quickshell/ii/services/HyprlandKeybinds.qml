@@ -7,66 +7,87 @@ import QtQuick
 import Quickshell
 import Quickshell.Io
 import Quickshell.Hyprland
+import "hyprlandKeybinds.js" as KeybindParser
 
 /**
- * A service that provides access to Hyprland keybinds.
- * Uses the `get_keybinds.py` script to parse comments in config files in a certain format and convert to JSON.
+ * Cheatsheet keybinds from ~/.config/hypr/conf/keybindings.lua.
+ * Hyprland 0.55 Lua reports hyprctl binds as dispatcher "__lua" — we parse the config file instead.
  */
 Singleton {
     id: root
-    property string keybindParserPath: FileUtils.trimFileProtocol(`${Directories.scriptPath}/hyprland/get_keybinds.py`)
-    property string defaultKeybindConfigPath: FileUtils.trimFileProtocol(`${Directories.config}/hypr/hyprland/keybinds.conf`)
-    property string userKeybindConfigPath: FileUtils.trimFileProtocol(`${Directories.config}/hypr/custom/keybinds.conf`)
-    property var defaultKeybinds: {"children": []}
-    property var userKeybinds: {"children": []}
-    property var keybinds: ({
-        children: [
-            ...(defaultKeybinds.children ?? []),
-            ...(userKeybinds.children ?? []),
-        ]
-    })
+    property string keybindingsLuaPath: FileUtils.trimFileProtocol(`${Directories.config}/hypr/conf/keybindings.lua`)
+    property var keybinds: ({ "children": [] })
+    property var _hyprctlRaw: []
+
+    function applyTree(tree) {
+        root.keybinds = ({
+            children: tree.children || [],
+            keybinds: tree.keybinds || [],
+            name: tree.name || "",
+        });
+    }
+
+    function rebuild() {
+        const tree = KeybindParser.buildKeybindTree(keybindingsFile.text(), root._hyprctlRaw);
+        applyTree(tree);
+        const count = (tree.children || []).reduce((n, col) => {
+            const sec = col.children && col.children[0];
+            return n + (sec && sec.keybinds ? sec.keybinds.length : 0);
+        }, 0);
+        console.log("[HyprlandKeybinds] Loaded", count, "binds in", (tree.children || []).length, "sections");
+    }
+
+    function refresh() {
+        root._hyprctlRaw = [];
+        keybindingsFile.reload();
+        getBinds.running = true;
+    }
+
+    Component.onCompleted: {
+        keybindingsFile.reload();
+        refresh();
+    }
 
     Connections {
         target: Hyprland
 
         function onRawEvent(event) {
-            if (event.name == "configreloaded") {
-                getDefaultKeybinds.running = true
-                getUserKeybinds.running = true
-            }
+            if (event.name === "configreloaded")
+                root.refresh();
+        }
+    }
+
+    FileView {
+        id: keybindingsFile
+        path: root.keybindingsLuaPath
+
+        onLoaded: root.rebuild()
+
+        onLoadFailed: err => {
+            if (err === FileViewError.FileNotFound)
+                console.warn("[HyprlandKeybinds] Missing", root.keybindingsLuaPath);
+            root.rebuild();
         }
     }
 
     Process {
-        id: getDefaultKeybinds
-        running: true
-        command: [root.keybindParserPath, "--path", root.defaultKeybindConfigPath]
-        
-        stdout: SplitParser {
-            onRead: data => {
-                try {
-                    root.defaultKeybinds = JSON.parse(data)
-                } catch (e) {
-                    console.error("[CheatsheetKeybinds] Error parsing keybinds:", e)
-                }
-            }
-        }
-    }
+        id: getBinds
+        command: ["hyprctl", "binds", "-j"]
 
-    Process {
-        id: getUserKeybinds
-        running: true
-        command: [root.keybindParserPath, "--path", root.userKeybindConfigPath]
-        
-        stdout: SplitParser {
-            onRead: data => {
-                try {
-                    root.userKeybinds = JSON.parse(data)
-                } catch (e) {
-                    console.error("[CheatsheetKeybinds] Error parsing keybinds:", e)
+        stdout: StdioCollector {
+            id: bindsCollector
+
+            onStreamFinished: {
+                const raw = bindsCollector.text.trim();
+                if (raw) {
+                    try {
+                        root._hyprctlRaw = JSON.parse(raw);
+                    } catch (e) {
+                        console.warn("[HyprlandKeybinds] hyprctl parse failed:", e);
+                    }
                 }
+                root.rebuild();
             }
         }
     }
 }
-

@@ -178,6 +178,8 @@ Scope { // Scope
         target: "cheatsheet"
 
         function toggle(): void {
+        if (!cheatsheetLoader.active)
+            HyprlandKeybinds.refresh();
         cheatsheetLoader.active = !cheatsheetLoader.active;
     }
 
@@ -186,7 +188,9 @@ Scope { // Scope
                           }
 
         function open(): void {
+        HyprlandKeybinds.refresh();
         cheatsheetLoader.active = true;
+        Qt.callLater(() => HyprlandKeybinds.rebuild());
     }
     }
 
@@ -195,6 +199,8 @@ Scope { // Scope
             description: "Toggles cheatsheet on press"
 
             onPressed: {
+                if (!cheatsheetLoader.active)
+                    HyprlandKeybinds.refresh();
                 cheatsheetLoader.active = !cheatsheetLoader.active;
             }
         }
@@ -204,6 +210,7 @@ Scope { // Scope
             description: "Opens cheatsheet on press"
 
             onPressed: {
+                HyprlandKeybinds.refresh();
                 cheatsheetLoader.active = true;
             }
         }

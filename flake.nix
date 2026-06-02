@@ -9,7 +9,8 @@
     };
 
     quickshell = {
-      url = "github:quickshell-mirror/quickshell/db1777c20b936a86528c1095cbcb1ebd92801402";
+      # Includes Hyprland Lua dispatch support (hl.dsp.* via IPC, Hyprland.usingLua).
+      url = "github:quickshell-mirror/quickshell/b66495fcc5022681b56b61f928c7acbe910e722c";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

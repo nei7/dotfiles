@@ -6,7 +6,6 @@
 }:
 
 let
-  avatarUrl = ./nei.face.icon;
   # myWallpaperPkg = pkgs.runCommand "mojatapeta.png" { } ''
   #   cp ${./wallpaper.png} $out
   # '';
@@ -136,8 +135,6 @@ in
       };
     };
   };
-
-  environment.etc."sddm/faces/nei.face.icon".source = avatarUrl;
 
   environment.systemPackages = [
     sddm-theme

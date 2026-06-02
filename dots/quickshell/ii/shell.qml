@@ -32,6 +32,9 @@ ShellRoot {
     id: root
 
     // Force initialization of some singletons
+    // Touch singleton so it is registered before the bar workspace widget loads.
+    readonly property var _hyprlandDispatchReady: HyprlandDispatch
+
     Component.onCompleted: {
         Hyprsunset.load();
         ConflictKiller.load();
