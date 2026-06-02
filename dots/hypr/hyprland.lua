@@ -1,0 +1,6 @@
+require("conf.autostart")
+require("conf.environment")
+require("conf.theme")
+require("conf.settings")
+require("conf.keybindings")
+require("conf.windowrules")

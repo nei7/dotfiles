@@ -19,6 +19,11 @@
     };
 
     code-cursor-nix.url = "github:jacopone/code-cursor-nix";
+
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
