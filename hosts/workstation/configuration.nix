@@ -15,6 +15,9 @@
     ./variables.nix
   ];
 
+  # Accept remote builds offloaded from the laptop (see nixos/distributed-build.nix).
+  nix.settings.trusted-users = [ "nei" ];
+
   home-manager = {
     useUserPackages = true;
     useGlobalPkgs = true;
