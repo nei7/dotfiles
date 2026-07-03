@@ -1,17 +1,17 @@
 final: prev: {
   spotify-adblock = prev.rustPlatform.buildRustPackage {
     pname = "spotify-adblock";
-    version = "lastcommit at 2025-05-20";
+    version = "0-unstable-2025-05-20";
 
     src = prev.fetchFromGitHub {
       owner = "abba23";
       repo = "spotify-adblock";
-      rev = "refs/heads/main";
+      rev = "9aeadd3cfd4d50212059720c09f662f149942fec";
       fetchSubmodules = false;
-      hash = "sha256-nwiX2wCZBKRTNPhmrurWQWISQdxgomdNwcIKG2kSQsE=";
+      hash = "sha256-3X7vScKmnb65wJ4xWAT2AeyAMPTGzKZCFA549zm9gLc=";
     };
 
-    cargoHash = "sha256-oGpe+kBf6kBboyx/YfbQBt1vvjtXd1n2pOH6FNcbF8M=";
+    cargoHash = "sha256-gxGetdqaoJa/ZF1VnW6UXJyJfLBGZxZnyKpT/Qk/8Og=";
 
     patchPhase = ''
       substituteInPlace src/lib.rs \
