@@ -22,36 +22,16 @@
     "usb_storage"
     "sd_mod"
   ];
-  boot.kernelParams = [
-    "amdgpu.dcdebugmask=0x10"
-  ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [
     "kvm-amd"
-    "amdgpu"
   ];
 
   boot.extraModulePackages = [ ];
 
-  services.tlp = {
-    enable = true;
-  };
-
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
-  };
-
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-
-    extraPackages = with pkgs; [
-      rocmPackages.clr
-
-      libva-vdpau-driver
-      libvdpau-va-gl
-    ];
   };
 
   fileSystems."/" = {

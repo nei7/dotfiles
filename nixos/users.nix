@@ -6,9 +6,9 @@
 }:
 
 {
-  users.users.nei = {
+  users.users.${config.var.username} = {
     isNormalUser = true;
-    description = "nei";
+    description = config.var.username;
     extraGroups = [
       "networkmanager"
       "wheel"

@@ -1,12 +1,13 @@
 {
   config,
+  osConfig,
   inputs,
   pkgs,
   ...
 }:
 {
-  home.username = "nei";
-  home.homeDirectory = "/home/nei";
+  home.username = osConfig.var.username;
+  home.homeDirectory = "/home/${osConfig.var.username}";
   home.stateVersion = "25.05";
 
   xdg.mimeApps = {
@@ -25,11 +26,7 @@
   imports = [
     ./lib.nix
 
-    ./packages
-    ./zsh
-    ./hyprland
-    ./theme
-    ./quickshell
-    ./git
+    ./programs
+    ./system
   ];
 }

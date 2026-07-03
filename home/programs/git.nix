@@ -1,7 +1,5 @@
 {
-  config,
-  inputs,
-  pkgs,
+  osConfig,
   ...
 }:
 {
@@ -10,8 +8,8 @@
 
     settings = {
       user = {
-        email = "franciszek.szarek2@gmail.com";
-        name = "nei7";
+        email = osConfig.var.git.email;
+        name = osConfig.var.git.name;
       };
       init = {
         defaultBranch = "master";

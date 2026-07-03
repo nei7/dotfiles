@@ -1,8 +1,11 @@
 {
-  description = "Hyprland on Nixos";
+  description = "Hyprland on NixOS";
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
+
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -28,59 +31,26 @@
   };
 
   outputs =
-    {
+    inputs@{
       self,
       nixpkgs,
-      home-manager,
       ...
-    }@inputs:
+    }:
     let
       system = "x86_64-linux";
-      lib = nixpkgs.lib;
 
-      # https://github.com/sioodmy/dotfiles/blob/main/flake.nix
-      mkSystem =
-        pkgs: system: hostname:
-        nixpkgs.lib.nixosSystem {
-
-          system = system;
-          specialArgs = { inherit inputs; };
-          modules = [
-
-            (
-              { pkgs, ... }:
-              {
-                nixpkgs.overlays = [
-                  (import ./overlays)
-                  (import ./overlays/quickshell.nix { inherit inputs; })
-                ];
-              }
-            )
-            { networking.hostName = "${hostname}"; }
-
-            ./modules/system
-
-            (./. + "/hosts/${hostname}/hardware-configuration.nix")
-            (./. + "/hosts/${hostname}/system.nix")
-
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                useUserPackages = true;
-                useGlobalPkgs = true;
-                extraSpecialArgs = { inherit inputs; };
-                users.nei = (./. + "/hosts/${hostname}/user.nix");
-                backupFileExtension = "backup";
-              };
-            }
-          ];
-        };
+      # Shared args passed to every per-host flake.nix (nixy-style).
+      args = {
+        inherit inputs nixpkgs system;
+        pkgs = nixpkgs.legacyPackages.${system};
+      };
     in
     {
-      nixosConfigurations = {
-        desktop = mkSystem inputs.nixpkgs "x86_64-linux" "desktop";
-        laptop = mkSystem inputs.nixpkgs "x86-64-linux" "laptop";
-      };
+      formatter.${system} = nixpkgs.legacyPackages.${system}.nixfmt-rfc-style;
 
+      nixosConfigurations = {
+        laptop = import ./hosts/laptop/flake.nix args;
+        workstation = import ./hosts/workstation/flake.nix args;
+      };
     };
 }

@@ -14,7 +14,6 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  # Boot
   boot.initrd.availableKernelModules = [
     "xhci_pci"
     "ahci"
@@ -25,10 +24,6 @@
   ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
-  boot.kernelParams = [
-    "nvidia-drm.modeset=1"
-    "nvidia-drm.fbdev=1"
-  ];
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/21337092-22df-4fc5-9e51-0baa6745eb71";
@@ -53,32 +48,4 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-
-  # Bluetooth
-  hardware.bluetooth.enable = true;
-
-  # GPU
-  boot.initrd.kernelModules = [
-    "nvidia"
-    "nvidia_modeset"
-    "nvidia_uvm"
-    "nvidia_drm"
-  ];
-
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-  };
-
-  services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia = {
-    open = true;
-    modesetting.enable = true;
-    powerManagement.enable = true;
-    nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-  };
-
-  powerManagement.enable = true;
-
 }
