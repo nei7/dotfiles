@@ -1,21 +1,22 @@
 final: prev: {
   spotify-adblock = prev.rustPlatform.buildRustPackage {
     pname = "spotify-adblock";
-    version = "0-unstable-2025-05-20";
+    version = "1.1.0";
 
     src = prev.fetchFromGitHub {
       owner = "abba23";
       repo = "spotify-adblock";
-      rev = "9aeadd3cfd4d50212059720c09f662f149942fec";
+      rev = "v1.1.0";
       fetchSubmodules = false;
       hash = "sha256-3X7vScKmnb65wJ4xWAT2AeyAMPTGzKZCFA549zm9gLc=";
     };
 
     cargoHash = "sha256-gxGetdqaoJa/ZF1VnW6UXJyJfLBGZxZnyKpT/Qk/8Og=";
 
+    # v1.1.0 loads config from XDG or /etc; point the fallback at the Nix store path.
     patchPhase = ''
-      substituteInPlace src/lib.rs \
-        --replace 'config.toml' $out/etc/spotify-adblock/config.toml
+      substituteInPlace src/config.rs \
+        --replace 'const GLOBAL_CONFIG_DIR: &str = "/etc";' "const GLOBAL_CONFIG_DIR: &str = \"$out/etc\";"
     '';
 
     installPhase = ''
@@ -32,6 +33,17 @@ final: prev: {
     buildInputs = [ prev.makeWrapper ];
     postBuild = ''
       wrapProgram $out/bin/spotify \
+        --run '
+          cache="$HOME/.cache/spotify"
+          socket="$cache/SingletonSocket"
+          if [ -L "$socket" ]; then
+            target=$(readlink "$socket")
+            if [ ! -S "$target" ]; then
+              rm -f "$cache/SingletonLock" "$cache/SingletonSocket" "$cache/SingletonCookie"
+            fi
+          fi
+        ' \
+        --set NIXOS_OZONE_WL 0 \
         --set LD_PRELOAD "${final.spotify-adblock}/lib/libspotifyadblock.so"
     '';
   };
