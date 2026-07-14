@@ -10,6 +10,7 @@ hl.on("hyprland.start", function()
         "dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY HYPRLAND_INSTANCE_SIGNATURE XDG_CURRENT_DESKTOP"
     )
     execOnce("qs -c ii")
+    execOnce("hypridle")
     execOnce("wl-paste --type text --watch cliphist store")
     execOnce("wl-paste --type image --watch cliphist store")
 end)

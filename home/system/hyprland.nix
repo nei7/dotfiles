@@ -39,5 +39,6 @@
   home.packages = with pkgs; [
     wl-clipboard
     libcap # setpriv — strips ambient caps for NixOS autostart (Quickshell/Flatpak)
+    hypridle
   ];
 }
