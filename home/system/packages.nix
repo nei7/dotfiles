@@ -11,13 +11,17 @@
     # Cli tools
     killall
     fastfetch
-    inputs.code-cursor-nix.packages.x86_64-linux.cursor
     unzip
     rar
     hyprpicker
     hyprshot
     ydotool
     wtype
+
+    # Ai
+    inputs.code-cursor-nix.packages.x86_64-linux.cursor
+    pkgs.claude-code
+
     qt6.qtdeclarative
 
     # Apps
