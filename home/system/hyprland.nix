@@ -1,5 +1,6 @@
 {
   config,
+  inputs,
   lib,
   pkgs,
   ...
@@ -20,16 +21,21 @@
   xdg.portal = {
     enable = lib.mkForce true;
 
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-gnome
-      xdg-desktop-portal-gtk
-      xdg-desktop-portal-wlr
-      kdePackages.xdg-desktop-portal-kde
+    # HM's xdg.portal points the portal daemon at the user-profile portals dir
+    # (NIX_XDG_DESKTOP_PORTAL_DIR), hiding system-level portals — XDPH must be
+    # listed here or ScreenCast falls back to a broken impl. gnome/kde/wlr
+    # portals can't work on Hyprland and only served as broken fallbacks.
+    extraPortals = [
+      inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland
+      pkgs.xdg-desktop-portal-gtk
     ];
 
     config = {
       common = {
-        default = [ "hyprland" ];
+        default = [
+          "hyprland"
+          "gtk"
+        ];
       };
     };
   };

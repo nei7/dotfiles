@@ -46,6 +46,9 @@
     postman
     docker-compose
 
+    chromium
+
+    obsidian
   ];
 
   programs.chromium.extensions = [
