@@ -120,18 +120,17 @@ Singleton {
             }
 
             property JsonObject apps: JsonObject {
-                property string bluetooth: "kcmshell6 kcm_bluetooth"
+                property string bluetooth: "kitty -1 bluetoothctl"
                 property string network: "kitty -1 fish -c nmtui"
-                property string networkEthernet: "kcmshell6 kcm_networkmanagement"
-                property string taskManager: "plasma-systemmonitor --page-name Processes"
+                property string networkEthernet: "kitty -1 nmtui"
+                property string taskManager: "kitty -1 btop"
                 property string terminal: "kitty -1" // This is only for shell actions
                 property string update: "kitty -1 --hold=yes fish -i -c 'sudo pacman -Syu'"
-                property string volumeMixer:
-                `~/.config/hypr/hyprland/scripts/launch_first_available.sh "pavucontrol-qt" "pavucontrol"`
+                property string volumeMixer: "pavucontrol"
             }
 
             property JsonObject background: JsonObject {
-                property string wallpaperPath: "/home/nei/.config/quickshell/wallpaper.png"
+                property string wallpaperPath: "/home/nei/.config/quickshell/wallpaper.jpg"
                 property string thumbnailPath: ""
                 property bool hideWhenFullscreen: true
                 property JsonObject parallax: JsonObject {

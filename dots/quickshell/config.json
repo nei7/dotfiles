@@ -24,13 +24,13 @@
         }
     },
     "apps": {
-        "bluetooth": "kcmshell6 kcm_bluetooth",
+        "bluetooth": "kitty -1 bluetoothctl",
         "network": "kitty -1 zsh -c nmtui",
-        "networkEthernet": "kcmshell6 kcm_networkmanagement",
-        "taskManager": "btop",
+        "networkEthernet": "kitty -1 nmtui",
+        "taskManager": "kitty -1 btop",
         "terminal": "kitty -1",
         "update": "kitty -1 --hold=yes fish -i -c 'sudo pacman -Syu'",
-        "volumeMixer": "~/.config/hypr/hyprland/scripts/launch_first_available.sh \"pavucontrol-qt\" \"pavucontrol\""
+        "volumeMixer": "pavucontrol"
     },
     "audio": {
         "protection": {
@@ -49,7 +49,7 @@
             "workspaceZoom": 1
         },
         "thumbnailPath": "",
-        "wallpaperPath": "/home/nei/.config/quickshell/wallpaper.png"
+        "wallpaperPath": "/home/nei/.config/quickshell/wallpaper.jpg"
     },
     "bar": {
         "autoHide": {
