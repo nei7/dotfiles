@@ -10,6 +10,17 @@ import Quickshell.Hyprland
 Scope {
     id: root
     property int sidebarWidth: Appearance.sizes.sidebarWidth
+    // keepRightSidebarLoaded keeps the content after the first open instead of building it
+    // at startup, where it would delay the first bar frame by ~100 ms
+    property bool openedOnce: false
+
+    Connections {
+        target: GlobalStates
+        function onSidebarRightOpenChanged() {
+            if (GlobalStates.sidebarRightOpen)
+                root.openedOnce = true;
+        }
+    }
 
     PanelWindow {
         id: sidebarRoot
@@ -43,7 +54,7 @@ Scope {
 
         Loader {
             id: sidebarContentLoader
-            active: GlobalStates.sidebarRightOpen || Config?.options.sidebar.keepRightSidebarLoaded
+            active: GlobalStates.sidebarRightOpen || (Config?.options.sidebar.keepRightSidebarLoaded && root.openedOnce)
             anchors {
                 fill: parent
                 margins: Appearance.sizes.hyprlandGapsOut

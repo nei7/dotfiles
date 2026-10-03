@@ -67,7 +67,7 @@ Singleton {
     }
 
     Component.onCompleted: {
-        updateEverything();
+        updateAll();
     }
 
     // A single user action makes Hyprland emit a burst of raw events (opening a

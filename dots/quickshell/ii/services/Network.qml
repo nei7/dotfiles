@@ -152,12 +152,20 @@ Singleton {
         updateNetworkStrength.running = true;
     }
 
+    // nmcli monitor emits bursts of lines while NetworkManager connects (e.g. right after login);
+    // coalesce them so each burst costs one round of nmcli spawns instead of one per line
+    Timer {
+        id: updateDebounce
+        interval: 300
+        onTriggered: root.update()
+    }
+
     Process {
         id: subscriber
         running: true
         command: ["nmcli", "monitor"]
         stdout: SplitParser {
-            onRead: root.update()
+            onRead: updateDebounce.restart()
         }
     }
 
