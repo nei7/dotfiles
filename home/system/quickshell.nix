@@ -11,6 +11,8 @@
 
     cava
     ddcutil
+    hyprsunset # night light toggle / schedule
+    imagemagick # wallpaper size for background parallax
     inetutils
     libnotify
     brightnessctl
