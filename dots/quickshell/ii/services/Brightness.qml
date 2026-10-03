@@ -95,8 +95,10 @@ Singleton {
             root.brightnessChanged();
         }
 
+        // Not animated (and not written back) until the initial value is read: animating up from 0
+        // used to run brightnessctl every frame at startup, dimming the backlight to 1% and back
         Behavior on multipliedBrightness {
-            enabled: monitor.animateChanges
+            enabled: monitor.animateChanges && monitor.ready
             NumberAnimation {
                 duration: 200
                 easing.type: Easing.BezierSpline
@@ -104,8 +106,8 @@ Singleton {
             }
         }
         onMultipliedBrightnessChanged: {
-            if (monitor.animationEnabled) syncBrightness();
-            else setTimer.restart();
+            if (!monitor.ready) return;
+            setTimer.restart();
         }
 
         function initialize() {
