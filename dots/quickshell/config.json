@@ -181,7 +181,7 @@
         "blur": {
             "enable": true,
             "extraZoom": 1.1,
-            "radius": 100
+            "radius": 48
         },
         "centerClock": true,
         "launchOnStartup": false,

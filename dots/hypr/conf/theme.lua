@@ -1,3 +1,11 @@
+local host = require("conf.host")
+
+-- Blur only runs on layers (windows have no_blur) and is cached between frames,
+-- so it mostly costs GPU time during popup/sidebar animations. Cheaper on the
+-- iGPU laptop, full quality on the workstation.
+local blurSize = host.isLaptop and 8 or 10
+local blurPasses = host.isLaptop and 2 or 3
+
 hl.config({
     general = {
         gaps_in = 8,
@@ -16,8 +24,8 @@ hl.config({
             enabled = true,
             special = false,
             new_optimizations = true,
-            size = 10,
-            passes = 3,
+            size = blurSize,
+            passes = blurPasses,
             brightness = 1,
         },
 

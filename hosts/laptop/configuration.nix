@@ -17,6 +17,9 @@
     ./variables.nix
   ];
 
+  # DRAM-less NVMe: skip access-time writes.
+  fileSystems."/".options = [ "noatime" ];
+
   home-manager = {
     useUserPackages = true;
     useGlobalPkgs = true;

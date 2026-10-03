@@ -14,6 +14,7 @@
     ./users.nix
     ./android.nix
     ./power.nix
+    ./performance.nix
   ];
 
   networking.hostName = config.var.hostname;

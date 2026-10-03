@@ -1,3 +1,4 @@
+| `conf/host.lua`        | Hostname detection (`/etc/hostname`); laptop gets cheaper blur and no colour-management pass |
 # Dotfiles
 
 Personal NixOS configuration with **Hyprland**, **Quickshell**, and **Home Manager**. Managed as a single Nix flake with two machine profiles.
@@ -65,6 +66,7 @@ nix fmt
 ├── nixos/                    # Shared NixOS modules
 │   ├── default.nix           # Boot, audio, locale, users, SDDM, ...
 │   ├── distributed-build.nix # Laptop → workstation remote builds
+│   ├── performance.nix       # Responsiveness tuning (oomd, ananicy, scx, zram sysctls)
 │   ├── docker.nix
 │   └── gpu/                  # amd.nix / nvidia.nix
 ├── home/                     # Shared Home Manager modules
@@ -233,6 +235,7 @@ Shared modules in `nixos/`:
 - **Bluetooth**, **GVFS**, **udisks2**, Android tools (MTP/adb)
 - **nix**: flakes, weekly GC (7d retention), unfree packages allowed
 - **SDDM**: SilentSDDM catppuccin-latte theme, custom dark overrides
+- **Performance** (`nixos/performance.nix`): systemd-oomd on user slices, ananicy-cpp with CachyOS rules, idle-priority nix daemon, 256 MB journal cap. Laptop only: zram sized to RAM (zstd) with zram-tuned sysctls, MGLRU `min_ttl_ms`, sched_ext `scx_bpfland`, TLP schedutil + boost on battery, `max-jobs = 2`, `noatime` root
 
 ## Distributed builds
 
@@ -253,7 +256,7 @@ If the workstation is offline, Nix falls back to local builds after a 5s connect
 | `nixpkgs`         | nixos-unstable                             |
 | `home-manager`    | User environment                           |
 | `hyprland`        | Compositor (pinned from hyprwm)            |
-| `quickshell`      | Shell UI (pinned commit with Lua dispatch) |
+| `quickshell`      | Shell UI (tracks master, ≥ v0.3.1 for Lua dispatch) |
 | `silentSDDM`      | Login theme                                |
 | `code-cursor-nix` | Cursor editor                              |
 | `nixos-hardware`  | Hardware modules                           |
