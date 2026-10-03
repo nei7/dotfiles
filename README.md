@@ -213,7 +213,7 @@ Dark Material-inspired setup (`home/system/theme.nix`):
 | Quickshell fonts | Gabarito, Space Grotesk, Material Symbols |
 | Terminal palette | Custom warm dark (Kitty)                  |
 
-Wallpaper path is set in Quickshell config (`~/.config/quickshell/wallpaper.png`).
+Wallpaper path is set in Quickshell config (`~/.config/quickshell/wallpaper.jpg`).
 
 ## Development setup
 
