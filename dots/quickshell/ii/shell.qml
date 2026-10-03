@@ -33,6 +33,8 @@ ShellRoot {
     // Force initialization of some singletons
     // Touch singleton so it is registered before the bar workspace widget loads.
     readonly property var _hyprlandDispatchReady: HyprlandDispatch
+    // Idle restores the inhibitor across shell restarts; only the (lazy) sidebar references it.
+    readonly property var _idleReady: Idle
 
     Component.onCompleted: {
         Hyprsunset.load();

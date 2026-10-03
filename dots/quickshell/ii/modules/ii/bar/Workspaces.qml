@@ -207,7 +207,9 @@ Item {
                     implicitWidth: workspaceButtonWidth
                     implicitHeight: workspaceButtonWidth
                     property var biggestWindow: HyprlandData.biggestWindowForWorkspace(button.workspaceValue)
-                    property var mainAppIconSource: Quickshell.iconPath(AppSearch.guessIcon(biggestWindow?.class), "image-missing")
+                    // Only resolve an icon for occupied workspaces: failed theme lookups for
+                    // "image-missing" on every empty workspace cost ~150 ms at startup
+                    property var mainAppIconSource: biggestWindow ? Quickshell.iconPath(AppSearch.guessIcon(biggestWindow.class), "image-missing") : ""
 
                     StyledText { // Workspace number text
                         opacity: root.showNumbers
@@ -289,7 +291,7 @@ Item {
                         }
 
                         Loader {
-                            active: Config.options.bar.workspaces.monochromeIcons
+                            active: Config.options.bar.workspaces.monochromeIcons && !!workspaceButtonBackground.biggestWindow
                             anchors.fill: mainAppIcon
                             sourceComponent: Item {
                                 Desaturate {

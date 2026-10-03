@@ -9,7 +9,10 @@ hl.on("hyprland.start", function()
     execOnce(
         "dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY HYPRLAND_INSTANCE_SIGNATURE XDG_CURRENT_DESKTOP"
     )
-    execOnce("qs -c ii")
+    -- Canonical path instead of `-c ii`: ~/.config/quickshell is a 3-hop symlink
+    -- chain (HM store link) and every hop costs ~45 ms of startup. IPC/logs then
+    -- need the same path: `qs ipc -p ~/dotfiles/dots/quickshell/ii ...`.
+    execOnce("qs -p " .. os.getenv("HOME") .. "/dotfiles/dots/quickshell/ii")
     execOnce("hypridle")
     execOnce("wl-paste --type text --watch cliphist store")
     execOnce("wl-paste --type image --watch cliphist store")

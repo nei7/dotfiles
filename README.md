@@ -167,7 +167,7 @@ Lua entry point: [`dots/hypr/hyprland.lua`](dots/hypr/hyprland.lua)
 
 Autostart on login:
 
-- **Quickshell** (`qs -c ii`)
+- **Quickshell** (`qs -p ~/dotfiles/dots/quickshell/ii`, the canonical path starts faster than `-c ii` through the Home Manager symlinks; pass the same `-p` to `qs ipc` and `qs log`)
 - **hypridle**
 - **cliphist** (text + image clipboard history)
 
