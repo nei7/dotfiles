@@ -49,8 +49,6 @@ RippleButton {
     }
 
     onClicked: {
-        LauncherSearch.query = "";
-
         root.itemExecute();
         GlobalStates.launcherOpen = false;
     }

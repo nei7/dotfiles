@@ -28,11 +28,29 @@ Item {
         searchBar.forceFocus();
     }
 
+    // Moves the selection without taking focus from the search input; the list scrolls to follow it
+    function moveSelection(delta) {
+        if (appResults.count === 0)
+            return;
+        appResults.currentIndex = Math.max(0, Math.min(appResults.count - 1, appResults.currentIndex + delta));
+    }
+
     Keys.onPressed: event => {
         if (event.key === Qt.Key_Escape) {
-            LauncherSearch.query = "";
-
             GlobalStates.launcherOpen = false;
+            return;
+        }
+
+        // Arrows and page keys bubble up from the search input
+        const steps = {
+            [Qt.Key_Down]: 1,
+            [Qt.Key_Up]: -1,
+            [Qt.Key_PageDown]: appResults.pageSize,
+            [Qt.Key_PageUp]: -appResults.pageSize
+        };
+        if (event.key in steps) {
+            root.moveSelection(steps[event.key]);
+            event.accepted = true;
             return;
         }
 
@@ -89,11 +107,15 @@ Item {
             }
             Item {
                 Layout.bottomMargin: 22
+                Layout.fillWidth: true
                 Layout.preferredWidth: 600
                 Layout.preferredHeight: 500
 
                 ListView {
                     id: appResults
+                    // Rows the selection jumps on PageUp/PageDown
+                    readonly property int pageSize: Math.max(1, Math.floor(height / ((currentItem?.height ?? 55) + spacing)))
+
                     Layout.fillWidth: true
                     anchors.fill: parent
                     clip: true
@@ -102,23 +124,18 @@ Item {
                     spacing: 2
                     highlightMoveDuration: 100
 
-                    KeyNavigation.up: searchBar
-
-                    onFocusChanged: {
-                        if (focus)
-                            appResults.currentIndex = 1;
+                    ScrollBar.vertical: StyledScrollBar {
+                        // Stay visible while there is more to scroll, also when moving with the keyboard
+                        policy: size < 1.0 ? ScrollBar.AlwaysOn : ScrollBar.AsNeeded
                     }
 
                     model: ScriptModel {
                         id: model
                         values: LauncherSearch.results
-                    }
-
-                    Connections {
-                        target: root
-                        function onSearchingTextChanged() {
-                            if (appResults.count > 0)
-                                appResults.currentIndex = 0;
+                        // New results start from the top with the best match selected
+                        onValuesChanged: {
+                            root.focusFirstItem();
+                            appResults.positionViewAtBeginning();
                         }
                     }
 
