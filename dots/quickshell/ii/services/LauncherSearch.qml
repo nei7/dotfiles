@@ -12,7 +12,7 @@ Singleton {
 
     property string query: ""
     property list<var> results: {
-        return (root.query == "" ? AppSearch.initialList() : AppSearch.fuzzyQuery(root.query)).map(entry => {
+        return (root.query == "" ? AppSearch.list : AppSearch.fuzzyQuery(root.query)).map(entry => {
             return resultComp.createObject(null, {
                 id: entry.id,
                 name: entry.name,

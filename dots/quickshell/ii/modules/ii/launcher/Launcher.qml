@@ -41,6 +41,11 @@ Scope { // Scope
             anchors {
                 fill: parent
             }
+            // Drop the query on any close, so the launcher always reopens on the full app list
+            onActiveChanged: {
+                if (!active)
+                    LauncherSearch.query = "";
+            }
 
             sourceComponent: LauncherContent {}
         }

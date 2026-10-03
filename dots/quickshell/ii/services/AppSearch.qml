@@ -69,10 +69,6 @@ Singleton {
         });
     }
 
-    function initialList() {
-        return list.slice(0, 9);
-    }
-
     function iconExists(iconName) {
         if (!iconName || iconName.length == 0)
             return false;
