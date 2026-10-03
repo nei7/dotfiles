@@ -85,10 +85,7 @@
         },
         "utilButtons": {
             "showColorPicker": false,
-            "showDarkModeToggle": true,
-            "showKeyboardToggle": true,
             "showMicToggle": false,
-            "showPerformanceProfileToggle": false,
             "showScreenRecord": false,
             "showScreenSnip": true
         },
@@ -132,10 +129,6 @@
         "useMacSymbol": false,
         "useMouseSymbol": false
     },
-    "conflictKiller": {
-        "autoKillNotificationDaemons": false,
-        "autoKillTrays": false
-    },
     "enabledPanels": [
         "iiBar",
         "iiBackground",
@@ -144,7 +137,6 @@
         "iiMediaControls",
         "iiNotificationPopup",
         "iiOnScreenDisplay",
-        "iiOnScreenKeyboard",
         "iiPolkit",
         "iiReloadPopup",
         "iiScreenCorners",
@@ -187,8 +179,7 @@
         "launchOnStartup": false,
         "materialShapeChars": true,
         "security": {
-            "requirePasswordToPower": false,
-            "unlockKeyring": true
+            "requirePasswordToPower": false
         },
         "showLockedText": true,
         "useHyprlock": false
@@ -208,10 +199,6 @@
     },
     "osd": {
         "timeout": 1000
-    },
-    "osk": {
-        "layout": "qwerty_full",
-        "pinnedOnStartup": false
     },
     "panelFamily": "ii",
     "resources": {
@@ -269,8 +256,7 @@
                         "type": "nightLight"
                     }
                 ]
-            },
-            "style": "android"
+            }
         }
     },
     "sounds": {

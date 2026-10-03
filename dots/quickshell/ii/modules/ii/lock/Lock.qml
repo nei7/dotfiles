@@ -12,21 +12,6 @@ import Quickshell.Hyprland
 Scope {
     id: root
 
-    Process {
-        id: unlockKeyringProc
-        onExited: (exitCode, exitStatus) => {
-            KeyringStorage.fetchKeyringData();
-        }
-    }
-    function unlockKeyring() {
-        unlockKeyringProc.exec({
-            environment: ({
-                "UNLOCK_PASSWORD": lockContext.currentText
-            }),
-            command: ["bash", "-c", Quickshell.shellPath("scripts/keyring/unlock.sh")]
-        })
-    }
-
     property var windowData: []
     function saveWindowPositionAndTile() {
         Quickshell.execDetached(["hyprctl", "keyword", "dwindle:pseudotile", "true"])
@@ -56,7 +41,6 @@ Scope {
             function onScreenLockedChanged() {
                 if (GlobalStates.screenLocked) {
                     lockContext.reset();
-                    lockContext.tryFingerUnlock();
                 }
             }
         }
@@ -70,9 +54,6 @@ Scope {
                 Session.reboot();
                 return;
             }
-
-            // Unlock the keyring if configured to do so
-            if (Config.options.lock.security.unlockKeyring) root.unlockKeyring();
 
             // Unlock the screen before exiting, or the compositor will display a
             // fallback lock you can't interact with.
@@ -169,8 +150,6 @@ Scope {
         if (!Config.ready || !Persistent.ready) return;
         if (Config.options.lock.launchOnStartup && Persistent.isNewHyprlandInstance) {
             root.lock();
-        } else {
-            KeyringStorage.fetchKeyringData();
         }
     }
     Connections {

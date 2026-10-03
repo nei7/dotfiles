@@ -100,23 +100,6 @@ MouseArea {
         scale: root.toolbarScale
         opacity: root.toolbarOpacity
 
-        // Fingerprint
-        Loader {
-            Layout.leftMargin: 10
-            Layout.rightMargin: 6
-            Layout.alignment: Qt.AlignVCenter
-            active: root.context.fingerprintsConfigured
-            visible: active
-
-            sourceComponent: MaterialSymbol {
-                id: fingerprintIcon
-                fill: 1
-                text: "fingerprint"
-                iconSize: Appearance.font.pixelSize.hugeass
-                color: Appearance.colors.colOnSurfaceVariant
-            }
-        }
-
         ToolbarTextField {
             id: passwordBox
             Layout.rightMargin: -Layout.leftMargin
@@ -231,36 +214,6 @@ MouseArea {
             Layout.leftMargin: 8
             icon: "account_circle"
             text: SystemInfo.username
-        }
-
-        // Keyboard layout (Xkb)
-        Loader {
-            Layout.rightMargin: 8
-            Layout.fillHeight: true
-
-            active: true
-            visible: active
-
-            sourceComponent: Row {
-                spacing: 8
-
-                MaterialSymbol {
-                    id: keyboardIcon
-                    anchors.verticalCenter: parent.verticalCenter
-                    fill: 1
-                    text: "keyboard_alt"
-                    iconSize: Appearance.font.pixelSize.huge
-                    color: Appearance.colors.colOnSurfaceVariant
-                }
-                Loader {
-                    anchors.verticalCenter: parent.verticalCenter
-                    sourceComponent: StyledText {
-                        text: HyprlandXkb.currentLayoutCode
-                        color: Appearance.colors.colOnSurfaceVariant
-                        animateChange: true
-                    }
-                }
-            }
         }
 
         // Keyboard layout (Fcitx)

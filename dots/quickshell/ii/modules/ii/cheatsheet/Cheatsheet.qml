@@ -2,9 +2,7 @@ import qs.services
 import qs.modules.common
 import qs.modules.common.widgets
 import QtQuick
-import QtQuick.Controls
 import QtQuick.Layouts
-import Qt5Compat.GraphicalEffects
 import Quickshell.Io
 import Quickshell
 import Quickshell.Wayland
@@ -12,16 +10,6 @@ import Quickshell.Hyprland
 
 Scope { // Scope
     id: root
-    property var tabButtonList: [
-        {
-            "icon": "keyboard",
-            "name": "Keybinds"
-        },
-        {
-            "icon": "experiment",
-            "name": "Elements"
-        },
-    ]
 
     Loader {
         id: cheatsheetLoader
@@ -82,24 +70,6 @@ Scope { // Scope
                                     if (event.key === Qt.Key_Escape) {
                                         cheatsheetRoot.hide();
                                     }
-                                    if (event.modifiers === Qt.ControlModifier) {
-                                        if (event.key === Qt.Key_PageDown) {
-                                            tabBar.incrementCurrentIndex();
-                                            event.accepted = true;
-                                        } else if (event.key === Qt.Key_PageUp) {
-                                            tabBar.decrementCurrentIndex();
-                                            event.accepted = true;
-                                        } else if (event.key === Qt.Key_Tab) {
-                                            tabBar.setCurrentIndex((tabBar.currentIndex + 1)
-                                                                   % root.tabButtonList.length);
-                                            event.accepted = true;
-                                        } else if (event.key === Qt.Key_Backtab) {
-                                            tabBar.setCurrentIndex((tabBar.currentIndex - 1
-                                                                    + root.tabButtonList.length)
-                                                                   % root.tabButtonList.length);
-                                            event.accepted = true;
-                                        }
-                                    }
                                 }
 
                 RippleButton { // Close button
@@ -132,42 +102,21 @@ Scope { // Scope
                     anchors.centerIn: parent
                     spacing: 10
 
-                    Toolbar {
+                    StyledText { // Title, level with the close button
                         Layout.alignment: Qt.AlignHCenter
-                        enableShadow: false
-                        ToolbarTabBar {
-                            id: tabBar
-                            tabButtonList: root.tabButtonList
-                            currentIndex: swipeView.currentIndex
+                        Layout.preferredHeight: closeButton.implicitHeight
+                        verticalAlignment: Text.AlignVCenter
+                        font {
+                            family: Appearance.font.family.title
+                            pixelSize: Appearance.font.pixelSize.title
+                            variableAxes: Appearance.font.variableAxes.title
                         }
+                        color: Appearance.colors.colOnLayer0
+                        text: "Keybinds"
                     }
 
-                    SwipeView { // Content pages
-                        id: swipeView
+                    CheatsheetKeybinds {
                         Layout.topMargin: 5
-                        Layout.fillWidth: true
-                        Layout.fillHeight: true
-                        currentIndex: tabBar.currentIndex
-                        spacing: 10
-
-                        implicitWidth: Math.max.apply(null, contentChildren.map(child => child.implicitWidth
-                                                                                || 0))
-                        implicitHeight: Math.max.apply(null, contentChildren.map(child
-                                                                                 => child.implicitHeight
-                                                                                 || 0))
-
-                        clip: true
-                        layer.enabled: true
-                        layer.effect: OpacityMask {
-                            maskSource: Rectangle {
-                                width: swipeView.width
-                                height: swipeView.height
-                                radius: Appearance.rounding.small
-                            }
-                        }
-
-                        CheatsheetKeybinds {}
-                        CheatsheetPeriodicTable {}
                     }
                 }
             }

@@ -14,7 +14,6 @@ import qs.modules.ii.lock
 import qs.modules.ii.mediaControls
 import qs.modules.ii.notificationPopup
 import qs.modules.ii.onScreenDisplay
-import qs.modules.ii.onScreenKeyboard
 import qs.modules.ii.polkit
 import qs.modules.ii.screenCorners
 import qs.modules.ii.sessionScreen
@@ -37,7 +36,6 @@ ShellRoot {
 
     Component.onCompleted: {
         Hyprsunset.load();
-        ConflictKiller.load();
     }
 
     // Load enabled stuff
@@ -72,11 +70,6 @@ ShellRoot {
         identifier: "iiOnScreenDisplay"
         component: OnScreenDisplay {}
     }
-    PanelLoader {
-        identifier: "iiOnScreenKeyboard"
-        component: OnScreenKeyboard {}
-    }
-
     PanelLoader {
         identifier: "iiPolkit"
         component: Polkit {}

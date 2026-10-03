@@ -79,7 +79,7 @@ Singleton {
             id: configOptionsJsonAdapter
 
             property list<string> enabledPanels: ["iiBar", "iiBackground", "iiCheatsheet", "iiLauncher", "iiLock",
-                "iiMediaControls", "iiNotificationPopup", "iiOnScreenDisplay", "iiOnScreenKeyboard",
+                "iiMediaControls", "iiNotificationPopup", "iiOnScreenDisplay",
                 "iiPolkit", "iiReloadPopup", "iiScreenCorners", "iiSessionScreen", "iiSidebarRight"]
             property string panelFamily: "ii"
 
@@ -174,9 +174,6 @@ Singleton {
                     property bool showScreenSnip: true
                     property bool showColorPicker: false
                     property bool showMicToggle: false
-                    property bool showKeyboardToggle: true
-                    property bool showDarkModeToggle: true
-                    property bool showPerformanceProfileToggle: false
                     property bool showScreenRecord: false
                 }
                 property JsonObject workspaces: JsonObject {
@@ -230,11 +227,6 @@ Singleton {
                 }
             }
 
-            property JsonObject conflictKiller: JsonObject {
-                property bool autoKillNotificationDaemons: false
-                property bool autoKillTrays: false
-            }
-
             property JsonObject interactions: JsonObject {
                 property JsonObject scrolling: JsonObject {
                     property bool fasterTouchpadScroll: false // Enable faster scrolling with touchpad
@@ -272,7 +264,6 @@ Singleton {
                 property bool centerClock: true
                 property bool showLockedText: true
                 property JsonObject security: JsonObject {
-                    property bool unlockKeyring: true
                     property bool requirePasswordToPower: false
                 }
                 property bool materialShapeChars: true
@@ -294,11 +285,6 @@ Singleton {
 
             property JsonObject osd: JsonObject {
                 property int timeout: 1000
-            }
-
-            property JsonObject osk: JsonObject {
-                property string layout: "qwerty_full"
-                property bool pinnedOnStartup: false
             }
 
             property JsonObject resources: JsonObject {
@@ -340,7 +326,6 @@ Singleton {
                 }
 
                 property JsonObject quickToggles: JsonObject {
-                    property string style: "android" // Options: classic, android
                     property JsonObject android: JsonObject {
                         property int columns: 5
                         property list<var> toggles: [
