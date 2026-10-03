@@ -150,7 +150,7 @@ Keybindings are defined in [`dots/hypr/conf/keybindings.lua`](dots/hypr/conf/key
 | Lid close (laptop) | Suspend                 |
 | Power button       | Suspend                 |
 
-Session lock is handled by Quickshell (`loginctl lock-session`).
+Session lock is Quickshell's lock screen: `loginctl lock-session` (suspend, session menu) makes hypridle run `qs -p ~/dotfiles/dots/quickshell/ii ipc call lock activate`.
 
 ## Hyprland config
 
