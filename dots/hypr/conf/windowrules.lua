@@ -72,7 +72,6 @@ hl.layer_rule({ match = { namespace = "quickshell:screenCorners" }, animation = 
 hl.layer_rule({ match = { namespace = "quickshell:lockWindowPusher" }, no_anim = true })
 hl.layer_rule({ match = { namespace = "quickshell:notificationPopup" }, animation = "fade" })
 hl.layer_rule({ match = { namespace = "quickshell:overlay" }, no_anim = true, ignore_alpha = 1 })
-hl.layer_rule({ match = { namespace = "quickshell:osk" }, animation = "slide bottom" })
 hl.layer_rule({ match = { namespace = "quickshell:polkit" }, no_anim = true })
 hl.layer_rule({ match = { namespace = "quickshell:popup" }, xray = false, ignore_alpha = 1 })
 hl.layer_rule({ match = { namespace = "quickshell:mediaControls" }, ignore_alpha = 1 })

@@ -173,7 +173,7 @@ Autostart on login:
 
 ## Quickshell
 
-Panel family `ii` with bar, launcher, lock screen, OSD, media controls, notification popups, on-screen keyboard, and right sidebar.
+Panel family `ii` with bar, launcher, lock screen, OSD, media controls, notification popups, and right sidebar.
 
 Config: [`dots/quickshell/config.json`](dots/quickshell/config.json)
 
@@ -181,7 +181,7 @@ Notable sidebar toggles (Android-style quick settings):
 
 - Network, Bluetooth, idle inhibitor, mic, audio, night light
 
-Bar utilities include dark mode toggle, keyboard layout indicator, and screenshot button.
+Bar utilities: region screenshot, colour picker (`hyprpicker`) and mic mute.
 
 ## Applications
 
@@ -194,7 +194,7 @@ Installed via Home Manager (`home/system/packages.nix`):
 | **Media**          | VLC, Gwenview                                                 |
 | **Files**          | Dolphin, Proton VPN                                           |
 | **Dev / CLI**      | Cursor, Postman, Docker Compose, fastfetch, btop, ripgrep, jq |
-| **Hyprland tools** | hyprshot, hyprpicker, ydotool, wtype                          |
+| **Hyprland tools** | hyprshot, hyprpicker, wtype                                   |
 | **System**         | pavucontrol, lxappearance                                     |
 
 Default MIME handlers: Brave (web/PDF), Gwenview (images), VLC (video).
