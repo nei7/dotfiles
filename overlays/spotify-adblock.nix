@@ -8,7 +8,7 @@ final: prev: {
       repo = "spotify-adblock";
       rev = "v1.1.0";
       fetchSubmodules = false;
-      hash = "sha256-3X7vScKmnb65wJ4xWAT2AeyAMPTGzKZCFA549zm9gLc=";
+      hash = "sha256-Em8ICO+GtA1k/urBA7e9+OdZmHvthTy+iRWueUz4+40=";
     };
 
     cargoHash = "sha256-gxGetdqaoJa/ZF1VnW6UXJyJfLBGZxZnyKpT/Qk/8Og=";
