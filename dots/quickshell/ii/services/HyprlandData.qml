@@ -33,16 +33,28 @@ Singleton {
         getMonitors.running = true;
     }
 
+    function updateActiveWorkspace() {
+        getActiveWorkspace.running = true;
+    }
+
     function updateWorkspaces() {
         getWorkspaces.running = true;
         getActiveWorkspace.running = true;
     }
 
+    // Only the data the shell actually consumes (windowList, monitors,
+    // activeWorkspace). layers/workspaces are available on demand via the
+    // functions above.
     function updateAll() {
         updateWindowList();
         updateMonitors();
+        updateActiveWorkspace();
+    }
+
+    function updateEverything() {
+        updateAll();
         updateLayers();
-        updateWorkspaces();
+        getWorkspaces.running = true;
     }
 
     function biggestWindowForWorkspace(workspaceId) {
@@ -55,15 +67,44 @@ Singleton {
     }
 
     Component.onCompleted: {
-        updateAll();
+        updateEverything();
+    }
+
+    // A single user action makes Hyprland emit a burst of raw events (opening a
+    // window: openwindow + activewindow + activewindowv2 + focusedmon + ...).
+    // Refreshing on each one used to spawn 5 hyprctl processes per event.
+    // Coalesce the burst into one refresh and skip events that cannot change
+    // the data we expose.
+    readonly property var ignoredEvents: new Set([
+        "activelayout", "submap", "screencast", "bell", "urgent", "minimized",
+        "openlayer", "closelayer", "configreloaded", "activespecialv2"
+    ])
+    // Title updates are frequent (browser tabs, terminals, media players) and
+    // only affect the fallback title in the bar; refresh them lazily.
+    readonly property var titleEvents: new Set(["windowtitle", "windowtitlev2"])
+
+    Timer {
+        id: refreshTimer
+        interval: 50
+        repeat: false
+        onTriggered: root.updateAll()
+    }
+
+    function scheduleUpdate(delay) {
+        // A pending sooner refresh already covers this event.
+        if (refreshTimer.running && refreshTimer.interval <= delay)
+            return;
+        refreshTimer.interval = delay;
+        refreshTimer.restart();
     }
 
     Connections {
         target: Hyprland
 
         function onRawEvent(event) {
-            // console.log("Hyprland raw event:", event.name);
-            updateAll()
+            if (root.ignoredEvents.has(event.name))
+                return;
+            root.scheduleUpdate(root.titleEvents.has(event.name) ? 400 : 50);
         }
     }
 

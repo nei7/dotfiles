@@ -1,3 +1,5 @@
+local host = require("conf.host")
+
 hl.config({
     dwindle = {
         preserve_split = true,
@@ -19,6 +21,9 @@ hl.config({
 
     render = {
         direct_scanout = true,
+        -- The laptop panel is sRGB-only; skipping the colour-management shader
+        -- pass saves iGPU time on every frame. Keep it on the workstation.
+        cm_enabled = not host.isLaptop,
     },
 
     input = {

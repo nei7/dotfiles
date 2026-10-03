@@ -12,8 +12,9 @@
     };
 
     quickshell = {
-      # Includes Hyprland Lua dispatch support (hl.dsp.* via IPC, Hyprland.usingLua).
-      url = "github:quickshell-mirror/quickshell/b66495fcc5022681b56b61f928c7acbe910e722c";
+      # Tracks master. Hyprland Lua dispatch support (hl.dsp.* via IPC,
+      # Hyprland.usingLua) landed on 2026-06-01 and is in every release since v0.3.1.
+      url = "github:quickshell-mirror/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
