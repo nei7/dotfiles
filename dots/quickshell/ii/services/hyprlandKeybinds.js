@@ -133,9 +133,11 @@ function autogenerateComment(dispatcher, params, env) {
             return "Move focus up";
         if (direction === "d" || direction === "down")
             return "Move focus down";
-        if (p === "e+1" || p === "+1")
+        var relWs = p.match(/workspace\s*=\s*"([^"]+)"/);
+        var rel = relWs ? relWs[1] : p;
+        if (rel === "e+1" || rel === "+1")
             return "Workspace: focus next";
-        if (p === "e-1" || p === "-1")
+        if (rel === "e-1" || rel === "-1")
             return "Workspace: focus previous";
         var wsMatch = p.match(/workspace\s*=\s*(\d+)/);
         if (wsMatch)
@@ -258,21 +260,33 @@ function extractBindFromLine(line, variables, env, pendingComment, sectionName) 
     if (open === -1)
         return null;
 
+    // Split hl.bind(key, dispatcher[, opts]) on the first top-level comma; the
+    // trailing opts table (e.g. { mouse = true }) is stripped from the dispatcher.
     var depth = 0;
+    var inString = false;
     var comma = -1;
     for (var i = open + 8; i < line.length; i++) {
         var ch = line.charAt(i);
-        if (ch === "(")
+        if (inString) {
+            if (ch === "\\")
+                i++;
+            else if (ch === '"')
+                inString = false;
+        } else if (ch === '"') {
+            inString = true;
+        } else if (ch === "(" || ch === "{") {
             depth++;
-        else if (ch === ")") {
+        } else if (ch === ")" || ch === "}") {
             if (depth === 0) {
+                if (comma === -1)
+                    return null;
                 var dspText = line.substring(comma + 1, i).trim();
                 dspText = dspText.replace(/,\s*\{[^}]*\}\s*$/, "").trim();
                 var keyExpr = line.substring(open + 8, comma).trim();
                 return parseBindCall(keyExpr, dspText, variables, env, pendingComment, sectionName);
             }
             depth--;
-        } else if (ch === "," && depth === 0) {
+        } else if (ch === "," && depth === 0 && comma === -1) {
             comma = i;
         }
     }
