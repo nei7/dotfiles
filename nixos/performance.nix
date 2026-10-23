@@ -71,6 +71,12 @@ in
     enable = true;
     package = pkgs.ananicy-cpp;
     rulesProvider = pkgs.ananicy-rules-cachyos;
+    # The workaround moves realtime processes (Hyprland runs SCHED_RR) to the
+    # root cgroup, and everything Hyprland spawns afterwards lands there too:
+    # outside the logind session, so polkit demands admin auth for poweroff,
+    # reboot etc. It is only needed with CONFIG_RT_GROUP_SCHED, which NixOS
+    # kernels don't enable.
+    settings.cgroup_realtime_workaround = lib.mkForce false;
   };
 
   # Local nix builds (fallback when the workstation builder is offline) must
