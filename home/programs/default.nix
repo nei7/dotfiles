@@ -8,6 +8,7 @@
     ./obs.nix
     ./vscode.nix
     ./direnv.nix
+    ./virt-manager.nix
     ./neovim.nix
   ];
 
