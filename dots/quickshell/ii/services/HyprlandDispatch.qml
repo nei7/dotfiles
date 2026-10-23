@@ -32,6 +32,7 @@ Singleton {
     }
 
     function reload() {
-        dispatch("reload");
+        // reload is a hyprctl command, not a dispatcher
+        Quickshell.execDetached(["hyprctl", "reload"]);
     }
 }

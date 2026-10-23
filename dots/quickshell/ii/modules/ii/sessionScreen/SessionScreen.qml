@@ -69,7 +69,10 @@ Scope {
         id: sessionLoader
         active: GlobalStates.sessionOpen
         onActiveChanged: {
-            if (sessionLoader.active) root.detectRunningStuff();
+            if (!sessionLoader.active) return;
+            // The sidebar's focus grab would swallow the first click and keyboard input
+            GlobalStates.sidebarRightOpen = false;
+            root.detectRunningStuff();
         }
 
         Connections {
