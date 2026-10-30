@@ -11,6 +11,7 @@
     ../../nixos/gpu/nvidia.nix
     ../../nixos/docker.nix
     ../../nixos/virtualisation.nix
+    ../../nixos/claude-code-update.nix
 
     ./hardware-configuration.nix
     ./variables.nix

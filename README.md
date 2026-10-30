@@ -72,6 +72,7 @@ nix fmt
 │   ├── distributed-build.nix # Laptop → workstation remote builds
 │   ├── docker.nix            # Docker (workstation)
 │   ├── virtualisation.nix    # libvirt/QEMU + virt-manager (workstation)
+│   ├── claude-code-update.nix # Weekly Claude Code bump + switch (workstation)
 │   └── gpu/                  # amd.nix / nvidia.nix
 ├── home/                     # Shared Home Manager modules
 │   ├── lib.nix               # mkLinkDotfiles helper
@@ -285,7 +286,7 @@ Shared modules in `nixos/`:
 - **SDDM**: SilentSDDM catppuccin-latte theme, custom dark overrides, Wayland
 - **Hyprland**: from the `hyprland` flake input, UWSM session, XWayland
 - **Performance** (`nixos/performance.nix`): systemd-oomd on user slices, ananicy-cpp with CachyOS rules (realtime cgroup workaround disabled, otherwise Hyprland's children leave the logind session and polkit asks for admin auth on poweroff), idle-priority nix daemon, 256 MB journal cap. Laptop only: zram sized to RAM (zstd) with zram-tuned sysctls, MGLRU `min_ttl_ms`, sched_ext `scx_bpfland`, TLP schedutil + boost on battery, `max-jobs = 2`, `noatime` root
-- **Workstation only**: Docker, libvirt/virt-manager, OpenSSH, `gpiolib_acpi.ignore_wake` for the chipset WAKE# pin that resumed S3 instantly
+- **Workstation only**: Docker, libvirt/virt-manager, OpenSSH, weekly Claude Code auto-update (see below), `gpiolib_acpi.ignore_wake` for the chipset WAKE# pin that resumed S3 instantly
 
 ## Distributed builds
 
@@ -298,6 +299,22 @@ Requirements:
 3. Workstation user `nei` in `nix.settings.trusted-users`.
 
 If the workstation is offline, Nix falls back to local builds after a 5s connect timeout.
+
+## Claude Code auto-update
+
+Claude Code comes from the `claude-code` flake input ([claude-code-nix](https://github.com/sadjow/claude-code-nix)) because nixpkgs lags weeks behind upstream. On the workstation, [`nixos/claude-code-update.nix`](nixos/claude-code-update.nix) keeps it current with a weekly systemd timer that:
+
+1. Runs `nix flake update claude-code` in `~/dotfiles` as the user (skipped if `flake.lock` has uncommitted changes).
+2. Commits `flake.lock` with a `chore(claude-code): <old> -> <new>` message when the version changed.
+3. Switches the system from the committed branch tip (`git+file://`), so unfinished edits in the checkout never get activated, then sends a desktop notification.
+
+The timer is `Persistent`, so a run missed while the machine was off happens at the next boot. The commit is local; push it along with your own work.
+
+```bash
+systemctl list-timers claude-code-update   # next run
+sudo systemctl start claude-code-update    # update now
+journalctl -u claude-code-update           # log
+```
 
 ## Flake inputs
 
