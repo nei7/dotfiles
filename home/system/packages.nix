@@ -19,7 +19,8 @@
 
     # Ai
     inputs.code-cursor-nix.packages.x86_64-linux.cursor
-    pkgs.claude-code
+    # claude-code-nix tracks upstream releases; nixpkgs lags weeks behind.
+    inputs.claude-code.packages.x86_64-linux.default
 
     qt6.qtdeclarative
 

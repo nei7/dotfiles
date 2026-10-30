@@ -301,16 +301,16 @@ If the workstation is offline, Nix falls back to local builds after a 5s connect
 
 ## Flake inputs
 
-| Input             | Purpose                                                              |
-| ----------------- | -------------------------------------------------------------------- |
-| `nixpkgs`         | nixos-unstable                                                       |
-| `home-manager`    | User environment                                                     |
-| `hyprland`        | Compositor (pinned from hyprwm)                                      |
-| `quickshell`      | Shell UI (tracks master, ≥ v0.3.1 for Lua dispatch)                  |
-| `silentSDDM`      | Login theme                                                          |
-| `code-cursor-nix` | Cursor editor                                                        |
-| `claude-code`     | Claude Code CLI (declared; the package currently comes from nixpkgs) |
-| `nixos-hardware`  | Hardware modules (AMD CPU, laptop SSD)                               |
+| Input             | Purpose                                                  |
+| ----------------- | -------------------------------------------------------- |
+| `nixpkgs`         | nixos-unstable                                           |
+| `home-manager`    | User environment                                         |
+| `hyprland`        | Compositor (pinned from hyprwm)                          |
+| `quickshell`      | Shell UI (tracks master, ≥ v0.3.1 for Lua dispatch)      |
+| `silentSDDM`      | Login theme                                              |
+| `code-cursor-nix` | Cursor editor                                            |
+| `claude-code`     | Claude Code CLI (upstream releases, nixpkgs lags behind) |
+| `nixos-hardware`  | Hardware modules (AMD CPU, laptop SSD)                   |
 
 ## Credits
 
